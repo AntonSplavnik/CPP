@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Contact.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
+/*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:27:05 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/03/21 19:01:14 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/03/21 20:43:42 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 class Contact {
 public:
 	Contact();
+
 	void SetContact(int index, const std::string &firstName, const std::string &lastName, const std::string &nickName);
 	void PrintContacts() const;
 

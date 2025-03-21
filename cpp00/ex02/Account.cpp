@@ -1,34 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PhoneBook.hpp                                      :+:      :+:    :+:   */
+/*   Account.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/21 09:58:09 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/03/21 20:43:53 by asplavni         ###   ########.fr       */
+/*   Created: 2025/03/21 20:42:33 by asplavni          #+#    #+#             */
+/*   Updated: 2025/03/21 20:53:49 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHONEBOOK_HPP
-#define PHONEBOOK_HPP
+#include "Account.hpp"
 
-#include "Contact.hpp"
+Account::Account( int initial_deposit ) {};
+Account::~Account( void ) {};
 
-class	PhoneBook {
-public:
+void	makeDeposit( int deposit ){
 
-	PhoneBook();
+}
 
-	void	Add(const std::string &firstName, const std::string &lastName, const std::string &nickName);
-	void	Search() const;
-	void	Exit();
-
-private:
-
-	Contact		contacts[8];
-	int			numberOfContacts;
-	int			nextIndex;
-};
-
-#endif
+bool	makeWithdrawal( int withdrawal );
+int		checkAmount( void ) const;
+void	displayStatus( void ) const;

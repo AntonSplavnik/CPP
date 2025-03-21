@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PhoneBook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
+/*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 09:58:13 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/03/21 18:42:05 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/03/21 20:41:11 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ void PhoneBook::Add(const std::string &firstName, const std::string &lastName, c
 		numberOfContacts++;
 }
 
-
-
 void	PhoneBook::Search() const{
 
 	std::cout << std::setw(10) << "index" <<  "|"
@@ -37,4 +35,3 @@ void	PhoneBook::Search() const{
 	for (int i = 0; i < numberOfContacts; i++)
 		contacts[i].PrintContacts();
 }
-

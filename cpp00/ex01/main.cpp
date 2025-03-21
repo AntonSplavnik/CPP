@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
+/*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 09:58:15 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/03/21 18:59:15 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/03/21 20:41:01 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,6 @@ int Parsing(int ac) {
 		return (1);
 	return (0);
 }
-
-/* bool getInput(const std::string &prompt, std::string &output)
-{
-	std::cout << prompt << std::flush;
-	if (!(std::cin >> output)) {
-		std::cout << "\nEOF detected. Goodbye!" << std::endl;
-		return false;
-	}
-	return true;
-} */
 
 bool getInput(const std::string &prompt, std::string &output)
 {
@@ -44,7 +34,6 @@ bool getInput(const std::string &prompt, std::string &output)
 		std::cout << "Input cannot be empty. Please try again.\n";
 	}
 }
-
 
 int Execution(PhoneBook &pb) {
 	std::cout << "*-----------------------------------*\n"
