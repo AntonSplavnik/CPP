@@ -6,7 +6,7 @@
 /*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:47:08 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/03/23 00:12:36 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/03/23 00:20:41 by antonsplavn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 Contact::Contact() {}
 
 void Contact::setContact(int index, const std::string &firstName,
-							const std::string &lastName, const std::string &nickName,
-							const std::string &phoneNumber, std::string & darkestSecret) {
+						 const std::string &lastName, const std::string &nickName,
+						 const std::string &phoneNumber, std::string & darkestSecret) {
 
 	this->index = index + 1;
 	this->_firstName = firstName;
