@@ -1,0 +1,33 @@
+# --- OS-specific ---
+.DS_Store           # macOS
+Thumbs.db           # Windows
+
+# --- VS Code ---
+.vscode/            # VS Code settings folder (optional — keep if project-specific config)
+
+# --- Build files ---
+*.o                 # Object files
+*.obj               # Windows object files
+*.exe               # Executables
+*.out               # Linux binaries
+*.a                 # Static libraries
+*.so                # Shared libraries
+*.dll               # Dynamic libraries (Windows)
+*.dSYM/             # macOS debug symbols
+
+# --- CMake (if used) ---
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+build/
+
+# --- Logs / Misc ---
+*.log
+*.tmp
+*.swp
+*~
+
+# --- Ignore generated binaries from g++/clang++ ---
+a.out
+main
