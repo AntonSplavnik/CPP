@@ -6,7 +6,7 @@
 /*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 09:58:09 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/03/22 18:01:02 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/03/22 22:57:54 by antonsplavn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,13 @@ public:
 
 	PhoneBook();
 
-	void	add(const std::string &firstName, const std::string &lastName,
-				const std::string &nickName, const std::string &phoneNumber,
-				std::string &darkestSecret);
-	void	printListOfContacts();
-	void	search(std::string id) const;
-	void	exit();
+	void		 add(const std::string &firstName, const std::string &lastName,
+					 const std::string &nickName, const std::string &phoneNumber,
+					 std::string &darkestSecret);
+	void		 printListOfContacts();
+	void		 search(const int indextToSearch) const;
+	void		 exit();
+	const int	&getNumberOfContacts();
 
 private:
 

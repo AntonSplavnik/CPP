@@ -6,7 +6,7 @@
 /*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 09:58:13 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/03/22 18:24:28 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/03/22 22:57:28 by antonsplavn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,29 +30,22 @@ void PhoneBook::add(const std::string &firstName, const std::string &lastName,
 		_numberOfContacts++;
 }
 
-void PhoneBook::search(std::string indexToSearch) const {
+void PhoneBook::search(const int indexToSearch) const {
 
-	int indexToInt = std::atoi(indexToSearch.c_str());
-	indexToInt -= 1;
+	std::cout << "First name:     " << _contacts[indexToSearch].getFirstName()
+			  << std::endl;
+	std::cout << "Second name:    " << _contacts[indexToSearch].getLastName()
+			  << std::endl;
+	std::cout << "Nick name:      " << _contacts[indexToSearch].getNickName()
+			  << std::endl;
+	std::cout << "Phone number:   " << _contacts[indexToSearch].getPhoneNumber()
+			  << std::endl;
+	std::cout << "Darkest secret: " << _contacts[indexToSearch].getDarkestSecret()
+			  << std::endl;
+}
 
-	std::cout << indexToSearch << std::endl;
-	std::cout << indexToInt << std::endl;
-
-	if (indexToInt < 0 || indexToInt >= this->_numberOfContacts) {
-		std::cout << "Invalid index" << std::endl;
-		return;
-	}
-
-	std::cout << "First name:     " << _contacts[indexToInt].getFirstName()
-			  << std::endl;
-	std::cout << "Second name:    " << _contacts[indexToInt].getLastName()
-			  << std::endl;
-	std::cout << "Nick name:      " << _contacts[indexToInt].getNickName()
-			  << std::endl;
-	std::cout << "Phone number:   " << _contacts[indexToInt].getPhoneNumber()
-			  << std::endl;
-	std::cout << "Darkest secret: " << _contacts[indexToInt].getDarkestSecret()
-			  << std::endl;
+int const &PhoneBook::getNumberOfContacts() {
+	return (this->_numberOfContacts);
 }
 
 void PhoneBook::_printHeader() const {
@@ -70,7 +63,3 @@ void PhoneBook::printListOfContacts() {
 	for (int i = 0; i < _numberOfContacts; i++)
 	_contacts[i].printContacts();
 }
-
-/* bool	isNumber() {
-
-} */
