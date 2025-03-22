@@ -6,7 +6,7 @@
 /*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:47:08 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/03/21 19:00:56 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/03/22 18:21:18 by antonsplavn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,40 @@
 
 Contact::Contact() {}
 
-void	Contact::SetContact(int index, const std::string &firstName, const std::string &lastName, const std::string &nickName)
-{
+void Contact::setContact(int index, const std::string &firstName,
+							const std::string &lastName, const std::string &nickName,
+							const std::string &phoneNumber, std::string & darkestSecret) {
+
 	this->index = index + 1;
-	this->firstName = firstName;
-	this->lastName = lastName;
-	this->nickName = nickName;
+	this->_firstName = firstName;
+	this->_lastName = lastName;
+	this->_nickName = nickName;
+	this->_phoneNumber = phoneNumber;
+	this->_darkestSecret = darkestSecret;
 }
 
-static std::string	FormatField(const std::string &str) {
+const std::string	&Contact::getFirstName() const { return (this->_firstName); }
+
+const std::string	&Contact::getLastName() const { return (this->_lastName); }
+
+const std::string	&Contact::getNickName() const { return (this->_nickName); }
+
+const std::string	&Contact::getPhoneNumber() const { return (this->_phoneNumber); }
+
+const std::string	&Contact::getDarkestSecret() const { return (this->_darkestSecret); }
+
+std::string	_FormatField(const std::string &str) {
+
 	if (str.length() > 10)
 		return (str.substr(0, 9) + ".");
 	return (std::string(10 - str.length(), ' ') + str);
 }
 
-void	Contact::PrintContacts() const {
+void Contact::printContacts() const {
+
 	std::cout << std::setw(10) << index << "|"
-			<< ::FormatField(firstName) << "|"
-			<< ::FormatField(lastName) << "|"
-			<< ::FormatField(nickName) << "|" << std::endl;
+			  << ::_FormatField(_firstName) << "|"
+			  << ::_FormatField(_lastName) << "|"
+			  << ::_FormatField(_nickName)
+			  << std::endl;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PhoneBook.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 09:58:09 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/03/21 20:43:53 by asplavni         ###   ########.fr       */
+/*   Updated: 2025/03/22 18:01:02 by antonsplavn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,20 @@ public:
 
 	PhoneBook();
 
-	void	Add(const std::string &firstName, const std::string &lastName, const std::string &nickName);
-	void	Search() const;
-	void	Exit();
+	void	add(const std::string &firstName, const std::string &lastName,
+				const std::string &nickName, const std::string &phoneNumber,
+				std::string &darkestSecret);
+	void	printListOfContacts();
+	void	search(std::string id) const;
+	void	exit();
 
 private:
 
-	Contact		contacts[8];
-	int			numberOfContacts;
-	int			nextIndex;
+	Contact	_contacts[8];
+	int		_numberOfContacts;
+	int		_nextIndex;
+
+	void	_printHeader() const;
 };
 
 #endif
