@@ -6,7 +6,7 @@
 /*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 09:58:15 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/03/23 00:07:30 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/03/23 00:14:11 by antonsplavn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int validateArguments(int ac) {
 	return (0);
 }
 
-bool	isNumber(const std::string &str) {
+bool isNumber(const std::string &str) {
 	if (str.empty())
 		return (false);
 
@@ -59,7 +59,7 @@ bool getInput(const std::string &prompt, std::string &output) {
 	}
 }
 
-int	addCommand(PhoneBook &phoneBook) {
+int addCommand(PhoneBook &phoneBook) {
 
 	std::string input, firstName, lastName, nickName, phoneNumber, darkestSecret;
 
@@ -80,7 +80,7 @@ int	addCommand(PhoneBook &phoneBook) {
 	return (0);
 }
 
-int	searchCommand(PhoneBook &phoneBook) {
+int searchCommand(PhoneBook &phoneBook) {
 	phoneBook.printListOfContacts();
 
 	std::string	index;

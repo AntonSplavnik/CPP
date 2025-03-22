@@ -6,7 +6,7 @@
 /*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:47:08 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/03/22 18:21:18 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/03/23 00:12:36 by antonsplavn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,25 @@ void Contact::setContact(int index, const std::string &firstName,
 	this->_darkestSecret = darkestSecret;
 }
 
-const std::string	&Contact::getFirstName() const { return (this->_firstName); }
+const std::string	&Contact::getFirstName() const {
+	return (this->_firstName);
+}
 
-const std::string	&Contact::getLastName() const { return (this->_lastName); }
+const std::string	&Contact::getLastName() const {
+	return (this->_lastName);
+}
 
-const std::string	&Contact::getNickName() const { return (this->_nickName); }
+const std::string	&Contact::getNickName() const {
+	return (this->_nickName);
+}
 
-const std::string	&Contact::getPhoneNumber() const { return (this->_phoneNumber); }
+const std::string	&Contact::getPhoneNumber() const {
+	return (this->_phoneNumber);
+}
 
-const std::string	&Contact::getDarkestSecret() const { return (this->_darkestSecret); }
+const std::string	&Contact::getDarkestSecret() const {
+	return (this->_darkestSecret);
+}
 
 std::string	_FormatField(const std::string &str) {
 
