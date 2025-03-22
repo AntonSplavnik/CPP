@@ -6,7 +6,7 @@
 /*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 09:58:15 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/03/22 23:23:12 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/03/23 00:07:30 by antonsplavn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void animateLoop(const std::string &base, int cycles = 6, int delayMicroseconds 
 		usleep(delayMicroseconds);
 	}
 	std::cout << std::endl;
-	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
 int validateArguments(int ac) {
@@ -33,7 +32,7 @@ int validateArguments(int ac) {
 	return (0);
 }
 
-bool	isNumber(std::string &str) {
+bool	isNumber(const std::string &str) {
 	if (str.empty())
 		return (false);
 
@@ -50,18 +49,65 @@ bool getInput(const std::string &prompt, std::string &output) {
 	while (true) {
 		if (!std::getline(std::cin, output)) {
 			std::cout << "\nEOF detected. Goodbye!" << std::endl;
-			return false;
+			return (false);
 		}
 
 		if (output.find_first_not_of(" \t\n\r") != std::string::npos)
-			return true;
+			return (true);
 
 		std::cout << "Input cannot be empty. Try again.\n" << prompt << std::flush;
 	}
 }
 
-bool	addCommand(){
+int	addCommand(PhoneBook &phoneBook) {
 
+	std::string input, firstName, lastName, nickName, phoneNumber, darkestSecret;
+
+	if (!getInput("input first name: ", firstName))
+		return 1;
+	if (!getInput("input last name: ", lastName))
+		return 1;
+	if (!getInput("input nick name: ", nickName))
+		return 1;
+	if (!getInput("input phone number: ", phoneNumber))
+		return 1;
+	if (!getInput("input darkest secret: ", darkestSecret))
+		return 1;
+
+	animateLoop("adding contact");
+	phoneBook.add(firstName, lastName, nickName, phoneNumber, darkestSecret);
+
+	return (0);
+}
+
+int	searchCommand(PhoneBook &phoneBook) {
+	phoneBook.printListOfContacts();
+
+	std::string	index;
+	int			indexToInt;
+
+	while (true) {
+		if (!getInput("input index to search: ", index))
+			continue;
+
+		if (!isNumber(index)) {
+			std::cout << "Invalid input: index must be a number" << std::endl;
+			continue;
+		}
+
+		indexToInt = std::atoi(index.c_str());
+		indexToInt -= 1;
+
+		if (indexToInt < 0 || indexToInt >= phoneBook.getNumberOfContacts()) {
+			std::cout << "Invalid index" << std::endl;
+			continue;
+		}
+		break;
+	}
+
+	animateLoop("searching");
+	phoneBook.search(indexToInt);
+	return (0);
 }
 
 int runPhoneBook(PhoneBook &phoneBook) {
@@ -76,53 +122,17 @@ int runPhoneBook(PhoneBook &phoneBook) {
 			  << "*******************************************\n"
 			  << std::endl;
 
-	std::string input, firstName, lastName, nickName,
-				phoneNumber, darkestSecret, index;
-	int indexToInt;
+	std::string input;
 
 	while (true) {
 		if (!getInput("waiting for command: ", input))
 			break;
 
 		if (input == "ADD") {
-			if (!getInput("input first name: ", firstName))
-				break;
-			if (!getInput("input last name: ", lastName))
-				break;
-			if (!getInput("input nick name: ", nickName))
-				break;
-			if (!getInput("input phone number: ", phoneNumber))
-				break;
-			if (!getInput("input darkest secret: ", darkestSecret))
-				break;
-
-			animateLoop("adding contact");
-			phoneBook.add(firstName, lastName, nickName, phoneNumber, darkestSecret);
+			addCommand(phoneBook);
 		}
 		else if (input == "SEARCH") {
-			phoneBook.printListOfContacts();
-			while (true) {
-				if (!getInput("input index to search: ", index))
-					continue;
-
-				if (!isNumber(index)) {
-					std::cout << "Invalid input: index must be a number" << std::endl;
-					continue;
-				}
-
-				indexToInt = std::atoi(index.c_str());
-
-				indexToInt -= 1;
-
-				if (indexToInt < 0 || indexToInt >= phoneBook.getNumberOfContacts()) {
-					std::cout << "Invalid index" << std::endl;
-					continue;
-				}
-
-				break;
-			}
-			animateLoop("searching");
-			phoneBook.search(indexToInt);
+			searchCommand(phoneBook);
 		}
 		else if (input == "EXIT") {
 			animateLoop("exiting");
