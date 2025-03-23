@@ -6,7 +6,7 @@
 /*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 23:27:31 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/03/21 01:05:31 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/03/23 19:03:21 by antonsplavn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,13 @@ void	ConcatinateArguments(int ac, char **av, std::string &output)
 
 int	main(int ac, char **av)
 {
-	std::string megaphoneMessage;
-
 	if (ac == 1)
 	{
 		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" <<std::endl;
 		return (0);
 	}
 
+	std::string megaphoneMessage;
 	std::string &megaphoneMessageRef = megaphoneMessage;
 
 	ConcatinateArguments(ac, av, megaphoneMessageRef);
