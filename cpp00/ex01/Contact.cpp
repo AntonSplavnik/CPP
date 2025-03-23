@@ -6,7 +6,7 @@
 /*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:47:08 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/03/23 00:20:41 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/03/23 12:43:40 by antonsplavn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,18 +49,18 @@ const std::string	&Contact::getDarkestSecret() const {
 	return (this->_darkestSecret);
 }
 
-std::string	_FormatField(const std::string &str) {
+std::string	Contact::_formatField(const std::string &str) const{
 
 	if (str.length() > 10)
 		return (str.substr(0, 9) + ".");
 	return (std::string(10 - str.length(), ' ') + str);
 }
 
-void Contact::printContacts() const {
+void Contact::printContacts() const{
 
 	std::cout << std::setw(10) << index << "|"
-			  << ::_FormatField(_firstName) << "|"
-			  << ::_FormatField(_lastName) << "|"
-			  << ::_FormatField(_nickName)
+			  << _formatField(_firstName) << "|"
+			  << _formatField(_lastName) << "|"
+			  << _formatField(_nickName)
 			  << std::endl;
 }

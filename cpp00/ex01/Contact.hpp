@@ -6,7 +6,7 @@
 /*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:27:05 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/03/23 00:20:38 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/03/23 12:41:34 by antonsplavn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ private:
 	std::string	_phoneNumber;
 	std::string	_darkestSecret;
 
-	std::string	_formatField(const std::string &str);
+	std::string	_formatField(const std::string &str) const;
 };
 
 #endif

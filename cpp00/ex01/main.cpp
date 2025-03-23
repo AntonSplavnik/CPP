@@ -6,7 +6,7 @@
 /*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 09:58:15 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/03/23 00:14:11 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/03/23 13:23:25 by antonsplavn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,18 @@ bool isNumber(const std::string &str) {
 	return (true);
 }
 
+void trim(std::string &str) {
+	size_t first = str.find_first_not_of(" \t\r\n");
+	size_t last = str.find_last_not_of(" \t\r\n");
+
+	if (first == std::string::npos) {
+		str.clear();
+		return;
+	}
+	str = str.substr(first, last - first + 1);
+}
+
+
 bool getInput(const std::string &prompt, std::string &output) {
 
 	std::cout << prompt << std::flush;
@@ -52,8 +64,10 @@ bool getInput(const std::string &prompt, std::string &output) {
 			return (false);
 		}
 
-		if (output.find_first_not_of(" \t\n\r") != std::string::npos)
-			return (true);
+		trim(output);
+
+		if (!output.empty())
+			return true;
 
 		std::cout << "Input cannot be empty. Try again.\n" << prompt << std::flush;
 	}
@@ -62,15 +76,22 @@ bool getInput(const std::string &prompt, std::string &output) {
 int addCommand(PhoneBook &phoneBook) {
 
 	std::string input, firstName, lastName, nickName, phoneNumber, darkestSecret;
-
 	if (!getInput("input first name: ", firstName))
 		return 1;
 	if (!getInput("input last name: ", lastName))
 		return 1;
 	if (!getInput("input nick name: ", nickName))
 		return 1;
-	if (!getInput("input phone number: ", phoneNumber))
-		return 1;
+	while (true) {
+		if (!getInput("input phone number: ", phoneNumber))
+			return 1;
+
+		if (!isNumber(phoneNumber)) {
+			std::cout << "Phone number must contain only digits." << std::endl;
+			continue;
+		}
+		break;
+	}
 	if (!getInput("input darkest secret: ", darkestSecret))
 		return 1;
 
@@ -88,7 +109,7 @@ int searchCommand(PhoneBook &phoneBook) {
 
 	while (true) {
 		if (!getInput("input index to search: ", index))
-			continue;
+			return 1;
 
 		if (!isNumber(index)) {
 			std::cout << "Invalid input: index must be a number" << std::endl;
