@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   megaphone.hpp                                      :+:      :+:    :+:   */
+/*   Zombie.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/20 23:27:36 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/03/23 21:06:52 by asplavni         ###   ########.fr       */
+/*   Created: 2025/03/24 12:25:43 by asplavni          #+#    #+#             */
+/*   Updated: 2025/03/24 13:58:22 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MEGAPHONE_HPP
-#define MEGAPHONE_HPP
+#include "Zombie.hpp"
 
-#include <iostream>
-#include <string>
-#include <cctype>
+Zombie::Zombie() {};
 
-void	toUpper(std::string &output);
-void	concatinateArguments(int ac, char **av, std::string &output);
+Zombie::Zombie( std::string	name ) {
+	this->_name = name;
+}
 
-#endif
+Zombie::~Zombie(){
+	std::cout << this->_name << " is destroyed" << std::endl;
+};
+
+
+void Zombie::announce( void ) {
+
+	std::cout << this->_name << ": " << "BraiiiiiiinnnzzzZ..." << std::endl;
+}

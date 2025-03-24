@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   megaphone.hpp                                      :+:      :+:    :+:   */
+/*   randomCump.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/20 23:27:36 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/03/23 21:06:52 by asplavni         ###   ########.fr       */
+/*   Created: 2025/03/24 13:32:56 by asplavni          #+#    #+#             */
+/*   Updated: 2025/03/24 13:34:41 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MEGAPHONE_HPP
-#define MEGAPHONE_HPP
+#include "Zombie.hpp"
 
-#include <iostream>
-#include <string>
-#include <cctype>
+void Zombie::randomChump( std::string name ) {
 
-void	toUpper(std::string &output);
-void	concatinateArguments(int ac, char **av, std::string &output);
-
-#endif
+	Zombie zombie(name);
+	zombie.announce();
+}

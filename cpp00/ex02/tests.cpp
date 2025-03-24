@@ -38,9 +38,6 @@ int		main( void ) {
 
 	Account::displayAccountsInfos();
 	std::for_each( acc_begin, acc_end, std::mem_fun_ref( &Account::displayStatus ) );
-	// std::for_each(acc_begin, acc_end, [](Account &acc) {
-	// 	acc.displayStatus();
-	// });
 	for ( acc_int_t it( acc_begin, dep_begin ); it.first != acc_end && it.second != dep_end; ++(it.first), ++(it.second) ) {
 
 		(*(it.first)).makeDeposit( *(it.second) );
@@ -48,9 +45,6 @@ int		main( void ) {
 
 	Account::displayAccountsInfos();
 	std::for_each( acc_begin, acc_end, std::mem_fun_ref( &Account::displayStatus ) );
-	// std::for_each(acc_begin, acc_end, [](Account &acc) {
-	// 	acc.displayStatus();
-	// });
 	for ( acc_int_t it( acc_begin, wit_begin ); it.first != acc_end && it.second != wit_end; ++(it.first), ++(it.second) ) {
 
 		(*(it.first)).makeWithdrawal( *(it.second) );
@@ -58,9 +52,6 @@ int		main( void ) {
 
 	Account::displayAccountsInfos();
 	std::for_each( acc_begin, acc_end, std::mem_fun_ref( &Account::displayStatus ) );
-	// std::for_each(acc_begin, acc_end, [](Account &acc) {
-	// 	acc.displayStatus();
-	// });
 	return 0;
 }
 

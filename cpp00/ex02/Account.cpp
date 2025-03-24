@@ -3,20 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   Account.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
+/*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 20:42:33 by asplavni          #+#    #+#             */
-/*   Updated: 2025/03/23 20:11:17 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/03/24 12:49:17 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Account.hpp"
 #include <iostream>
-#include <iostream>
 #include <ctime>
 #include <iomanip>
-
-/* c++ -std=c++98 -Wall -Wextra -Werror tests.cpp Account.cpp -o my_test */
 
 int Account::_nbAccounts = 0;
 int Account::_totalAmount = 0;

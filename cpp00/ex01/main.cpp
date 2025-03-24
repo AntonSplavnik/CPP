@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
+/*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 09:58:15 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/03/23 13:23:25 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/03/23 21:22:56 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <string>
 #include <iostream>
 #include <unistd.h>
+#include <cstdlib>
 
 void animateLoop(const std::string &base, int cycles = 6, int delayMicroseconds = 400000) {
 	for (int i = 0; i < cycles; ++i) {
