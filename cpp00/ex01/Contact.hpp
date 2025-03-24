@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Contact.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
+/*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:27:05 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/03/23 12:41:34 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/03/24 18:56:08 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ public:
 
 	void	setContact(int index, const std::string &firstName,
 					   const std::string &lastName, const std::string &nickName,
-					   const std::string &phoneNumber, std::string & darkestSecret);
+					   const std::string &phoneNumber, std::string &darkestSecret);
 
 	const std::string	&getFirstName() const;
 	const std::string	&getLastName() const;
