@@ -19,7 +19,6 @@ Thumbs.db           # Windows
 CMakeCache.txt
 CMakeFiles/
 cmake_install.cmake
-Makefile
 build/
 
 # --- Logs / Misc ---
