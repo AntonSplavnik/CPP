@@ -6,7 +6,7 @@
 /*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 15:31:12 by asplavni          #+#    #+#             */
-/*   Updated: 2025/03/27 11:49:56 by asplavni         ###   ########.fr       */
+/*   Updated: 2025/03/27 14:24:48 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void Harl::complain ( std::string level ) {
 	void (Harl::*funcions[])() = {&Harl::dbug, &Harl::info, &Harl::warning,
 								  &Harl::error};
 
-	for (int i = 0; i < 4; )
+	for (int i = 0; i < 4; i++)
 		if (level == levels[i]){
 			(this->*funcions[i])();
 			return ;

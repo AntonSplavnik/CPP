@@ -6,7 +6,7 @@
 /*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 15:30:06 by asplavni          #+#    #+#             */
-/*   Updated: 2025/03/27 13:35:57 by asplavni         ###   ########.fr       */
+/*   Updated: 2025/03/27 14:59:31 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,16 @@
 #include <sstream>
 #include <string>
 
-bool toInt(const std::string& str, int& result) {
-	std::stringstream ss(str);
-	return (ss >> result) ? true : false;
+bool checkInput(const std::string& input, std::string levels[]) {
+
+	bool flag = false;
+
+	for (int i = 0; i < 4; i++) {
+		if (input == levels[i])
+			flag = true;
+	}
+
+	return (flag);
 }
 
 int main(int ac, char **av ) {
@@ -27,30 +34,34 @@ int main(int ac, char **av ) {
 	}
 
 	std::string input = av[1];
-	int level;
+	std::string levels[] = {"DEBUG", "INFO", "WARNING", "ERROR"};
+	int levelNumber[] = {1, 2, 3, 4};
 
-	if (!toInt(input,level)) {
-		std::cerr << "[ Probably complaining about insignificant problems ]"
+	if (!checkInput(input, levels)) {
+		std::cout << "[ Probably complaining about insignificant problems ]"
 				  << std::endl;
 		return (1);
 	}
 
-	std::string levels[] = {"DEBUG", "INFO", "WARNING", "ERROR"};
+	for (int i = 0; i < 4; i++) {
+		if (input == levels[i]) {
 
-	Harl harl;
-	switch (level) {
-		case 1:
-			harl.complain(levels[0]);
-		case 2:
-			harl.complain(levels[1]);
-		case 3:
-			harl.complain(levels[2]);
-		case 4:
-			harl.complain(levels[3]);
-			break;
-		default :
-			std::cout << "[ Probably complaining about insignificant problems ]"
-					  << std::endl;
+			Harl harl;
+			switch (levelNumber[i]) {
+				case 1:
+					harl.complain(levels[0]);
+				case 2:
+					harl.complain(levels[1]);
+				case 3:
+					harl.complain(levels[2]);
+				case 4:
+					harl.complain(levels[3]);
+					break;
+				default :
+					std::cout << "[ Probably complaining about insignificant problems ]"
+							  << std::endl;
+			}
+		}
 	}
 
 	return (0);

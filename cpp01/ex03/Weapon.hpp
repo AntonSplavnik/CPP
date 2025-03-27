@@ -6,7 +6,7 @@
 /*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 16:44:04 by asplavni          #+#    #+#             */
-/*   Updated: 2025/03/24 18:54:09 by asplavni         ###   ########.fr       */
+/*   Updated: 2025/03/27 14:08:47 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ public:
 	Weapon(std::string type);
 	~Weapon();
 
-	std::string	getType();
-	void		setType(std::string type);
+	const std::string& getType();
+	void setType(std::string type);
 
 private:
 

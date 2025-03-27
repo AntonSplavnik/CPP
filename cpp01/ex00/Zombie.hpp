@@ -6,7 +6,7 @@
 /*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 12:21:40 by asplavni          #+#    #+#             */
-/*   Updated: 2025/03/24 13:19:31 by asplavni         ###   ########.fr       */
+/*   Updated: 2025/03/27 14:12:20 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ public:
 	~Zombie();
 
 
-	void	announce( void );
-	Zombie*	newZombie( std::string name );
-	void	randomChump( std::string name );
+	void announce( void );
+	Zombie* newZombie( std::string name );
+	void randomChump( std::string name );
 
 private:
 

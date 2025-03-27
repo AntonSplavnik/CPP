@@ -6,7 +6,7 @@
 /*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 16:44:10 by asplavni          #+#    #+#             */
-/*   Updated: 2025/03/24 18:53:24 by asplavni         ###   ########.fr       */
+/*   Updated: 2025/03/27 14:09:11 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ public:
 	HumanB( std::string _name );
 	~HumanB();
 
-	void	setWeapon(Weapon &wepon);
-	void	attack();
+	void setWeapon(Weapon &wepon);
+	void attack();
 
 private:
 
