@@ -13,11 +13,28 @@
 #include "fixed_point.hpp"
 #include <iostream>
 #include <string>
+#include <cmath>
 
 Fixed::Fixed() {
 
 	std::cout << "Default constructor called" << std::endl;
+
 	_fixedPoint = 0;
+}
+
+Fixed::Fixed(const int input) {
+
+
+	_fixedPoint = input << _fractionalBits;
+}
+
+Fixed::Fixed(const float input) {
+
+	std::cout << "Float constructor called" << std::endl;
+
+	//_fixedPoint = static_cast<int>(roundf(input * 256));
+	_fixedPoint = static_cast<int>(roundf(input * (1 << _fractionalBits)));
+
 }
 
 Fixed::Fixed(const Fixed &other) {
@@ -50,4 +67,17 @@ int Fixed::getRawBits( void ) const {
 void Fixed::setRawBits ( int const raw ) {
 
 	_fixedPoint = raw << _fractionalBits;
+}
+
+
+float Fixed::toFloat( void ) const {
+
+	//return (_fixedPoint / 256.0f);
+	return ( _fixedPoint / static_cast<float>(1 << _fixedPoint));
+}
+
+int Fixed::toInt( void ) const{
+
+	//return _fixedPoint >> 8;
+	return (_fixedPoint >> _fractionalBits);
 }
