@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fixed_point.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 12:13:35 by asplavni          #+#    #+#             */
-/*   Updated: 2025/03/28 16:35:00 by asplavni         ###   ########.fr       */
+/*   Updated: 2025/03/28 22:29:04 by antonsplavn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 #include <iostream>
 #include <string>
 #include <cmath>
+
+std::ostream &operator<<(std::ostream &out, const Fixed &fixed) {
+	out << fixed.toFloat();
+	return out;
+}
 
 Fixed::Fixed() {
 

@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   fixed_point.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 12:58:00 by asplavni          #+#    #+#             */
-/*   Updated: 2025/03/28 16:37:46 by asplavni         ###   ########.fr       */
+/*   Updated: 2025/03/28 22:26:44 by antonsplavn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FIXED_POINT_HPP
 #define FIXED_POINT_HPP
 
-std::ostream &operator<<(std::ostream &out, const Fixed &fixed);
+#include <iostream>
 
 class Fixed {
 
-public:
+	public:
 
 	Fixed();
 	Fixed(const int input);
@@ -33,10 +33,12 @@ public:
 	float toFloat( void ) const;
 	int toInt( void ) const;
 
-private:
+	private:
 
 	int _fixedPoint;
 	static const int _fractionalBits = 8;
 };
+
+std::ostream &operator<<(std::ostream &out, const Fixed &fixed);
 
 #endif
