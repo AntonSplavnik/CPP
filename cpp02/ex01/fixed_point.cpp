@@ -6,7 +6,7 @@
 /*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 12:13:35 by asplavni          #+#    #+#             */
-/*   Updated: 2025/03/28 22:29:04 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/03/28 22:41:28 by antonsplavn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ Fixed::Fixed() {
 
 Fixed::Fixed(const int input) {
 
+	std::cout << "Int constructor called" << std::endl;
 
 	_fixedPoint = input << _fractionalBits;
 }
@@ -41,6 +42,13 @@ Fixed::Fixed(const float input) {
 	_fixedPoint = static_cast<int>(roundf(input * (1 << _fractionalBits)));
 
 }
+
+Fixed::~Fixed () {
+
+	std::cout << "Destructor called" << std::endl;
+}
+
+
 
 Fixed::Fixed(const Fixed &other) {
 
@@ -58,10 +66,7 @@ Fixed &Fixed::operator=(const Fixed &other) {
 	return (*this);
 }
 
-Fixed::~Fixed () {
 
-	std::cout << "Destructor called" << std::endl;
-}
 
 int Fixed::getRawBits( void ) const {
 
@@ -71,14 +76,14 @@ int Fixed::getRawBits( void ) const {
 
 void Fixed::setRawBits ( int const raw ) {
 
-	_fixedPoint = raw << _fractionalBits;
+	_fixedPoint = raw;
 }
 
 
 float Fixed::toFloat( void ) const {
 
 	//return (_fixedPoint / 256.0f);
-	return ( _fixedPoint / static_cast<float>(1 << _fixedPoint));
+	return ( _fixedPoint / static_cast<float>(1 << _fractionalBits));
 }
 
 int Fixed::toInt( void ) const{
