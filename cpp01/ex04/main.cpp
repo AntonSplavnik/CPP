@@ -6,7 +6,7 @@
 /*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 19:18:49 by asplavni          #+#    #+#             */
-/*   Updated: 2025/03/26 16:17:20 by asplavni         ###   ########.fr       */
+/*   Updated: 2025/03/28 11:35:37 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,6 @@ std::string replaceString(std::string const &fromFile, std::string const &string
 			i++;
 		}
 	}
-
-	// removes last unnececary \n line in toFile it might come from rading a file.
-	if (!fromFile.empty() && fromFile[fromFile.length() - 1] != '\n' &&
-		!toFile.empty() && toFile[toFile.length() - 1] == '\n')
-		toFile.erase(toFile.length() - 1);
 
 	return (toFile);
 }
@@ -70,7 +65,8 @@ int main (int ac, char **av) {
 
 	while (std::getline(reading, line)){
 		fromFile += line;
-		fromFile += "\n";
+		 if (!reading.eof())
+			fromFile += "\n";
 	}
 
 	toFile += replaceString(fromFile, string1, string2);
