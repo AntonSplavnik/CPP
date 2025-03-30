@@ -6,7 +6,7 @@
 /*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 12:13:35 by asplavni          #+#    #+#             */
-/*   Updated: 2025/03/28 22:41:28 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/03/30 19:44:33 by antonsplavn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ Fixed::Fixed(const float input) {
 
 	//_fixedPoint = static_cast<int>(roundf(input * 256));
 	_fixedPoint = static_cast<int>(roundf(input * (1 << _fractionalBits)));
-
 }
 
 Fixed::~Fixed () {
