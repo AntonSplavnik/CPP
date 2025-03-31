@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fixed_point.cpp                                    :+:      :+:    :+:   */
+/*   fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
+/*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 12:13:35 by asplavni          #+#    #+#             */
-/*   Updated: 2025/03/30 23:14:41 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/03/31 16:19:46 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fixed_point.hpp"
+#include "fixed.hpp"
 #include <iostream>
 #include <string>
 #include <cmath>
@@ -116,44 +116,40 @@ Fixed Fixed::operator--(int) {
 	return (object);
 }
 
+
 Fixed::Fixed() {
 
-	std::cout << "Default constructor called" << std::endl;
+	// std::cout << "Default constructor called" << std::endl;
 
 	_fixedPoint = 0;
 }
 
 Fixed::Fixed(const int input) {
 
-	std::cout << "Int constructor called" << std::endl;
+	// std::cout << "Int constructor called" << std::endl;
 
 	_fixedPoint = input << _fractionalBits;
 }
 
 Fixed::Fixed(const float input) {
 
-	std::cout << "Float constructor called" << std::endl;
+	// std::cout << "Float constructor called" << std::endl;
 
 	//_fixedPoint = static_cast<int>(roundf(input * 256));
 	_fixedPoint = static_cast<int>(roundf(input * (1 << _fractionalBits)));
 
 }
 
-Fixed::~Fixed () {
-
-	std::cout << "Destructor called" << std::endl;
-}
-
 
 Fixed::Fixed(const Fixed &other) {
 
-	std::cout << "Copy constructor called" << std::endl;
+	// std::cout << "Copy constructor called" << std::endl;
 	this->_fixedPoint = other._fixedPoint;
 }
 
 Fixed &Fixed::operator=(const Fixed &other) {
 
-	std::cout << "Copy assignment operator called" << std::endl;
+	// std::cout << "Copy assignment operator called" << std::endl;
 
 	if (this != &other)
 		this->_fixedPoint = other._fixedPoint;
@@ -161,10 +157,16 @@ Fixed &Fixed::operator=(const Fixed &other) {
 	return (*this);
 }
 
+Fixed::~Fixed () {
+
+	// std::cout << "Destructor called" << std::endl;
+}
+
+
 
 int Fixed::getRawBits( void ) const {
 
-	std::cout << "getRawBits member function called" << std::endl;
+	// std::cout << "getRawBits member function called" << std::endl;
 	return (this->_fixedPoint);
 }
 

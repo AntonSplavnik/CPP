@@ -6,31 +6,34 @@
 /*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 12:52:54 by asplavni          #+#    #+#             */
-/*   Updated: 2025/03/31 16:23:30 by asplavni         ###   ########.fr       */
+/*   Updated: 2025/03/31 15:44:46 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fixed.hpp"
+#include "point.hpp"
 #include <iostream>
 
-int main( void ) {
+int main() {
+	Point a(0.0f, 0.0f);
+	Point b(10.0f, 0.0f);
+	Point c(5.0f, 10.0f);
 
-	Fixed		a;
-	Fixed const b( 10 );
-	Fixed const c( 42.42f );
-	Fixed const d( b );
+	// Clearly inside
+	Point p1(5.0f, 5.0f);
+	std::cout << "p1 is inside? " << (bsp(a, b, c, p1) ? "Yes" : "No") << std::endl;
 
-	a = Fixed( 1234.4321f );
+	// Clearly outside
+	Point p2(15.0f, 5.0f);
+	std::cout << "p2 is inside? " << (bsp(a, b, c, p2) ? "Yes" : "No") << std::endl;
 
-	std::cout << "a is " << a << std::endl;
-	std::cout << "b is " << b << std::endl;
-	std::cout << "c is " << c << std::endl;
-	std::cout << "d is " << d << std::endl;
+	// On edge AB
+	Point p3(5.0f, 0.0f);
+	std::cout << "p3 is inside? " << (bsp(a, b, c, p3) ? "Yes" : "No") << std::endl;
 
-	std::cout << "a is " << a.toInt() << " as integer" << std::endl;
-	std::cout << "b is " << b.toInt() << " as integer" << std::endl;
-	std::cout << "c is " << c.toInt() << " as integer" << std::endl;
-	std::cout << "d is " << d.toInt() << " as integer" << std::endl;
+	// At vertex C
+	Point p4(5.0f, 10.0f);
+	std::cout << "p4 is inside? " << (bsp(a, b, c, p4) ? "Yes" : "No") << std::endl;
 
 	return 0;
 }

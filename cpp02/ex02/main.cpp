@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
+/*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 12:52:54 by asplavni          #+#    #+#             */
-/*   Updated: 2025/03/30 23:03:49 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/03/31 16:22:59 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fixed_point.hpp"
+#include "fixed.hpp"
 #include <iostream>
 
 int main( void ) {

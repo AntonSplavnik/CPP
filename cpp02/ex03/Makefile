@@ -1,10 +1,10 @@
 CXX      = c++
 CXXFLAGS = -std=c++98 -Wall -Wextra -Werror
 
-SRCS     = main.cpp fixed.cpp
+SRCS     = main.cpp fixed.cpp bsp.cpp point.cpp
 OBJDIR   = build
 OBJS     = $(patsubst %.cpp,$(OBJDIR)/%.o,$(SRCS))
-TARGET   =  now_were_talking
+TARGET   =  BSP
 
 all: $(TARGET)
 

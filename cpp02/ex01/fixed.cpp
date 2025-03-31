@@ -1,24 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fixed_point.cpp                                    :+:      :+:    :+:   */
+/*   fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 12:13:35 by asplavni          #+#    #+#             */
-/*   Updated: 2025/03/28 16:35:00 by asplavni         ###   ########.fr       */
+/*   Updated: 2025/03/31 16:23:37 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fixed_point.hpp"
+#include "fixed.hpp"
 #include <iostream>
 #include <string>
+#include <cmath>
+
+std::ostream &operator<<(std::ostream &out, const Fixed &fixed) {
+	out << fixed.toFloat();
+	return out;
+}
 
 Fixed::Fixed() {
 
 	std::cout << "Default constructor called" << std::endl;
+
 	_fixedPoint = 0;
 }
+
+Fixed::Fixed(const int input) {
+
+	std::cout << "Int constructor called" << std::endl;
+
+	_fixedPoint = input << _fractionalBits;
+}
+
+Fixed::Fixed(const float input) {
+
+	std::cout << "Float constructor called" << std::endl;
+
+	//_fixedPoint = static_cast<int>(roundf(input * 256));
+	_fixedPoint = static_cast<int>(roundf(input * (1 << _fractionalBits)));
+}
+
+Fixed::~Fixed () {
+
+	std::cout << "Destructor called" << std::endl;
+}
+
+
 
 Fixed::Fixed(const Fixed &other) {
 
@@ -36,10 +65,7 @@ Fixed &Fixed::operator=(const Fixed &other) {
 	return (*this);
 }
 
-Fixed::~Fixed () {
 
-	std::cout << "Destructor called" << std::endl;
-}
 
 int Fixed::getRawBits( void ) const {
 
@@ -49,5 +75,18 @@ int Fixed::getRawBits( void ) const {
 
 void Fixed::setRawBits ( int const raw ) {
 
-	_fixedPoint = raw << _fractionalBits;
+	_fixedPoint = raw;
+}
+
+
+float Fixed::toFloat( void ) const {
+
+	//return (_fixedPoint / 256.0f);
+	return ( _fixedPoint / static_cast<float>(1 << _fractionalBits));
+}
+
+int Fixed::toInt( void ) const{
+
+	//return _fixedPoint >> 8;
+	return (_fixedPoint >> _fractionalBits);
 }
