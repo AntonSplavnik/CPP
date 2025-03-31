@@ -6,7 +6,7 @@
 /*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 12:13:35 by asplavni          #+#    #+#             */
-/*   Updated: 2025/03/30 23:07:05 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/03/30 23:14:41 by antonsplavn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,10 @@ Fixed Fixed::operator/( const Fixed &other ) const {
 
 	Fixed object;
 
+	if (other._fixedPoint == 0) {
+		std::cout << "division by 0 is unavalable" << std::endl;
+		return (1);
+	}
 	long raw = (static_cast<long>(this->_fixedPoint) << other._fractionalBits) / other._fixedPoint;
 	object.setRawBits(static_cast<int>(raw));
 	return (object);
