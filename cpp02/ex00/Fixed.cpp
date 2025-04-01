@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fixed.cpp                                          :+:      :+:    :+:   */
+/*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 12:13:35 by asplavni          #+#    #+#             */
-/*   Updated: 2025/03/31 16:24:00 by asplavni         ###   ########.fr       */
+/*   Updated: 2025/04/01 11:27:07 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fixed.hpp"
+#include "Fixed.hpp"
 #include <iostream>
 #include <string>
 
@@ -26,7 +26,7 @@ Fixed::Fixed(const Fixed &other) {
 	this->_fixedPoint = other._fixedPoint;
 }
 
-Fixed &Fixed::operator=(const Fixed &other) {
+Fixed& Fixed::operator=(const Fixed &other) {
 
 	std::cout << "Copy assignment operator called" << std::endl;
 

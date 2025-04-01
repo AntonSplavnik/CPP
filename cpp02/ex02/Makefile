@@ -1,7 +1,7 @@
 CXX      = c++
 CXXFLAGS = -std=c++98 -Wall -Wextra -Werror
 
-SRCS     = main.cpp fixed.cpp
+SRCS     = main.cpp Fixed.cpp
 OBJDIR   = build
 OBJS     = $(patsubst %.cpp,$(OBJDIR)/%.o,$(SRCS))
 TARGET   =  now_were_talking

@@ -6,12 +6,11 @@
 /*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:55:50 by asplavni          #+#    #+#             */
-/*   Updated: 2025/03/31 16:18:48 by asplavni         ###   ########.fr       */
+/*   Updated: 2025/04/01 12:10:32 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#include "point.hpp"
+#include "Point.hpp"
 
 Point::Point()
 	 : _x(0), _y(0)

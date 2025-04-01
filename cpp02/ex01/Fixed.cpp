@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fixed.cpp                                          :+:      :+:    :+:   */
+/*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 12:13:35 by asplavni          #+#    #+#             */
-/*   Updated: 2025/03/31 16:23:37 by asplavni         ###   ########.fr       */
+/*   Updated: 2025/04/01 11:50:49 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fixed.hpp"
+#include "Fixed.hpp"
 #include <iostream>
 #include <string>
 #include <cmath>
 
-std::ostream &operator<<(std::ostream &out, const Fixed &fixed) {
+std::ostream& operator<<(std::ostream& out, const Fixed& fixed) {
 	out << fixed.toFloat();
 	return out;
 }

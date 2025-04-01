@@ -1,43 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   point.hpp                                          :+:      :+:    :+:   */
+/*   fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/31 09:54:33 by asplavni          #+#    #+#             */
-/*   Updated: 2025/03/31 15:26:47 by asplavni         ###   ########.fr       */
+/*   Created: 2025/03/28 12:58:00 by asplavni          #+#    #+#             */
+/*   Updated: 2025/04/01 11:24:45 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef POINT_HPP
-#define POINT_HPP
+#ifndef FIXED_HPP
+#define FIXED_HPP
 
-#include "fixed.hpp"
-
-class Point {
+class Fixed {
 
 public:
 
-	Point();
-	Point(const float x, const float y);
-	Point(Point const& other);
-	Point& operator=(Point const& other);
-	~Point();
+	Fixed();
+	~Fixed();
+	Fixed(const Fixed &other);
+	Fixed& operator=(const Fixed &other);
 
-	Fixed getX() const;
-	Fixed getY() const;
-
+	int getRawBits( void ) const;
+	void setRawBits( int const raw );
 
 private:
 
-	Fixed const _x;
-	Fixed const _y;
-
+	int _fixedPoint;
+	static const int _fractionalBits = 8;
 };
-
-Fixed fixed_abs(Fixed const& value);
-
-bool bsp( Point const a, Point const b, Point const c, Point const point);
 
 #endif

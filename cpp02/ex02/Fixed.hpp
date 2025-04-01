@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fixed.hpp                                          :+:      :+:    :+:   */
+/*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 12:58:00 by asplavni          #+#    #+#             */
-/*   Updated: 2025/03/31 14:37:50 by asplavni         ###   ########.fr       */
+/*   Updated: 2025/04/01 12:07:59 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@ class Fixed {
 
 public:
 
-	Fixed operator+( const Fixed &other ) const;
-	Fixed operator-( const Fixed &other) const;
-	Fixed operator*( const Fixed &other ) const;
-	Fixed operator/( const Fixed &other ) const;
+	Fixed operator+( const Fixed& other ) const;
+	Fixed operator-( const Fixed& other) const;
+	Fixed operator*( const Fixed& other ) const;
+	Fixed operator/( const Fixed& other ) const;
 
-	bool operator<( const Fixed &other ) const;
-	bool operator>( const Fixed &other ) const;
-	bool operator>=( const Fixed &other ) const;
-	bool operator<=( const Fixed &other ) const;
-	bool operator==( const Fixed &other ) const;
-	bool operator!=( const Fixed &other ) const;
+	bool operator<( const Fixed& other ) const;
+	bool operator>( const Fixed& other ) const;
+	bool operator>=( const Fixed& other ) const;
+	bool operator<=( const Fixed& other ) const;
+	bool operator==( const Fixed& other ) const;
+	bool operator!=( const Fixed& other ) const;
 
 	Fixed& operator++();
 	Fixed operator++(int);
@@ -41,8 +41,8 @@ public:
 	Fixed(const float input);
 	~Fixed();
 
-	Fixed(const Fixed &other);
-	Fixed& operator=(const Fixed &other);
+	Fixed(const Fixed& other);
+	Fixed& operator=(const Fixed& other);
 
 	int getRawBits( void ) const;
 	void setRawBits( int const raw );
@@ -62,7 +62,7 @@ private:
 	static const int _fractionalBits = 8;
 };
 
-std::ostream &operator<<(std::ostream &out, const Fixed &fixed);
+std::ostream& operator<<(std::ostream& out, const Fixed& fixed);
 
 
 #endif

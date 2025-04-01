@@ -1,7 +1,7 @@
 CXX      = c++
 CXXFLAGS = -std=c++98 -Wall -Wextra -Werror
 
-SRCS     = main.cpp fixed.cpp bsp.cpp point.cpp
+SRCS     = main.cpp Fixed.cpp bsp.cpp Point.cpp
 OBJDIR   = build
 OBJS     = $(patsubst %.cpp,$(OBJDIR)/%.o,$(SRCS))
 TARGET   =  BSP

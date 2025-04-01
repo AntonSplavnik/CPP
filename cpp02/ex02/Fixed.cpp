@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fixed.cpp                                          :+:      :+:    :+:   */
+/*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 12:13:35 by asplavni          #+#    #+#             */
-/*   Updated: 2025/03/31 14:38:03 by asplavni         ###   ########.fr       */
+/*   Updated: 2025/04/01 12:09:59 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fixed.hpp"
+#include "Fixed.hpp"
 #include <iostream>
 #include <string>
 #include <cmath>
 
-std::ostream &operator<<(std::ostream &out, const Fixed &fixed) {
+std::ostream& operator<<(std::ostream& out, const Fixed& fixed) {
 	out << fixed.toFloat();
 	return out;
 }
 
-Fixed Fixed::operator+( const Fixed &other ) const {
+Fixed Fixed::operator+( const Fixed& other ) const {
 
 	Fixed object;
 
@@ -28,7 +28,7 @@ Fixed Fixed::operator+( const Fixed &other ) const {
 	return (object);
 }
 
-Fixed Fixed::operator-( const Fixed &other) const {
+Fixed Fixed::operator-( const Fixed& other) const {
 
 	Fixed object;
 
@@ -36,7 +36,7 @@ Fixed Fixed::operator-( const Fixed &other) const {
 	return (object);
 }
 
-Fixed Fixed::operator*( const Fixed &other ) const {
+Fixed Fixed::operator*( const Fixed& other ) const {
 
 	Fixed object;
 
@@ -45,45 +45,45 @@ Fixed Fixed::operator*( const Fixed &other ) const {
 	return (object);
 }
 
-Fixed Fixed::operator/( const Fixed &other ) const {
+Fixed Fixed::operator/( const Fixed& other ) const {
 
 	Fixed object;
 
 	if (other._fixedPoint == 0) {
-		std::cout << "division by 0 is unavalable" << std::endl;
-		return (1);
+		std::cerr << "Error: Division by zero"  << std::endl;
+		return (Fixed());
 	}
 	long raw = (static_cast<long>(this->_fixedPoint) << other._fractionalBits) / other._fixedPoint;
 	object.setRawBits(static_cast<int>(raw));
 	return (object);
 }
 
-bool Fixed::operator<( const Fixed &other ) const{
+bool Fixed::operator<( const Fixed& other ) const{
 
 	return (this->_fixedPoint < other._fixedPoint);
 }
 
-bool Fixed::operator>( const Fixed &other ) const{
+bool Fixed::operator>( const Fixed& other ) const{
 
 	return (this->_fixedPoint > other._fixedPoint);
 }
 
-bool Fixed::operator>=( const Fixed &other ) const{
+bool Fixed::operator>=( const Fixed& other ) const{
 
 	return (this->_fixedPoint >= other._fixedPoint);
 }
 
-bool Fixed::operator<=( const Fixed &other ) const{
+bool Fixed::operator<=( const Fixed& other ) const{
 
 	return (this->_fixedPoint <= other._fixedPoint);
 }
 
-bool Fixed::operator==( const Fixed &other ) const{
+bool Fixed::operator==( const Fixed& other ) const{
 
 	return (this->_fixedPoint == other._fixedPoint);
 }
 
-bool Fixed::operator!=( const Fixed &other ) const{
+bool Fixed::operator!=( const Fixed& other ) const{
 
 	return (this->_fixedPoint != other._fixedPoint);
 }
@@ -112,7 +112,7 @@ Fixed Fixed::operator--(int) {
 
 	Fixed object = *this;
 
-	object._fixedPoint -= 1;
+	this->_fixedPoint -= 1;
 	return (object);
 }
 
@@ -151,7 +151,7 @@ Fixed::Fixed(const Fixed &other) {
 	this->_fixedPoint = other._fixedPoint;
 }
 
-Fixed &Fixed::operator=(const Fixed &other) {
+Fixed& Fixed::operator=(const Fixed &other) {
 
 	std::cout << "Copy assignment operator called" << std::endl;
 

@@ -6,12 +6,12 @@
 /*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 12:52:54 by asplavni          #+#    #+#             */
-/*   Updated: 2025/03/31 15:44:46 by asplavni         ###   ########.fr       */
+/*   Updated: 2025/04/01 12:15:46 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fixed.hpp"
-#include "point.hpp"
+#include "Fixed.hpp"
+#include "Point.hpp"
 #include <iostream>
 
 int main() {
