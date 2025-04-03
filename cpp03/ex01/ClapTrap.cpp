@@ -6,39 +6,43 @@
 /*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 09:40:54 by asplavni          #+#    #+#             */
-/*   Updated: 2025/04/02 18:40:07 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/04/02 22:32:47 by antonsplavn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap() {
+ClapTrap::ClapTrap(): _name("Default") {
 
-	std::cout << "Default Constructor of ClapTrap called" << std::endl;
+	std::cout << getClassName() << " "
+			  << _name << " Default constructor called" << std::endl;
 
-	_name = "Default";
-	_hitPoints = 10;
-	_energyPoints = 10;
-	_attackDamage = 10;
+	_hitPoints = getMaxHitPoints();
+	_energyPoints = getMaxEnergyPoints();
+	_attackDamage = getMaxAttackDamage();
 }
 
 ClapTrap::ClapTrap(const std::string& name): _name(name) {
-	std::cout << "ClapTrap " << name << " created!" << std::endl;
 
-	_hitPoints = 10;
-	_energyPoints = 10;
-	_attackDamage = 10;
+	std::cout << getClassName() << " "
+			  << name << " Name constructor called" << std::endl;
+
+	_hitPoints = getMaxHitPoints();
+	_energyPoints = getMaxEnergyPoints();
+	_attackDamage = getMaxAttackDamage();
 }
 
 ClapTrap::~ClapTrap() {
 
-	std::cout << "Destructor of ClapTrap called" << std::endl;
+	std::cout << getClassName() << " "
+			  << _name << " Destructor called" << std::endl;
 }
 
-ClapTrap::ClapTrap(const ClapTrap &other) {
+ClapTrap::ClapTrap(const ClapTrap &other): _name(other._name) {
 
-	std::cout << "Copy constructor of ClapTrap called" << std::endl;
-	_name = other._name;
+	std::cout << getClassName() << " "
+			  << _name << " Copy constructor called" << std::endl;
+
 	_hitPoints = other._hitPoints;
 	_energyPoints = other._energyPoints;
 	_attackDamage = other._attackDamage;
@@ -46,7 +50,9 @@ ClapTrap::ClapTrap(const ClapTrap &other) {
 
 ClapTrap& ClapTrap::operator=(const ClapTrap &other) {
 
-	std::cout << "Copy assignment operator of ClapTrap called" << std::endl;
+	std::cout << getClassName() << " "
+			  << _name << " is being assigned from " << other._name << std::endl;
+
 	if (this != &other) {
 		_name = other._name;
 		_hitPoints = other._hitPoints;
@@ -56,42 +62,51 @@ ClapTrap& ClapTrap::operator=(const ClapTrap &other) {
 	return *this;
 }
 
+int ClapTrap::getMaxHitPoints() const { return (10); }
+
+int ClapTrap::getMaxEnergyPoints() const { return (10); }
+
+int ClapTrap::getMaxAttackDamage() const { return (0); }
+
+const char* ClapTrap::getClassName() const { return ("ClapTrap");}
 
 void ClapTrap::attack(const std::string& target) {
 
 	if (_hitPoints <= 0) {
 
-		std::cout << "ClapTrap " << _name << " is dead and can't attack." << std::endl;
+		std::cout << getClassName() << " "
+				  << _name << " is dead and can't attack." << std::endl;
 		return ;
 	}
 
 	if (_energyPoints <= 0) {
 
-		std::cout << "ClapTrap " << _name << " has no energy left!" << std::endl;
+		std::cout << getClassName() << " "
+				  << _name << " has no energy left!" << std::endl;
 		return ;
 	}
 
-	std::cout << "ClapTrap " << _name << " attacks " << target
-			  << ", causing " << _attackDamage << " points of damage!"
-			  << std::endl;
-
 	_energyPoints -= 1;
+
+	std::cout << getClassName() << " "
+			  << _name << " attacks " << target
+			  << ", dealing " << _attackDamage << " points of damage!"
+			  << std::endl;
 }
 
 void ClapTrap::takeDamage(unsigned int amount) {
 
 	if (_hitPoints <= 0) {
 
-		std::cout << "ClapTrap " << _name << " is already dead!" << std::endl;
+		std::cout << getClassName() << " "
+				  << _name << " is already dead!" << std::endl;
 		return ;
 	}
 
-	_hitPoints -= amount;
+	_hitPoints = (amount >= static_cast<unsigned int> (_hitPoints))? 0 : _hitPoints - amount;
 
-	if (_hitPoints < 0)
-		_hitPoints = 0;
-
-	std::cout << "ClapTrap " << _name << " takes "
+	std::cout << getClassName() << " "
+			  << _name << " takes "
 			  << amount << " damage. Remaining HP: "
 			  << _hitPoints << std::endl;
 
@@ -100,13 +115,33 @@ void ClapTrap::takeDamage(unsigned int amount) {
 void ClapTrap::beRepaired(unsigned int amount) {
 
 	if (_hitPoints <= 0) {
-		std::cout << "ClapTrap " << _name << " is dead and cannot repair."
+		std::cout << getClassName() << " "
+				  << _name << " is dead and cannot repair."
+				  << std::endl;
+		return;
+	}
+
+	if (_hitPoints == getMaxHitPoints()) {
+		std::cout << getClassName() << " "
+				  << _name << " already has maximum hit points."
 				  << std::endl;
 		return;
 	}
 
 	if (_energyPoints <= 0) {
-		std::cout << "ClapTrap " << _name << " has no energy to repair."
+		std::cout << getClassName() << " "
+				  << _name << " has no energy to repair."
+				  << std::endl;
+		return;
+	}
+
+	if (_hitPoints + amount > static_cast<unsigned int>(getMaxHitPoints())) {
+
+		_energyPoints -= 1;
+		_hitPoints = getMaxHitPoints();
+		std::cout << getClassName() << " "
+				  << _name << " repairs itself to full health "
+				  << getMaxHitPoints()
 				  << std::endl;
 		return;
 	}
@@ -114,7 +149,8 @@ void ClapTrap::beRepaired(unsigned int amount) {
 	_hitPoints += amount;
 	_energyPoints -= 1;
 
-	std::cout << "ClapTrap " << _name << " repairs itself, regaining "
+	std::cout << getClassName() << " "
+			  << _name << " repairs itself, regaining "
 			  << amount << " hit points! Current HP: " << _hitPoints
 			  << std::endl;
 }

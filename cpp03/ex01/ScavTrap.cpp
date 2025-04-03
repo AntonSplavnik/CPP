@@ -6,7 +6,7 @@
 /*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 17:40:20 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/04/02 18:39:42 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/04/02 22:33:21 by antonsplavn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,32 @@
 
 ScavTrap::ScavTrap(): ClapTrap() {
 
-	std::cout << "Default Constructor of ScavTrap called" << std::endl;
-
-	_hitPoints = 100;
-	_energyPoints = 50;
-	_attackDamage = 20;
+	std::cout << getClassName() << " "
+			  << _name << " Default constructor called" << std::endl;
 }
 
 ScavTrap::ScavTrap(const std::string& name): ClapTrap(name) {
 
-	std::cout << "Constructor of ScavTrap called" << std::endl;
-	std::cout << "ScavTrap " << _name << " created!" << std::endl;
-
-	_hitPoints = 100;
-	_energyPoints = 50;
-	_attackDamage = 20;
+	std::cout << getClassName() << " "
+			  << name << " Name constructor called" << std::endl;
 }
 
 ScavTrap::~ScavTrap() {
 
-	std::cout << "Destructor of ScavTrap called" << std::endl;
+	std::cout << getClassName() << " "
+			  << _name << " Destructor called" << std::endl;
 }
 
 ScavTrap::ScavTrap(const ScavTrap &other): ClapTrap(other) {
 
-	std::cout << "Copy constructor of ScavTrap called" << std::endl;
+	std::cout << getClassName() << " "
+			  << _name << " Copy constructor called" << std::endl;
 }
 
 ScavTrap& ScavTrap::operator=(const ScavTrap &other) {
 
-	std::cout << "Copy assignment operator of ScavTrap called" << std::endl;
+	std::cout << getClassName() << " "
+			  << _name << " is being assigned from " << other._name << std::endl;
 
 	if (this != &other) {
 		ClapTrap::operator=(other);
@@ -51,26 +47,16 @@ ScavTrap& ScavTrap::operator=(const ScavTrap &other) {
 	return *this;
 }
 
+int ScavTrap::getMaxHitPoints() const { return (100); }
+
+int ScavTrap::getMaxEnergyPoints() const { return (50); }
+
+int ScavTrap::getMaxAttackDamage() const { return (20); }
+
+const char* ScavTrap::getClassName() const { return ("ScavTrap");}
+
 void ScavTrap::guardGate() {
 
-	std::cout << "ScavTrap is now in Gatekeeper mode" << std::endl;
+	std::cout << getClassName() << " "
+			  << _name << " is now in Gatekeeper mode" << std::endl;
 }
-
-void ScavTrap::attack(const std::string& target) {
-
-	if (_hitPoints <= 0) {
-		std::cout << "ScavTrap " << _name << " is too dead to attack!" << std::endl;
-		return;
-	}
-
-	if (_energyPoints <=0){
-		std::cout << "ScavTrap " << _name << " has no energy left!" << std::endl;
-		return;
-	}
-
-	_energyPoints -= 1;
-	std::cout << "ScavTrap " << _name << " launches a powerful attack on "
-			  << target << ", dealing " << _attackDamage << " points of damage!"
-			  << std::endl;
-}
-

@@ -4,7 +4,7 @@ CXXFLAGS = -std=c++98 -Wall -Wextra -Werror
 SRCS     = main.cpp ClapTrap.cpp ScavTrap.cpp
 OBJDIR   = build
 OBJS     = $(patsubst %.cpp,$(OBJDIR)/%.o,$(SRCS))
-TARGET   =  aaaaand...open!
+TARGET   =  serena_my_love
 
 all: $(TARGET)
 

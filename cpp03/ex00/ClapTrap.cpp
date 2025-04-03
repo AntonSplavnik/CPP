@@ -6,39 +6,39 @@
 /*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 09:40:54 by asplavni          #+#    #+#             */
-/*   Updated: 2025/04/02 18:40:17 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/04/02 22:00:50 by antonsplavn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap() {
+ClapTrap::ClapTrap(): _name("Default"){
 
-	std::cout << "Default Constructor called" << std::endl;
+	std::cout << "ClapTrap " << _name << " Default constructor called" << std::endl;
 
-	_name = "Default";
 	_hitPoints = 10;
 	_energyPoints = 10;
-	_attackDamage = 10;
+	_attackDamage = 0;
 }
 
-ClapTrap::ClapTrap(const std::string& name) {
-	std::cout << "ClapTrap " << name << " created!" << std::endl;
-	_name = name;
+ClapTrap::ClapTrap(const std::string& name): _name(name){
+
+	std::cout << "ClapTrap " << name << " Name constructor called" << std::endl;
+
 	_hitPoints = 10;
 	_energyPoints = 10;
-	_attackDamage = 10;
+	_attackDamage = 0;
 }
 
 ClapTrap::~ClapTrap() {
 
-	std::cout << "Destructor called" << std::endl;
+	std::cout << "ClapTrap " << _name << " Destructor called" << std::endl;
 }
 
-ClapTrap::ClapTrap(const ClapTrap &other) {
+ClapTrap::ClapTrap(const ClapTrap &other): _name(other._name) {
 
-	std::cout << "Copy constructor called" << std::endl;
-	_name = other._name;
+	std::cout << "ClapTrap " << _name << " Copy constructor called" << std::endl;
+
 	_hitPoints = other._hitPoints;
 	_energyPoints = other._energyPoints;
 	_attackDamage = other._attackDamage;
@@ -46,13 +46,15 @@ ClapTrap::ClapTrap(const ClapTrap &other) {
 
 ClapTrap& ClapTrap::operator=(const ClapTrap &other) {
 
-	std::cout << "Copy assignment operator called" << std::endl;
+	std::cout << "ClapTrap " << _name << " is being assigned from " << other._name << std::endl;
+
 	if (this != &other) {
 		_name = other._name;
 		_hitPoints = other._hitPoints;
 		_energyPoints = other._energyPoints;
 		_attackDamage = other._attackDamage;
 	}
+
 	return *this;
 }
 
@@ -86,10 +88,7 @@ void ClapTrap::takeDamage(unsigned int amount) {
 		return ;
 	}
 
-	_hitPoints -= amount;
-
-	if (_hitPoints < 0)
-		_hitPoints = 0;
+	_hitPoints = (amount >= static_cast<unsigned int> (_hitPoints))? 0 : _hitPoints - amount;
 
 	std::cout << "ClapTrap " << _name << " takes "
 			  << amount << " damage. Remaining HP: "
@@ -105,8 +104,23 @@ void ClapTrap::beRepaired(unsigned int amount) {
 		return;
 	}
 
+	if (_hitPoints == 10) {
+		std::cout << "ClapTrap " << _name << " already has maximum hit points."
+				  << std::endl;
+		return;
+	}
+
 	if (_energyPoints <= 0) {
 		std::cout << "ClapTrap " << _name << " has no energy to repair."
+				  << std::endl;
+		return;
+	}
+
+	if (_hitPoints + amount > 10) {
+
+		_energyPoints -= 1;
+		_hitPoints = 10;
+		std::cout << "ClapTrap " << _name << " epairs itself to full health (10 HP)."
 				  << std::endl;
 		return;
 	}

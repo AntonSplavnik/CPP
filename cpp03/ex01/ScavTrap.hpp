@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+∆/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ScavTrap.hpp                                       :+:      :+:    :+:   */
@@ -6,7 +6,7 @@
 /*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 17:28:27 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/04/02 18:39:10 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/04/02 22:08:51 by antonsplavn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,13 @@ public:
 	ScavTrap(const ScavTrap& othere);
 	ScavTrap& operator=(const ScavTrap& other);
 
+	virtual int getMaxHitPoints() const;
+	virtual int getMaxEnergyPoints() const;
+	virtual int getMaxAttackDamage() const;
+	virtual const char* getClassName() const;
+
 	void guardGate();
-	void attack(const std::string& target);
+
 };
 
 #endif
