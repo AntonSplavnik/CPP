@@ -6,7 +6,7 @@
 /*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 09:34:36 by asplavni          #+#    #+#             */
-/*   Updated: 2025/04/02 22:08:09 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/04/03 21:09:30 by antonsplavn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ public:
 	virtual int getMaxAttackDamage() const;
 	virtual const char* getClassName() const;
 
-	void attack(const std::string& target);
+	virtual void attack(const std::string& target);
 	void takeDamage(unsigned int amount);
 	void beRepaired(unsigned int amount);
 

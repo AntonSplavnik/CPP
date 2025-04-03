@@ -6,13 +6,14 @@
 /*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 09:40:54 by asplavni          #+#    #+#             */
-/*   Updated: 2025/04/02 22:32:47 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/04/03 22:25:36 by antonsplavn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap(): _name("Default") {
+ClapTrap::ClapTrap()
+		: _name("Default") {
 
 	std::cout << getClassName() << " "
 			  << _name << " Default constructor called" << std::endl;
@@ -22,7 +23,8 @@ ClapTrap::ClapTrap(): _name("Default") {
 	_attackDamage = getMaxAttackDamage();
 }
 
-ClapTrap::ClapTrap(const std::string& name): _name(name) {
+ClapTrap::ClapTrap(const std::string& name)
+		: _name(name) {
 
 	std::cout << getClassName() << " "
 			  << name << " Name constructor called" << std::endl;
@@ -38,7 +40,8 @@ ClapTrap::~ClapTrap() {
 			  << _name << " Destructor called" << std::endl;
 }
 
-ClapTrap::ClapTrap(const ClapTrap &other): _name(other._name) {
+ClapTrap::ClapTrap(const ClapTrap &other)
+		: _name(other._name) {
 
 	std::cout << getClassName() << " "
 			  << _name << " Copy constructor called" << std::endl;

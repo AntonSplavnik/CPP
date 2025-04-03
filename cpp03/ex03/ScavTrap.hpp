@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScavTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 17:28:27 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/04/03 10:35:06 by asplavni         ###   ########.fr       */
+/*   Updated: 2025/04/03 21:09:49 by antonsplavn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,22 @@
 #include <string>
 #include "ClapTrap.hpp"
 
-class ScavTrap: public ClapTrap {
+class ScavTrap: virtual public ClapTrap {
 
 public:
 
 	ScavTrap();
 	ScavTrap(const std::string& name);
-	~ScavTrap();
 	ScavTrap(const ScavTrap& othere);
 	ScavTrap& operator=(const ScavTrap& other);
+	~ScavTrap();
 
 	virtual int getMaxHitPoints() const;
 	virtual int getMaxEnergyPoints() const;
 	virtual int getMaxAttackDamage() const;
 	virtual const char* getClassName() const;
+
+	virtual void attack(const std::string& target);
 
 	void guardGate();
 

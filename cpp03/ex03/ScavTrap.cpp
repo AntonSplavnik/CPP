@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScavTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 17:40:20 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/04/03 11:46:41 by asplavni         ###   ########.fr       */
+/*   Updated: 2025/04/03 21:33:36 by antonsplavn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,32 @@ int ScavTrap::getMaxEnergyPoints() const { return (50); }
 int ScavTrap::getMaxAttackDamage() const { return (20); }
 
 const char* ScavTrap::getClassName() const { return ("ScavTrap");}
+
+void ScavTrap::attack(const std::string& target) {
+
+	if (_hitPoints <= 0) {
+
+		std::cout << getClassName() << " "
+				  << _name << " is dead and can't attack." << std::endl;
+		return ;
+	}
+
+	if (_energyPoints <= 0) {
+
+		std::cout << getClassName() << " "
+				  << _name << " has no energy left!" << std::endl;
+		return ;
+	}
+
+	_energyPoints -= 1;
+
+	std::cout << getClassName() << " "
+			  << "[ScavTrap override] "
+			  << _name << " attacks " << target
+			  << ", dealing " << _attackDamage << " points of damage!"
+			  << std::endl;
+
+}
 
 void ScavTrap::guardGate() {
 

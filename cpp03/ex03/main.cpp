@@ -3,48 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 09:33:53 by asplavni          #+#    #+#             */
-/*   Updated: 2025/04/03 11:52:37 by asplavni         ###   ########.fr       */
+/*   Updated: 2025/04/03 21:32:36 by antonsplavn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include "ClapTrap.hpp"
-#include "FragTrap.hpp"
+#include "DiamondTrap.hpp"
 
 int main() {
-	std::cout << "\n=== Creating FragTrap ===" << std::endl;
-	FragTrap frag("Froggo");
 
-	std::cout << "\n=== Basic Action Test ===" << std::endl;
-	frag.attack("enemy bot");
-	frag.highFivesGuys();
-	frag.takeDamage(50);
-	frag.beRepaired(25);
+	std::cout << "\n[ Test 1: Default Constructor ]" << std::endl;
+	DiamondTrap dt1;
 
-	std::cout << "\n=== Draining FragTrap energy ===" << std::endl;
-	for (int i = 0; i < 100; ++i)
-		frag.attack("dummy bot");
+	std::cout << "\n[ Test 2: Param Constructor ]" << std::endl;
+	DiamondTrap dt2("Bob");
 
-	frag.attack("final bot"); // should fail due to energy == 0
-	frag.beRepaired(10);      // should also fail due to energy == 0
+	std::cout << "\n[ Test 3: whoAmI() Identity ]" << std::endl;
+	dt2.whoAmI();
 
-	std::cout << "\n=== Killing FragTrap ===" << std::endl;
-	frag.takeDamage(999); // HP drops to 0
-	frag.attack("ghost"); // should say it's dead
-	frag.beRepaired(10);  // should say it's dead
+	std::cout << "\n[ Test 4: Copy Constructor ]" << std::endl;
+	DiamondTrap dt3(dt2);
+	dt3.whoAmI();
 
-	std::cout << "\n=== Testing Copy Constructor ===" << std::endl;
-	FragTrap copyFrag(frag);
-	copyFrag.highFivesGuys();
+	std::cout << "\n[ Test 5: Assignment Operator ]" << std::endl;
+	dt1 = dt2;
+	dt1.whoAmI();
 
-	std::cout << "\n=== Testing Assignment Operator ===" << std::endl;
-	FragTrap another("Backup");
-	another = frag;
-	another.attack("copied enemy");
+	std::cout << "\n[ Test 6: Attack Method (from ScavTrap) ]" << std::endl;
+	dt2.ClapTrap::attack("target dummy");
+	dt2.attack("target dummy");
 
-	std::cout << "\n=== End of test ===" << std::endl;
-	return 0;
+	std::cout << "\n[ Test 7: Manual Value Check ]" << std::endl;
+	std::cout << "Hit Points: " << dt2.getMaxHitPoints() << std::endl;
+	std::cout << "Energy Points: " << dt2.getMaxEnergyPoints() << std::endl;
+	std::cout << "Attack Damage: " << dt2.getMaxAttackDamage() << std::endl;
+
+	std::cout << "\n[ Test 8: Destructors Called on Exit ]" << std::endl;
+
+	return (0);
 }

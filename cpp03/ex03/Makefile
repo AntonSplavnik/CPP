@@ -1,10 +1,10 @@
 CXX      = c++
 CXXFLAGS = -std=c++98 -Wall -Wextra -Werror
 
-SRCS     = main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp DiamondTrap.hpp
+SRCS     = main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp DiamondTrap.cpp
 OBJDIR   = build
 OBJS     = $(patsubst %.cpp,$(OBJDIR)/%.o,$(SRCS))
-TARGET   =  repetitive_work
+TARGET   =  now_its_weird
 
 all: $(TARGET)
 
