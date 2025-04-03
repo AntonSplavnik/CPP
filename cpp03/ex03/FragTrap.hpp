@@ -1,39 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
+/*   FragTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/02 17:28:27 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/04/03 09:41:44 by asplavni         ###   ########.fr       */
+/*   Created: 2025/04/02 18:51:09 by antonsplavn       #+#    #+#             */
+/*   Updated: 2025/04/03 11:10:27 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCAVTRAP_HPP
-#define SCAVTRAP_HPP
+#ifndef FRAGTRAP_HPP
+#define FRAGTRAP_HPP
 
-#include "ClapTrap.hpp"
 #include <iostream>
 #include <string>
+#include "ClapTrap.hpp"
 
-
-class ScavTrap: public ClapTrap {
+class FragTrap: public ClapTrap {
 
 public:
 
-	ScavTrap();
-	ScavTrap(const std::string& name);
-	~ScavTrap();
-	ScavTrap(const ScavTrap& othere);
-	ScavTrap& operator=(const ScavTrap& other);
+	FragTrap();
+	FragTrap(const std::string& name);
+	FragTrap(const FragTrap& other);
+	FragTrap& operator=(const FragTrap& other);
+	~FragTrap();
 
 	virtual int getMaxHitPoints() const;
 	virtual int getMaxEnergyPoints() const;
 	virtual int getMaxAttackDamage() const;
 	virtual const char* getClassName() const;
 
-	void guardGate();
+	void highFivesGuys(void);
 
 };
 

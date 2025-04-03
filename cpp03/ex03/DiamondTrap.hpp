@@ -1,15 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*    FragTrap.cpp                                      :+:      :+:    :+:   */
+/*   DiamondTrap.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
+/*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/02 18:51:50 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/04/02 19:03:07 by antonsplavn      ###   ########.fr       */
+/*   Created: 2025/04/03 11:58:48 by asplavni          #+#    #+#             */
+/*   Updated: 2025/04/03 12:02:09 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include " FragTrap.hpp"
+#ifndef DIAMONDTRAP_HPP
+#define DIAMONDTRAP_HPP
+
+#include <iostream>
+#include <string>
+#include "ClapTrap.hpp"
+#include "FragTrap.hpp"
+
+class DiamondTrap {
+
+public:
 
 
+private:
+
+	std::string _name;
+	
+
+};
+
+#endif

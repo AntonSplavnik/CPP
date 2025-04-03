@@ -1,40 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
+/*   ClapTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/02 17:28:27 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/04/03 09:41:44 by asplavni         ###   ########.fr       */
+/*   Created: 2025/04/02 09:34:36 by asplavni          #+#    #+#             */
+/*   Updated: 2025/04/02 22:08:09 by antonsplavn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCAVTRAP_HPP
-#define SCAVTRAP_HPP
+#ifndef CLAPTRAP_HPP
+#define CLAPTRAP_HPP
 
-#include "ClapTrap.hpp"
 #include <iostream>
 #include <string>
 
-
-class ScavTrap: public ClapTrap {
+class ClapTrap {
 
 public:
 
-	ScavTrap();
-	ScavTrap(const std::string& name);
-	~ScavTrap();
-	ScavTrap(const ScavTrap& othere);
-	ScavTrap& operator=(const ScavTrap& other);
+	ClapTrap();
+	ClapTrap(const std::string& name);
+	virtual ~ClapTrap();
+	ClapTrap(const ClapTrap& other);
+	ClapTrap& operator=(const ClapTrap& other);
 
 	virtual int getMaxHitPoints() const;
 	virtual int getMaxEnergyPoints() const;
 	virtual int getMaxAttackDamage() const;
 	virtual const char* getClassName() const;
 
-	void guardGate();
+	void attack(const std::string& target);
+	void takeDamage(unsigned int amount);
+	void beRepaired(unsigned int amount);
 
+protected:
+
+	std::string	_name;
+	int			_hitPoints;
+	int			_energyPoints;
+	int			_attackDamage;
 };
 
 #endif

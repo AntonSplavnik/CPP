@@ -6,17 +6,16 @@
 /*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 17:28:27 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/04/03 09:41:44 by asplavni         ###   ########.fr       */
+/*   Updated: 2025/04/03 10:35:06 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SCAVTRAP_HPP
 #define SCAVTRAP_HPP
 
-#include "ClapTrap.hpp"
 #include <iostream>
 #include <string>
-
+#include "ClapTrap.hpp"
 
 class ScavTrap: public ClapTrap {
 

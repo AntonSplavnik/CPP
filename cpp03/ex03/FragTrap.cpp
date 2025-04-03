@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.cpp                                       :+:      :+:    :+:   */
+/*   FragTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/02 17:40:20 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/04/03 11:46:30 by asplavni         ###   ########.fr       */
+/*   Created: 2025/04/02 18:51:50 by antonsplavn       #+#    #+#             */
+/*   Updated: 2025/04/03 11:46:53 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 
-ScavTrap::ScavTrap(): ClapTrap() {
+FragTrap::FragTrap(): ClapTrap() {
 
 	std::cout << getClassName() << " "
 			  << _name << " Default constructor called" << std::endl;
@@ -22,7 +22,7 @@ ScavTrap::ScavTrap(): ClapTrap() {
 	_attackDamage = getMaxAttackDamage();
 }
 
-ScavTrap::ScavTrap(const std::string& name): ClapTrap(name) {
+FragTrap::FragTrap(const std::string& name): ClapTrap(name) {
 
 	std::cout << getClassName() << " "
 			  << name << " Name constructor called" << std::endl;
@@ -32,19 +32,19 @@ ScavTrap::ScavTrap(const std::string& name): ClapTrap(name) {
 	_attackDamage = getMaxAttackDamage();
 }
 
-ScavTrap::~ScavTrap() {
+FragTrap::~FragTrap() {
 
 	std::cout << getClassName() << " "
 			  << _name << " Destructor called" << std::endl;
 }
 
-ScavTrap::ScavTrap(const ScavTrap &other): ClapTrap(other) {
+FragTrap::FragTrap(const FragTrap &other): ClapTrap(other) {
 
 	std::cout << getClassName() << " "
 			  << _name << " Copy constructor called" << std::endl;
 }
 
-ScavTrap& ScavTrap::operator=(const ScavTrap &other) {
+FragTrap& FragTrap::operator=(const FragTrap &other) {
 
 	if (this != &other) {
 		ClapTrap::operator=(other);
@@ -52,16 +52,17 @@ ScavTrap& ScavTrap::operator=(const ScavTrap &other) {
 	return *this;
 }
 
-int ScavTrap::getMaxHitPoints() const { return (100); }
+int FragTrap::getMaxHitPoints() const { return (100); }
 
-int ScavTrap::getMaxEnergyPoints() const { return (50); }
+int FragTrap::getMaxEnergyPoints() const { return (100); }
 
-int ScavTrap::getMaxAttackDamage() const { return (20); }
+int FragTrap::getMaxAttackDamage() const { return (30); }
 
-const char* ScavTrap::getClassName() const { return ("ScavTrap");}
+const char* FragTrap::getClassName() const { return ("FragTrap");}
 
-void ScavTrap::guardGate() {
+void FragTrap::highFivesGuys(void) {
 
 	std::cout << getClassName() << " "
-			  << _name << " is now in Gatekeeper mode" << std::endl;
+			  << _name << " is giving a high five!" << std::endl;
 }
+
