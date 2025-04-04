@@ -6,7 +6,7 @@
 /*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 18:51:50 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/04/03 11:46:53 by asplavni         ###   ########.fr       */
+/*   Updated: 2025/04/04 09:47:51 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,11 @@ FragTrap::FragTrap(const std::string& name): ClapTrap(name) {
 	_attackDamage = getMaxAttackDamage();
 }
 
-FragTrap::~FragTrap() {
-
-	std::cout << getClassName() << " "
-			  << _name << " Destructor called" << std::endl;
-}
 
 FragTrap::FragTrap(const FragTrap &other): ClapTrap(other) {
 
 	std::cout << getClassName() << " "
-			  << _name << " Copy constructor called" << std::endl;
+	<< _name << " Copy constructor called" << std::endl;
 }
 
 FragTrap& FragTrap::operator=(const FragTrap &other) {
@@ -50,6 +45,12 @@ FragTrap& FragTrap::operator=(const FragTrap &other) {
 		ClapTrap::operator=(other);
 	}
 	return *this;
+}
+
+FragTrap::~FragTrap() {
+
+	std::cout << getClassName() << " "
+			  << _name << " Destructor called" << std::endl;
 }
 
 int FragTrap::getMaxHitPoints() const { return (100); }

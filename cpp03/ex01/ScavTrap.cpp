@@ -6,7 +6,7 @@
 /*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 17:40:20 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/04/03 11:46:30 by asplavni         ###   ########.fr       */
+/*   Updated: 2025/04/04 09:59:33 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,10 @@ ScavTrap::ScavTrap(const std::string& name): ClapTrap(name) {
 	_attackDamage = getMaxAttackDamage();
 }
 
-ScavTrap::~ScavTrap() {
-
-	std::cout << getClassName() << " "
-			  << _name << " Destructor called" << std::endl;
-}
-
 ScavTrap::ScavTrap(const ScavTrap &other): ClapTrap(other) {
 
 	std::cout << getClassName() << " "
-			  << _name << " Copy constructor called" << std::endl;
+	<< _name << " Copy constructor called" << std::endl;
 }
 
 ScavTrap& ScavTrap::operator=(const ScavTrap &other) {
@@ -52,6 +46,12 @@ ScavTrap& ScavTrap::operator=(const ScavTrap &other) {
 	return *this;
 }
 
+ScavTrap::~ScavTrap() {
+
+	std::cout << getClassName() << " "
+			  << _name << " Destructor called" << std::endl;
+}
+
 int ScavTrap::getMaxHitPoints() const { return (100); }
 
 int ScavTrap::getMaxEnergyPoints() const { return (50); }
@@ -59,6 +59,32 @@ int ScavTrap::getMaxEnergyPoints() const { return (50); }
 int ScavTrap::getMaxAttackDamage() const { return (20); }
 
 const char* ScavTrap::getClassName() const { return ("ScavTrap");}
+
+void ScavTrap::attack(const std::string& target) {
+
+	if (_hitPoints <= 0) {
+
+		std::cout << getClassName() << " "
+				  << _name << " is dead and can't attack." << std::endl;
+		return ;
+	}
+
+	if (_energyPoints <= 0) {
+
+		std::cout << getClassName() << " "
+				  << _name << " has no energy left!" << std::endl;
+		return ;
+	}
+
+	_energyPoints -= 1;
+
+	std::cout << getClassName() << " "
+			  << "[ScavTrap override] "
+			  << _name << " attacks " << target
+			  << ", dealing " << _attackDamage << " points of damage!"
+			  << std::endl;
+
+}
 
 void ScavTrap::guardGate() {
 

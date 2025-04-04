@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   DiamondTrap.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
+/*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 18:28:07 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/04/03 19:29:18 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/04/04 09:51:19 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,12 @@ DiamondTrap::DiamondTrap(const std::string& name)
 	_attackDamage = getMaxAttackDamage();
 }
 
-DiamondTrap::~DiamondTrap() {
-
-	std::cout << getClassName() << " "
-			  << _name << " Destructor called" << std::endl;
-}
-
 DiamondTrap::DiamondTrap(const DiamondTrap &other)
-			: ClapTrap(other), ScavTrap(other),
-			  FragTrap(other), _name(other._name) {
+: ClapTrap(other), ScavTrap(other),
+FragTrap(other), _name(other._name) {
 
 	std::cout << getClassName() << " "
-			  << _name << " Copy constructor called" << std::endl;
+	<< _name << " Copy constructor called" << std::endl;
 }
 
 DiamondTrap& DiamondTrap::operator=(const DiamondTrap &other) {
@@ -59,6 +53,12 @@ DiamondTrap& DiamondTrap::operator=(const DiamondTrap &other) {
 	}
 
 	return *this;
+}
+
+DiamondTrap::~DiamondTrap() {
+
+	std::cout << getClassName() << " "
+			  << _name << " Destructor called" << std::endl;
 }
 
 int DiamondTrap::getMaxHitPoints() const { return (100); } // From FragTrap

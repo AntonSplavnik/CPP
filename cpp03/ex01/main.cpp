@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
+/*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 09:33:53 by asplavni          #+#    #+#             */
-/*   Updated: 2025/04/02 22:29:41 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/04/04 09:57:40 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int main() {
 	ScavTrap scav("GateBot");
 
 	std::cout << "\n=== Testing ScavTrap ===" << std::endl;
+	scav.ClapTrap::attack("intruder");
 	scav.attack("intruder");
 	scav.takeDamage(20);
 	scav.beRepaired(10);

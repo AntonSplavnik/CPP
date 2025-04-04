@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ClapTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
+/*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 09:40:54 by asplavni          #+#    #+#             */
-/*   Updated: 2025/04/03 22:25:36 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/04/04 09:49:47 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,11 @@ ClapTrap::ClapTrap(const std::string& name)
 	_attackDamage = getMaxAttackDamage();
 }
 
-ClapTrap::~ClapTrap() {
-
-	std::cout << getClassName() << " "
-			  << _name << " Destructor called" << std::endl;
-}
-
 ClapTrap::ClapTrap(const ClapTrap &other)
-		: _name(other._name) {
+: _name(other._name) {
 
 	std::cout << getClassName() << " "
-			  << _name << " Copy constructor called" << std::endl;
+	<< _name << " Copy constructor called" << std::endl;
 
 	_hitPoints = other._hitPoints;
 	_energyPoints = other._energyPoints;
@@ -54,7 +48,7 @@ ClapTrap::ClapTrap(const ClapTrap &other)
 ClapTrap& ClapTrap::operator=(const ClapTrap &other) {
 
 	std::cout << getClassName() << " "
-			  << _name << " is being assigned from " << other._name << std::endl;
+	<< _name << " is being assigned from " << other._name << std::endl;
 
 	if (this != &other) {
 		_name = other._name;
@@ -63,6 +57,12 @@ ClapTrap& ClapTrap::operator=(const ClapTrap &other) {
 		_attackDamage = other._attackDamage;
 	}
 	return *this;
+}
+
+ClapTrap::~ClapTrap() {
+
+	std::cout << getClassName() << " "
+			  << _name << " Destructor called" << std::endl;
 }
 
 int ClapTrap::getMaxHitPoints() const { return (10); }

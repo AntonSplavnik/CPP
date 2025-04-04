@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScavTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
+/*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 17:40:20 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/04/03 21:33:36 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/04/04 09:51:50 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,10 @@ ScavTrap::ScavTrap(const std::string& name): ClapTrap(name) {
 	_attackDamage = getMaxAttackDamage();
 }
 
-ScavTrap::~ScavTrap() {
-
-	std::cout << getClassName() << " "
-			  << _name << " Destructor called" << std::endl;
-}
-
 ScavTrap::ScavTrap(const ScavTrap &other): ClapTrap(other) {
 
 	std::cout << getClassName() << " "
-			  << _name << " Copy constructor called" << std::endl;
+	<< _name << " Copy constructor called" << std::endl;
 }
 
 ScavTrap& ScavTrap::operator=(const ScavTrap &other) {
@@ -50,6 +44,12 @@ ScavTrap& ScavTrap::operator=(const ScavTrap &other) {
 		ClapTrap::operator=(other);
 	}
 	return *this;
+}
+
+ScavTrap::~ScavTrap() {
+
+	std::cout << getClassName() << " "
+			  << _name << " Destructor called" << std::endl;
 }
 
 int ScavTrap::getMaxHitPoints() const { return (100); }

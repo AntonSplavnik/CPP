@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ClapTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
+/*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 09:34:36 by asplavni          #+#    #+#             */
-/*   Updated: 2025/04/03 21:09:30 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/04/04 09:51:05 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ public:
 
 	ClapTrap();
 	ClapTrap(const std::string& name);
-	virtual ~ClapTrap();
 	ClapTrap(const ClapTrap& other);
 	ClapTrap& operator=(const ClapTrap& other);
+	virtual ~ClapTrap();
 
 	virtual int getMaxHitPoints() const;
 	virtual int getMaxEnergyPoints() const;

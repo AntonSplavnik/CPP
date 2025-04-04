@@ -6,7 +6,7 @@
 /*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 09:34:36 by asplavni          #+#    #+#             */
-/*   Updated: 2025/04/02 11:51:05 by asplavni         ###   ########.fr       */
+/*   Updated: 2025/04/04 09:50:33 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ public:
 
 	ClapTrap();
 	ClapTrap(const std::string& name);
-	~ClapTrap();
 	ClapTrap(const ClapTrap &other);
 	ClapTrap& operator=(const ClapTrap &other);
+	~ClapTrap();
 
 	void attack(const std::string& target);
 	void takeDamage(unsigned int amount);

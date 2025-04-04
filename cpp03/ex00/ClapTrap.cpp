@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ClapTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
+/*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 09:40:54 by asplavni          #+#    #+#             */
-/*   Updated: 2025/04/02 22:00:50 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/04/04 09:50:29 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,6 @@ ClapTrap::ClapTrap(const std::string& name): _name(name){
 	_attackDamage = 0;
 }
 
-ClapTrap::~ClapTrap() {
-
-	std::cout << "ClapTrap " << _name << " Destructor called" << std::endl;
-}
-
 ClapTrap::ClapTrap(const ClapTrap &other): _name(other._name) {
 
 	std::cout << "ClapTrap " << _name << " Copy constructor called" << std::endl;
@@ -56,6 +51,11 @@ ClapTrap& ClapTrap::operator=(const ClapTrap &other) {
 	}
 
 	return *this;
+}
+
+ClapTrap::~ClapTrap() {
+
+	std::cout << "ClapTrap " << _name << " Destructor called" << std::endl;
 }
 
 
