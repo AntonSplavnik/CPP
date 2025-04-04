@@ -1,57 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.cpp                                         :+:      :+:    :+:   */
+/*   WrongCat.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/04 16:26:22 by asplavni          #+#    #+#             */
-/*   Updated: 2025/04/04 22:16:43 by antonsplavn      ###   ########.fr       */
+/*   Created: 2025/04/04 20:37:36 by antonsplavn       #+#    #+#             */
+/*   Updated: 2025/04/04 22:32:30 by antonsplavn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Animal.hpp"
+#include "WrongCat.hpp"
 
-Animal::Animal() {
+WrongCat::WrongCat(): WrongAnimal() {
 
 	std::cout << getType() << " " << "Default constructor" << std::endl;
 }
 
-Animal::Animal(const std::string& name)
-	  :_name(name), _type(getType()){
+WrongCat::WrongCat(const std::string& name): WrongAnimal(name) {
 
 	std::cout << getType() << " " << "Name constructor" << std::endl;
-
-	// _type = getType();
+	_type = getType();
 }
 
-Animal::Animal(const Animal& other)
-	  : _name(other._name), _type(other._type) {
+WrongCat::WrongCat(const WrongCat& other): WrongAnimal(other) {
 
 	std::cout << getType() << " " << "Default copy constructor" << std::endl;
 
 }
 
-Animal& Animal::operator=(const Animal& other) {
+WrongCat& WrongCat::operator=(const WrongCat& other){
 
 	std::cout << getType() << " " << "Default assingment operator" << std::endl;
 
 	if (this != &other)
-		_name = other._name;
-		_type = other._type;
+	WrongAnimal::operator=(other);
 
 	return (*this);
 }
 
-Animal::~Animal() {
+WrongCat::~WrongCat() {
 
 	std::cout << getType() << " " << "Default distructor" << std::endl;
-
 }
 
-const char* Animal::getType () const { return ("Animal");}
+void WrongCat::makeSound() const {
 
-void Animal::makeSound() const {
-
-	std::cout << getType() << " " << "Making an animal sound" << std::endl;
+	std::cout << getType() << " " << "Making a cat sound" << std::endl;
 }
+
+const char* WrongCat::getType() const{ return ("Cat"); }
