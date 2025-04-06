@@ -6,7 +6,7 @@
 /*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 16:34:04 by asplavni          #+#    #+#             */
-/*   Updated: 2025/04/04 21:34:27 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/04/06 14:35:38 by antonsplavn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,15 @@
 
 class Cat: public Animal {
 
-public:
+	public:
 
-	Cat();
-	Cat(const std::string& name);
-	Cat(const Cat& other);
-	Cat& operator=(const Cat& other);
-	~Cat();
+		Cat();
+		Cat(const Cat& other);
+		Cat& operator=(const Cat& other);
+		~Cat();
 
-	void makeSound() const;
-	virtual const char* getType() const;
+		void makeSound() const;
+		virtual const char* getType() const;
 };
 
 #endif

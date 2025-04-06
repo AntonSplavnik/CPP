@@ -1,10 +1,10 @@
 CXX      = c++
 CXXFLAGS = -std=c++98 -Wall -Wextra -Werror
 
-SRCS     = main.cpp Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp
+SRCS     = main.cpp AAnimal.cpp Dog.cpp Cat.cpp Brain.cpp
 OBJDIR   = build
 OBJS     = $(patsubst %.cpp,$(OBJDIR)/%.o,$(SRCS))
-TARGET   =  ex00
+TARGET   =  ex02
 
 all: $(TARGET)
 

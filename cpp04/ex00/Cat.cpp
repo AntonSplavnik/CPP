@@ -6,7 +6,7 @@
 /*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 20:37:36 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/04/04 22:10:24 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/04/06 14:35:26 by antonsplavn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,12 @@
 Cat::Cat(): Animal() {
 
 	std::cout << getType() << " " << "Default constructor" << std::endl;
-}
-
-Cat::Cat(const std::string& name): Animal(name) {
-
-	std::cout << getType() << " " << "Name constructor" << std::endl;
 	_type = getType();
 }
 
 Cat::Cat(const Cat& other): Animal(other) {
 
 	std::cout << getType() << " " << "Default copy constructor" << std::endl;
-
 }
 
 Cat& Cat::operator=(const Cat& other){
@@ -48,4 +42,4 @@ void Cat::makeSound() const {
 
 	std::cout << getType() << " " << "Making a cat sound" << std::endl;
 }
-const char* Cat::getType() const{ return ("Cat"); }
+const char* Cat::getType() const { return ("Cat"); }

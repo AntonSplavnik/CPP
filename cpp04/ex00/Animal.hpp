@@ -6,7 +6,7 @@
 /*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 16:23:17 by asplavni          #+#    #+#             */
-/*   Updated: 2025/04/04 22:01:23 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/04/06 14:35:46 by antonsplavn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,19 @@
 
 class Animal {
 
-public:
+	public:
 
-	Animal();
-	Animal(const std::string& name);
-	Animal(const Animal& other);
-	Animal& operator=(const Animal& other);
-	virtual ~Animal();
+		Animal();
+		Animal(const Animal& other);
+		Animal& operator=(const Animal& other);
+		virtual ~Animal();
 
-	virtual void makeSound() const;
-	virtual const char* getType() const;
+		virtual void makeSound() const;
+		virtual const char* getType() const;
 
-protected:
+	protected:
 
-	std::string _name;
-	std::string _type;
+		std::string _type;
 };
 
 #endif

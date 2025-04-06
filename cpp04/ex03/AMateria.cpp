@@ -1,36 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   WrongAnimal.hpp                                    :+:      :+:    :+:   */
+/*   AMateria.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/04 16:23:17 by asplavni          #+#    #+#             */
-/*   Updated: 2025/04/06 14:36:24 by antonsplavn      ###   ########.fr       */
+/*   Created: 2025/04/06 16:39:36 by antonsplavn       #+#    #+#             */
+/*   Updated: 2025/04/06 22:12:45 by antonsplavn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WRONGANIMAL_HPP
-#define WRONGANIMAL_HPP
+#include "AMateria.hpp"
 
-#include <iostream>
-#include <string>
+AMateria::AMateria(const std::string& type) { this->type = type; }
 
-class WrongAnimal {
+AMateria::AMateria(const AMateria& other) { this->type = other.type; }
 
-	public:
+AMateria& AMateria::operator=(const AMateria& other) {
 
-		WrongAnimal();
-		WrongAnimal(const WrongAnimal& other);
-		WrongAnimal& operator=(const WrongAnimal& other);
-		~WrongAnimal();
+	if(this != &other)
+		this->type = other.type;
 
-		void makeSound() const;
-		const char* getType() const;
+	return (*this);
+}
 
-	protected:
+AMateria::~AMateria() {}
 
-		std::string _type;
-};
-
-#endif
+const std::string& AMateria::getType() const { return (type); }

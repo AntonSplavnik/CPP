@@ -1,47 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   WrongCat.cpp                                       :+:      :+:    :+:   */
+/*   AAnimal.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/04 20:37:36 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/04/06 14:30:57 by antonsplavn      ###   ########.fr       */
+/*   Created: 2025/04/04 16:26:22 by asplavni          #+#    #+#             */
+/*   Updated: 2025/04/06 12:45:50 by antonsplavn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "WrongCat.hpp"
+#include "AAnimal.hpp"
 
-WrongCat::WrongCat(): WrongAnimal() {
+AAnimal::AAnimal() {
 
 	std::cout << getType() << " " << "Default constructor" << std::endl;
-
-	_type = getType();
 }
 
-WrongCat::WrongCat(const WrongCat& other): WrongAnimal(other) {
+AAnimal::AAnimal(const AAnimal& other)
+	  : _type(other._type) {
 
 	std::cout << getType() << " " << "Default copy constructor" << std::endl;
 }
 
-WrongCat& WrongCat::operator=(const WrongCat& other){
+AAnimal& AAnimal::operator=(const AAnimal& other) {
 
 	std::cout << getType() << " " << "Default assingment operator" << std::endl;
 
 	if (this != &other)
-	WrongAnimal::operator=(other);
+		_type = other._type;
 
 	return (*this);
 }
 
-WrongCat::~WrongCat() {
+AAnimal::~AAnimal() {
 
 	std::cout << getType() << " " << "Default distructor" << std::endl;
+
 }
 
-void WrongCat::makeSound() const {
-
-	std::cout << getType() << " " << "Making a cat sound" << std::endl;
-}
-
-const char* WrongCat::getType() const{ return ("Cat"); }
+const char* AAnimal::getType () const { return ("AAnimal");}

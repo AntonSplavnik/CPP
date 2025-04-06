@@ -6,7 +6,7 @@
 /*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 16:39:40 by asplavni          #+#    #+#             */
-/*   Updated: 2025/04/04 22:08:45 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/04/06 14:28:15 by antonsplavn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,6 @@ Dog::Dog(): Animal() {
 
 	std::cout << getType() << " " << "Default constructor" << std::endl;
 
-	_type = getType();
-}
-
-Dog::Dog(const std::string& name)
-	: Animal(name) {
-
-	std::cout << getType() << " " << "Name constructor" << std::endl;
 	_type = getType();
 }
 

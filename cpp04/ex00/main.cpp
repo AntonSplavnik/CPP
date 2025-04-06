@@ -6,16 +6,17 @@
 /*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 20:36:08 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/04/04 22:25:51 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/04/06 14:31:56 by antonsplavn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <iostream>
+#include <string>
 
 #include "Animal.hpp"
 #include "Dog.hpp"
 #include "Cat.hpp"
-#include "Animal.hpp"
-#include "Dog.hpp"
-#include "Cat.hpp"
+
 #include "WrongAnimal.hpp"
 #include "WrongCat.hpp"
 
