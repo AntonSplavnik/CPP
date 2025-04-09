@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Cat.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
+/*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 20:37:36 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/04/06 14:57:12 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/04/09 16:39:12 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,3 +51,13 @@ void Cat::makeSound() const {
 	std::cout << getType() << " " << "Making a cat sound" << std::endl;
 }
 const char* Cat::getType() const{ return ("Cat"); }
+
+void Cat::addIdea(const std::string& idea) {
+
+	_brain->addIdea(idea);
+}
+
+void Cat::printIdeas() const {
+
+	_brain->printAllIdeas();
+}

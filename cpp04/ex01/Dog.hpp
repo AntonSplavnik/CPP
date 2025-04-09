@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Dog.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
+/*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 16:28:44 by asplavni          #+#    #+#             */
-/*   Updated: 2025/04/06 14:53:10 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/04/09 16:39:20 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ class Dog: public Animal {
 
 		void makeSound() const;
 		virtual const char* getType() const;
+		void addIdea(const std::string& idea);
+		void printIdeas() const;
 
 	private:
 

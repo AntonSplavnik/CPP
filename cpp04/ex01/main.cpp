@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
+/*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 20:36:08 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/04/06 15:00:26 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/04/09 16:39:54 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,49 @@ void testAnimalArray()
 
 void testDeepCopy()
 {
-	std::cout << "\n[ Test 2: Deep Copy of Dog and Cat ]" << std::endl;
-	Dog originalDog;
-	originalDog.makeSound();
+	std::cout << "\n[ Test 2: Deep Copy Test: Dog ]\n" << std::endl;
 
-	Dog copiedDog(originalDog);
-	copiedDog.makeSound();
+	{
+	Dog original;
+	original.addIdea("I want a bone!");
+	std::cout << "\nOriginal Dog's ideas:" << std::endl;
+	original.printIdeas();
+	std::cout << std::endl;
 
-	Cat originalCat;
-	originalCat.makeSound();
+	Dog copy(original);  // Should perform deep copy
+	std::cout << "\nCopied Dog's ideas after copy:" << std::endl;
+	copy.printIdeas();
 
-	Cat copiedCat;
-	copiedCat = originalCat;
-	copiedCat.makeSound();
+	original.addIdea("Changed my mind, chasing a cat now!\n");
+	std::cout << "\nOriginal Dog after modification:" << std::endl;
+	original.printIdeas();
+
+	std::cout << "Copied Dog should remain unchanged:" << std::endl;
+	copy.printIdeas();
+	std::cout << std::endl;
+	}
+
+	std::cout << "\n[ Test 3: Deep Copy Test: Cat ]\n" << std::endl;
+	{
+	Cat original;
+	original.addIdea("Time to nap!");
+	std::cout << "\nOriginal Cat's ideas:" << std::endl;
+	original.printIdeas();
+	std::cout << std::endl;
+
+	Cat copy;
+	copy = original;  // Should perform deep copy
+	std::cout << "\nCopied Cat's ideas after assignment:" << std::endl;
+	copy.printIdeas();
+
+	original.addIdea("Wait... knock stuff off the shelf instead!");
+	std::cout << "\nOriginal Cat after modification:" << std::endl;
+	original.printIdeas();
+
+	std::cout << "\nCopied Cat should remain unchanged:" << std::endl;
+	copy.printIdeas();
+	std::cout << std::endl;
+	}
 }
 
 void testPolymorphism()

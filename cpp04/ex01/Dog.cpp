@@ -6,7 +6,7 @@
 /*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 16:39:40 by asplavni          #+#    #+#             */
-/*   Updated: 2025/04/07 17:01:06 by asplavni         ###   ########.fr       */
+/*   Updated: 2025/04/09 16:39:32 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ Dog::Dog(): Animal() {
 Dog::Dog(const Dog& other): Animal(other) {
 
 	std::cout << getType() << " " << "Default copy constructor" << std::endl;
-	
+
 	_brain = new Brain(*other._brain);
 }
 
@@ -54,3 +54,13 @@ void Dog::makeSound() const {
 }
 
 const char* Dog::getType () const { return ("Dog");}
+
+void Dog::addIdea(const std::string& idea) {
+
+	_brain->addIdea(idea);
+}
+
+void Dog::printIdeas() const {
+
+	_brain->printAllIdeas();
+}
