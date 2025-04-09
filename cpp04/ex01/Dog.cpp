@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Dog.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
+/*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 16:39:40 by asplavni          #+#    #+#             */
-/*   Updated: 2025/04/06 14:57:31 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/04/07 17:01:06 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ Dog::Dog(): Animal() {
 Dog::Dog(const Dog& other): Animal(other) {
 
 	std::cout << getType() << " " << "Default copy constructor" << std::endl;
+	
 	_brain = new Brain(*other._brain);
 }
 

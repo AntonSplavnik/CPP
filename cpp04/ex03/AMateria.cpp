@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   AMateria.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
+/*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 16:39:36 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/04/06 22:12:45 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/04/07 14:24:13 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

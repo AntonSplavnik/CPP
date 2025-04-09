@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Character.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
+/*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 21:07:50 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/04/06 22:37:20 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/04/07 14:08:26 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 Character::Character(const std::string& name): _name(name) {
 
 	for (int i = 0; i < 4; i++)
-		_inventory[i] = nullptr;
+		_inventory[i] = 0;
 }
 
 
@@ -25,7 +25,7 @@ Character::Character(const Character& other): _name(other._name) {
 		if (other._inventory[i])
 			_inventory[i] = other._inventory[i]->clone();
 		else
-			_inventory[i] = nullptr;
+			_inventory[i] = 0;
 	}
 }
 
@@ -39,7 +39,7 @@ Character& Character::operator=(const Character& other) {
 			if (other._inventory[i])
 				_inventory[i] = other._inventory[i]->clone();
 			else
-				_inventory[i] = nullptr;
+				_inventory[i] = 0;
 		}
 	}
 	return (*this);
@@ -55,11 +55,14 @@ const std::string& Character::getName() const { return (_name); }
 
 void Character::equip(AMateria* m) {
 
-	for (int i = 0; i < 4; i++){
+	int i = 0;
+	while (i < 4) {
 		if (_inventory[i])
 			i++;
-	else
-		_inventory[i] = m;
+		else {
+			_inventory[i] = m;
+			return ;
+		}
 	}
 }
 
@@ -70,10 +73,11 @@ void Character::unequip(int idx) {
 		return ;
 	}
 
-	_inventory[idx] = nullptr;
+	_inventory[idx] = 0;
 }
 
 void Character::use(int idx, ICharacter& target) {
 
-	
+	if (idx >= 0 && idx < 4 && _inventory[idx])
+		_inventory[idx]->use(target);
 }

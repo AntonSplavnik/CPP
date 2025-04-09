@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Ice.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
+/*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 16:57:02 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/04/06 21:50:38 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/04/07 15:16:23 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ Ice& Ice::operator=(const Ice& other) {
 
 	return (*this);
 }
+
+Ice::~Ice() {}
 
 Ice* Ice::clone() const { return (new Ice(*this)); }
 

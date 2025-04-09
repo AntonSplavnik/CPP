@@ -1,7 +1,9 @@
 CXX      = c++
 CXXFLAGS = -std=c++98 -Wall -Wextra -Werror
 
-SRCS     = main.cpp AMateria.cpp Ice.cpp Cure.cpp ICharacter.cpp
+SRCS     = main.cpp MateriaSource.cpp \
+		   Character.cpp AMateria.cpp \
+		   Ice.cpp Cure.cpp
 OBJDIR   = build
 OBJS     = $(patsubst %.cpp,$(OBJDIR)/%.o,$(SRCS))
 TARGET   =  ex03
