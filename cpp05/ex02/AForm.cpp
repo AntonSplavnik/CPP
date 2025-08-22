@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   AForm.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
+/*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 15:47:14 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/08/21 21:13:16 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/08/22 15:49:45 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ std::ostream& operator<<(std::ostream& out, const AForm& form){
 	out << "name: " << form.getName() << std::endl
 		<< "status: " << ((form.getSigneStatus()) ?  "signed" : "unsigned") << std::endl
 		<< "signe grade: " << form.getSigneGrade() << std::endl
-		<< "execute grade: " << form.getExecuteGrade() << std::endl;
+		<< "execute grade: " << form.getExecuteGrade();
 	return out;
 }
 

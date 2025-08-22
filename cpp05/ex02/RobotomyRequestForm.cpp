@@ -3,20 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   RobotomyRequestForm.cpp                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
+/*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 00:21:02 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/08/21 15:26:33 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/08/22 15:31:50 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RobotomyRequestForm.hpp"
-
-/*
-RobotomyRequestForm: Required grades: sign 72, exec 45
-Makes some drilling noises, then informs that <target> has been robotomized successfully
- 50% of the time. Otherwise, it informs that the robotomy failed.
-*/
 
 RobotomyRequestForm::RobotomyRequestForm(const std::string formTarget)
 	: AForm("RobotomyRequestForm", 72, 45), _formTarget(formTarget){}

@@ -3,19 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   PresidentialPardonForm.cpp                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
+/*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 00:20:57 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/08/21 15:38:30 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/08/22 15:31:57 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PresidentialPardonForm.hpp"
-
-/*
-* PresidentialPardonForm: Required grades: sign 25, exec 5.
-* Informs that <target> has been pardoned by Zaphod Beeblebrox.
-*/
 
 PresidentialPardonForm::PresidentialPardonForm(const std::string formTarget)
 	: AForm("PresidentialPardonForm", 25, 5), _formTarget(formTarget) {}

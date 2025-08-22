@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
+/*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 23:06:30 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/08/21 21:20:48 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/08/22 15:28:44 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 
 void testInvalidBureaucratCreation1() {
 
+	std::cout << "=== Testing invalid grade 0 ===" << std::endl;
 	try {
-		std::cout << "=== Testing invalid grade 0 ===" << std::endl;
 		Bureaucrat invalid1 = Bureaucrat("Ananas", 0);
 	}
 	catch(const std::exception& e) {
@@ -32,8 +32,8 @@ void testInvalidBureaucratCreation1() {
 
 void testInvalidBureaucratCreation2() {
 
+	std::cout << "=== Testing invalid grade 151 ===" << std::endl;
 	try {
-		std::cout << "=== Testing invalid grade 151 ===" << std::endl;
 		Bureaucrat invalid2 = Bureaucrat("Ananas", 151);
 	}
 	catch(const std::exception& e) {
@@ -53,14 +53,12 @@ void testFormOperations() {
 		forms[1] = new ShrubberyCreationForm("home");
 		forms[2] = new PresidentialPardonForm("Kim Jong-un");
 
-
 		std::cout << "=== Error catching tests ===" << std::endl;
 		for (size_t i = 0; i < 3; i++) {
 			ananas.signForm(*forms[i]);
 			ananas.executeForm(*forms[i]);
 		}
 		std::cout << "\n\n\n";
-
 
 		std::cout << "=== Correct behavior tests ===" << std::endl;
 		for (size_t i = 0; i < 3; i++) {
@@ -69,12 +67,10 @@ void testFormOperations() {
 		}
 		std::cout << "\n\n\n";
 
-
 		std::cout << "=== Testing Robotomy Randomness ===" << std::endl;
 		for (int i = 0; i < 5; i++)
 		buba.executeForm(*forms[0]);
 		std::cout << "\n\n\n";
-
 
 		for (size_t i = 0; i < 3; i++)
 			delete forms[i];
@@ -86,9 +82,9 @@ void testFormOperations() {
 }
 
  void testGradeModification() {
-	try {
-		std::cout << "=== Testing grade modification ===" << std::endl;
 
+	std::cout << "=== Testing grade modification ===" << std::endl;
+	try {
 		Bureaucrat test("Test", 2);
 		std::cout << test << std::endl;
 		test.incrementGrade();

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ShrubberyCreationForm.cpp                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
+/*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 00:19:58 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/08/21 16:14:16 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/08/22 15:42:44 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void ShrubberyCreationForm::execute(const Bureaucrat& executor) const{
 	"    ___||___\n";
 
 	std::string fileName  = getUniqueFilename();
-	std::ofstream file(fileName);
+	std::ofstream file(fileName.c_str());
 	if(file.is_open()){
 		file << tree << std::endl;
 		file.close();
