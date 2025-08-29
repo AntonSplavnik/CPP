@@ -6,12 +6,13 @@
 /*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 13:35:13 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/08/29 23:29:07 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/08/29 23:46:06 by antonsplavn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
 #include <sstream>
+#include <algorithm>
 #include <iomanip>
 #include <limits>
 
@@ -82,10 +83,9 @@ void ScalarConverter::convert(std::string input) {
 
 	if (input.length() == 3 && input[0] == '\'' && input[2] == '\'') {
 		char inputChar = input[1];
-
-		int intValue = inputChar;
-		float floatValue = inputChar;
-		double doubleValue = inputChar;
+		int intValue = static_cast<int>(inputChar);
+		float floatValue = static_cast<float>(inputChar);
+		double doubleValue = static_cast<double>(inputChar);
 
 		std::cout << "char:   " << "'" << inputChar << "'" << std::endl;
 		std::cout << "int:    " << intValue << std::endl;
@@ -228,7 +228,7 @@ void ScalarConverter::convert(std::string input) {
 
 		//char
 		if(convertedDouble >= 32 && convertedDouble <= 126)
-			std::cout << "char:   " << "'" << (char)convertedDouble << "'"<< std::endl;
+			std::cout << "char:   " << "'" << static_cast<char>(convertedDouble) << "'"<< std::endl;
 		else if (convertedDouble >= 0 && convertedDouble <= 127)
 			std::cout << "char:   Non displayable" << std::endl;
 		else
