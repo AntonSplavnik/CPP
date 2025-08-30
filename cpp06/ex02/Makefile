@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = serializer
+NAME = identify
 
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
@@ -19,7 +19,7 @@ SRCDIR = .
 OBJDIR = obj
 
 SOURCES = main.cpp \
-		  Serializer.cpp
+		  Base.cpp
 
 OBJECTS = $(addprefix $(OBJDIR)/, $(SOURCES:.cpp=.o))
 
