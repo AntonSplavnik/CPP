@@ -1,32 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScalarConverter.hpp                                :+:      :+:    :+:   */
+/*   Serializer.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/23 13:22:34 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/08/30 11:30:27 by antonsplavn      ###   ########.fr       */
+/*   Created: 2025/08/30 11:26:49 by antonsplavn       #+#    #+#             */
+/*   Updated: 2025/08/30 12:43:53 by antonsplavn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCALARCONVERTER_HPP
-#define SCALARCONVERTER_HPP
+#ifndef SERIALIZER_HPP
+#define SERIALIZER_HPP
 
 #include <iostream>
+#include <cstdint>
 #include <string>
 
-class ScalarConverter {
+struct Data{
 
-	public:
-		static void convert(std::string input);
-
-	private:
-		ScalarConverter();
-		ScalarConverter(const ScalarConverter& other);
-		ScalarConverter& operator=(const ScalarConverter& other);
-		~ScalarConverter();
+	int intValue;
+	float floatValue;
+	std::string stringValue;
 };
 
+class Serializer{
+
+	public:
+		static uintptr_t serialize(Data* ptr);
+		static Data* deserialize(uintptr_t raw);
+
+	private:
+		Serializer();
+		Serializer(const Serializer& other);
+		Serializer& operator=(const Serializer& other);
+		~ Serializer();
+};
 
 #endif
