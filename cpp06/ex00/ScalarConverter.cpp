@@ -6,7 +6,7 @@
 /*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 13:35:13 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/08/29 23:46:06 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/09/01 12:20:49 by antonsplavn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,20 @@
   */
 void ScalarConverter::convert(std::string input) {
 
-	if (input.length() == 3 && input[0] == '\'' && input[2] == '\'') {
+	if(input.length() == 1 && isprint(input[0])){
+		char inputChar = input[0];
+		int intValue = static_cast<int>(inputChar);
+		float floatValue = static_cast<float>(inputChar);
+		double doubleValue = static_cast<double>(inputChar);
+
+		std::cout << "char:   " << "'" << inputChar << "'" << std::endl;
+		std::cout << "int:    " << intValue << std::endl;
+		std::cout << "float:  " << std::fixed << std::setprecision(1) << floatValue << "f" << std::endl;
+		std::cout << "double: " << std::fixed << std::setprecision(1) << doubleValue  << std::endl;
+
+		return;
+	}
+	else if(input.length() == 3 && input[0] == '\'' && input[2] == '\'') {
 		char inputChar = input[1];
 		int intValue = static_cast<int>(inputChar);
 		float floatValue = static_cast<float>(inputChar);
@@ -92,7 +105,7 @@ void ScalarConverter::convert(std::string input) {
 		std::cout << "float:  " << std::fixed << std::setprecision(1) << floatValue << "f" << std::endl;
 		std::cout << "double: " << std::fixed << std::setprecision(1) << doubleValue  << std::endl;
 
-		return ;
+		return;
 	}
 	else if(input == "-inff" || input == "+inff" || input == "nanf"){
 
@@ -232,19 +245,19 @@ void ScalarConverter::convert(std::string input) {
 		else if (convertedDouble >= 0 && convertedDouble <= 127)
 			std::cout << "char:   Non displayable" << std::endl;
 		else
-			std::cout << "char:   Impossible" << std::endl;
+			std::cout << "char:   impossible" << std::endl;
 
 		//int
 		if(convertedDouble > std::numeric_limits<int>::max() ||
 			convertedDouble < std::numeric_limits<int>::min())
-				std::cout << "int:    Impossible" << std::endl;
+				std::cout << "int:    impossible" << std::endl;
 		else
 			std::cout << "int:    " << convertedInt << std::endl;
 
 		//float
 		if(convertedDouble > std::numeric_limits<float>::max() ||
 			convertedDouble < -std::numeric_limits<float>::max())
-			std::cout << "float:   Impossible" << std::endl;
+			std::cout << "float:   impossible" << std::endl;
 		else
 			std::cout << "float:  " << std::fixed << std::setprecision(precision) << convertedFloat  << "f" << std::endl;
 
