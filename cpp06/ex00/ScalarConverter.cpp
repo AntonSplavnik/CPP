@@ -6,7 +6,7 @@
 /*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 13:35:13 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/09/01 12:20:49 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/09/02 14:48:18 by antonsplavn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,35 +79,225 @@
       - get() - Reads ALL characters including spaces and newlines
       - >>    - Skips whitespace characters (spaces, tabs, newlines)
   */
-void ScalarConverter::convert(std::string input) {
 
-	if(input.length() == 1 && isprint(input[0])){
-		char inputChar = input[0];
-		int intValue = static_cast<int>(inputChar);
-		float floatValue = static_cast<float>(inputChar);
-		double doubleValue = static_cast<double>(inputChar);
 
-		std::cout << "char:   " << "'" << inputChar << "'" << std::endl;
-		std::cout << "int:    " << intValue << std::endl;
-		std::cout << "float:  " << std::fixed << std::setprecision(1) << floatValue << "f" << std::endl;
-		std::cout << "double: " << std::fixed << std::setprecision(1) << doubleValue  << std::endl;
 
+void handleChar(std::string input){
+
+	char inputChar;
+	if(input[0] == '\'')
+		inputChar = input[1];
+	else
+		inputChar = input[0];
+
+	int intValue = static_cast<int>(inputChar);
+	float floatValue = static_cast<float>(inputChar);
+	double doubleValue = static_cast<double>(inputChar);
+
+	std::cout << "char:   " << "'" << inputChar << "'" << std::endl;
+	std::cout << "int:    " << intValue << std::endl;
+	std::cout << "float:  " << std::fixed << std::setprecision(1) << floatValue << "f" << std::endl;
+	std::cout << "double: " << std::fixed << std::setprecision(1) << doubleValue  << std::endl;
+	return;
+}
+
+void handleInt(std::string input){
+
+	std::stringstream ss(input);
+	double convertedDouble;
+	ss >> convertedDouble;
+	if(ss.fail()){
+		std::cout << "Parsing error" << std::endl;
 		return;
 	}
-	else if(input.length() == 3 && input[0] == '\'' && input[2] == '\'') {
-		char inputChar = input[1];
-		int intValue = static_cast<int>(inputChar);
-		float floatValue = static_cast<float>(inputChar);
-		double doubleValue = static_cast<double>(inputChar);
+	ss.clear();
+	ss.seekg(0);
 
-		std::cout << "char:   " << "'" << inputChar << "'" << std::endl;
-		std::cout << "int:    " << intValue << std::endl;
-		std::cout << "float:  " << std::fixed << std::setprecision(1) << floatValue << "f" << std::endl;
-		std::cout << "double: " << std::fixed << std::setprecision(1) << doubleValue  << std::endl;
-
+	if(convertedDouble > std::numeric_limits<int>::max() || convertedDouble < std::numeric_limits<int>::min())
+	{
+		std::cout << "char:   impossible" << std::endl;
+		std::cout << "int:    impossible" << std::endl;
+		std::cout << "float:  impossible" << std::endl;
+		std::cout << "double: impossible" << std::endl;
 		return;
 	}
-	else if(input == "-inff" || input == "+inff" || input == "nanf"){
+
+	int convertedInput;
+	ss >> convertedInput;
+	if(ss.fail()){
+		std::cout << "Conversion error" << std::endl;
+		return;
+	}
+
+	float floatValue = static_cast<float>(convertedInput);
+	double doubleValue = static_cast<double>(convertedInput);
+
+	if (convertedInput >= 32 && convertedInput <= 126)
+		std::cout << "char:   " << "'" << static_cast<char>(convertedInput) << "'"<< std::endl;
+	else if (convertedInput >= 0 && convertedInput <= 127)
+		std::cout << "char:   Non displayable" << std::endl;
+	else
+		std::cout << "char:   impossible" << std::endl;
+
+	std::cout << "int:    " << convertedInput << std::endl;
+	std::cout << "float:  " << std::fixed << std::setprecision(1) << floatValue << "f" << std::endl;
+	std::cout << "double: " << std::fixed << std::setprecision(1) << doubleValue  << std::endl;
+	return;
+
+}
+
+void handleFloat(std::string input){
+
+	std::string parsedStr = input;
+	int precision = 1;
+
+	if(input.find('.') != std::string::npos){
+		size_t dotPos = input.find('.');
+
+		//decimal point position
+		if(dotPos == input.length() - 1){
+			std::cout << "parsing error" << std::endl;
+			return;
+		}
+
+		char afterDot = input[dotPos + 1];
+		if(afterDot < '0' || afterDot > '9') {
+			std::cout << "parsing error" << std::endl;
+			return;
+		}
+
+		//multiple decimal points
+		if (std::count(input.begin(), input.end(), '.') > 1) {
+			std::cout << "parsing error" << std::endl;
+			return;
+		}
+
+		//precision counter
+		precision = 0;
+		for(size_t i = dotPos; i < input.length(); i++) {
+			if(input[i] == 'f')
+				break;
+			if(input[i] != '.')
+				precision++;
+			if(precision == 18)
+				break;
+		}
+	}
+
+	//'f' at wrong position
+	size_t fPos = input.find('f');
+	if (fPos != std::string::npos && fPos != input.length() - 1) {
+		std::cout << "parsing error" << std::endl;
+		return;
+	}
+
+	//'f' removal
+	if(input.length() > 1 && input.back() == 'f')
+		parsedStr = input.substr(0, input.length() - 1);
+
+	std::stringstream ss(parsedStr);
+	double convertedDouble;
+	ss >> convertedDouble;
+	if(ss.fail()){
+		std::cout << "Parsing error" << std::endl;
+		return;
+	}
+	ss.clear();
+	ss.seekg(0);
+
+	if(convertedDouble > std::numeric_limits<float>::max() || convertedDouble < -std::numeric_limits<float>::max())
+	{
+		std::cout << "char:   impossible" << std::endl;
+		std::cout << "int:    impossible" << std::endl;
+		std::cout << "float:  impossible" << std::endl;
+		std::cout << "double: impossible" << std::endl;
+		return;
+	}
+
+	float convertedInput;
+	ss >> convertedInput;
+
+	int intValue = static_cast<int>(convertedInput);
+	double doubleValue = static_cast<double>(convertedInput);
+
+	if (convertedInput >= 32 && convertedInput <= 126)
+		std::cout << "char:   " << "'" << static_cast<char>(convertedInput) << "'"<< std::endl;
+	else if (convertedInput >= 0 && convertedInput <= 127)
+		std::cout << "char:   Non displayable" << std::endl;
+	else
+		std::cout << "char:   impossible" << std::endl;
+
+	std::cout << "int:    " << intValue << std::endl;
+	std::cout << "float:  " << std::fixed << std::setprecision(precision) << convertedInput << "f" << std::endl;
+	std::cout << "double: " << std::fixed << std::setprecision(precision) << doubleValue  << std::endl;
+	return;
+}
+
+void handleDouble(std::string input){
+
+	int precision = 1;
+
+	if (input.find('.') != std::string::npos){
+		size_t dotPos = input.find('.');
+
+		//decimal point position
+		if(dotPos == input.length() - 1){
+			std::cout << "parsing error" << std::endl;
+			return;
+		}
+
+		char afterDot = input[dotPos + 1];
+		if(afterDot < '0' || afterDot > '9') {
+			std::cout << "parsing error" << std::endl;
+			return;
+		}
+
+		//multiple decimal points
+		if (std::count(input.begin(), input.end(), '.') > 1) {
+			std::cout << "parsing error" << std::endl;
+			return;
+		}
+
+		//precision counter
+		precision = 0;
+		for(size_t i = dotPos; i < input.length(); i++) {
+			if(input[i] != '.')
+				precision++;
+			if(precision == 18)
+				break;
+		}
+	}
+
+	std::stringstream ss(input);
+	double convertedInput;
+	ss >> convertedInput;
+	if(ss.fail()){
+		std::cout << "Parsing error" << std::endl;
+		return;
+	}
+	ss.clear();
+	ss.seekg(0);
+
+	int intValue = static_cast<int>(convertedInput);
+	float doubleValue = static_cast<float>(convertedInput);
+
+	if (convertedInput >= 32 && convertedInput <= 126)
+		std::cout << "char:   " << "'" << static_cast<char>(convertedInput) << "'"<< std::endl;
+	else if (convertedInput >= 0 && convertedInput <= 127)
+		std::cout << "char:   Non displayable" << std::endl;
+	else
+		std::cout << "char:   impossible" << std::endl;
+
+	std::cout << "int:    " << intValue << std::endl;
+	std::cout << "float:  " << std::fixed << std::setprecision(precision) << convertedInput << "f" << std::endl;
+	std::cout << "double: " << std::fixed << std::setprecision(precision) << doubleValue  << std::endl;
+	return;
+
+}
+
+void handleSpecial(std::string input){
+
+if(input == "-inff" || input == "+inff" || input == "nanf"){
 
 		if(input == "-inff"){
 			std::cout << "char:   " << "impossible" << std::endl;
@@ -151,117 +341,74 @@ void ScalarConverter::convert(std::string input) {
 		}
 		return;
 	}
-	else {
 
-		//sign placement (+ or -):
-		size_t plusCount = std::count(input.begin(), input.end(), '+');
-		size_t minusCount = std::count(input.begin(), input.end(), '-');
+}
 
-		//only one sign at the beginning
-		if (plusCount > 1 || minusCount > 1 || (plusCount > 0 && minusCount > 0)) {
-			std::cout << "parsing error" << std::endl;
-			return;
-		}
+bool isValidInput(std::string input){
 
-		size_t plusPos = input.find('+');
-		size_t minusPos = input.find('-');
-		if ((plusPos != std::string::npos && plusPos != 0) ||
-			(minusPos != std::string::npos && minusPos != 0)) {
-			std::cout << "parsing error" << std::endl;
-			return;
-		}
+	if(input.empty())
+		return false;
 
-		size_t precision = 1;
+	//sign placement (+ or -):
+	size_t plusCount = std::count(input.begin(), input.end(), '+');
+	size_t minusCount = std::count(input.begin(), input.end(), '-');
 
-		if (input.find('.') != std::string::npos){
-			size_t dotPos = input.find('.');
+	//only one sign at the beginning
+	if (plusCount > 1 || minusCount > 1 || (plusCount > 0 && minusCount > 0)) {
+		std::cout << "parsing error" << std::endl;
+		return false;
+	}
 
-			//decimal point position
-			if(dotPos == input.length() - 1){
-				std::cout << "parsing error" << std::endl;
-				return;
-			}
-			char afterDot = input[dotPos + 1];
-			if(afterDot < '0' || afterDot > '9') {
-				std::cout << "parsing error" << std::endl;
-				return;
-			}
-			//multiple decimal points
-			if (std::count(input.begin(), input.end(), '.') > 1) {
-				std::cout << "parsing error" << std::endl;
-				return;
-			}
+	size_t plusPos = input.find('+');
+	size_t minusPos = input.find('-');
+	if ((plusPos != std::string::npos && plusPos != 0) ||
+		(minusPos != std::string::npos && minusPos != 0)) {
+		std::cout << "parsing error" << std::endl;
+		return false;
+	}
 
-			//precision counter
-			precision = 0;
-			for(size_t i = dotPos; i < input.length(); i++) {
-				if(input[i] == 'f')
-					break;
-				if(input[i] != '.')
-					precision++;
-			}
-		}
+	return true;
+}
 
-		//'f' at wrong position
-		size_t fPos = input.find('f');
-		if (fPos != std::string::npos && fPos != input.length() - 1) {
-			std::cout << "parsing error" << std::endl;
-			return;
-		}
+LiteralType detectType(std::string input){
 
-		//'f' removal
-		std::string parsedStr = input;
-		if(input.length() > 1 && input.back() == 'f')
-			parsedStr = input.substr(0, input.length() - 1);
+	if (input.length() == 3 && input[0] == '\'' && input[2] == '\'')
+		return CHAR;
+	if (input.length() == 1 && isalpha(input[0]))
+		return CHAR;
+	if (input == "inf" || input == "-inf" || input == "+inf" || input == "nan" || input == "inff" || input == "-inff" || input == "+inff" || input == "nanf")
+		return SPECIAL;
+	if (input[input.length() -1 ] == 'f' && input.find('.') != std::string::npos)
+		return FLOAT;
+	if (input.find('.') != std::string::npos)
+		return DOUBLE;
+	return INT;
+}
 
-		//conversions
-		std::stringstream ss(parsedStr);
-		bool conversionFail = false;
+void ScalarConverter::convert(std::string input) {
 
-		double convertedDouble;
-		ss >> convertedDouble;
-		if(ss.fail()) conversionFail = true;
-		ss.seekg(0);
+	if (!isValidInput(input)) {
+		std::cout << "Invalid input" << std::endl;
+		return;
+	}
 
-		int convertedInt;
-		ss >> convertedInt;
-		ss.clear();
-		ss.seekg(0);
+	LiteralType type = detectType(input);
 
-		float convertedFloat;
-		ss >> convertedFloat;
-		ss.clear();
-		ss.seekg(0);
-
-		if(conversionFail)
-		{
-			std::cout << "Conversion failed!" << std::endl;
-			return;
-		}
-
-		//char
-		if(convertedDouble >= 32 && convertedDouble <= 126)
-			std::cout << "char:   " << "'" << static_cast<char>(convertedDouble) << "'"<< std::endl;
-		else if (convertedDouble >= 0 && convertedDouble <= 127)
-			std::cout << "char:   Non displayable" << std::endl;
-		else
-			std::cout << "char:   impossible" << std::endl;
-
-		//int
-		if(convertedDouble > std::numeric_limits<int>::max() ||
-			convertedDouble < std::numeric_limits<int>::min())
-				std::cout << "int:    impossible" << std::endl;
-		else
-			std::cout << "int:    " << convertedInt << std::endl;
-
-		//float
-		if(convertedDouble > std::numeric_limits<float>::max() ||
-			convertedDouble < -std::numeric_limits<float>::max())
-			std::cout << "float:   impossible" << std::endl;
-		else
-			std::cout << "float:  " << std::fixed << std::setprecision(precision) << convertedFloat  << "f" << std::endl;
-
-		//double
-		std::cout << "double: " << std::fixed << std::setprecision(precision) << convertedDouble  << std::endl;
+	switch(type){
+		case CHAR:
+			handleChar(input);
+			break;
+		case INT:
+			handleInt(input);
+			break;
+		case DOUBLE:
+			handleDouble(input);
+			break;
+		case FLOAT:
+			handleFloat(input);
+			break;
+		case SPECIAL:
+			handleSpecial(input);
+			break;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 13:22:34 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/08/30 11:30:27 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/09/02 14:20:07 by antonsplavn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,14 @@
 
 #include <iostream>
 #include <string>
+
+enum LiteralType {
+	CHAR,
+	INT,
+	FLOAT,
+	DOUBLE,
+	SPECIAL
+};
 
 class ScalarConverter {
 
