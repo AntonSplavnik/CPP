@@ -6,7 +6,7 @@
 /*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 13:35:13 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/09/02 14:48:18 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/09/02 18:23:14 by antonsplavn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -279,7 +279,7 @@ void handleDouble(std::string input){
 	ss.seekg(0);
 
 	int intValue = static_cast<int>(convertedInput);
-	float doubleValue = static_cast<float>(convertedInput);
+	float floatleValue = static_cast<float>(convertedInput);
 
 	if (convertedInput >= 32 && convertedInput <= 126)
 		std::cout << "char:   " << "'" << static_cast<char>(convertedInput) << "'"<< std::endl;
@@ -288,9 +288,15 @@ void handleDouble(std::string input){
 	else
 		std::cout << "char:   impossible" << std::endl;
 
-	std::cout << "int:    " << intValue << std::endl;
-	std::cout << "float:  " << std::fixed << std::setprecision(precision) << convertedInput << "f" << std::endl;
-	std::cout << "double: " << std::fixed << std::setprecision(precision) << doubleValue  << std::endl;
+
+	if(convertedInput > std::numeric_limits<int>::max() || convertedInput < std::numeric_limits<int>::min())
+		std::cout << "int:    impossible" << std::endl;
+	else
+		std::cout << "int:    " << intValue << std::endl;
+
+
+	std::cout << "float:  " << std::fixed << std::setprecision(precision) << floatleValue << "f" << std::endl;
+	std::cout << "double: " << std::fixed << std::setprecision(precision) << convertedInput  << std::endl;
 	return;
 
 }
@@ -359,10 +365,10 @@ bool isValidInput(std::string input){
 		return false;
 	}
 
+	size_t tickPos = input.find('\'');
 	size_t plusPos = input.find('+');
 	size_t minusPos = input.find('-');
-	if ((plusPos != std::string::npos && plusPos != 0) ||
-		(minusPos != std::string::npos && minusPos != 0)) {
+	if ((plusPos != std::string::npos && plusPos != 0 && !(tickPos == 0 && plusPos == 1)) || (minusPos != std::string::npos && minusPos != 0 && !(tickPos == 0 && minusPos == 1))) {
 		std::cout << "parsing error" << std::endl;
 		return false;
 	}
@@ -374,7 +380,7 @@ LiteralType detectType(std::string input){
 
 	if (input.length() == 3 && input[0] == '\'' && input[2] == '\'')
 		return CHAR;
-	if (input.length() == 1 && isalpha(input[0]))
+	if (input.length() == 1 && (input[0]>= 0 && input[0] <= 127))
 		return CHAR;
 	if (input == "inf" || input == "-inf" || input == "+inf" || input == "nan" || input == "inff" || input == "-inff" || input == "+inff" || input == "nanf")
 		return SPECIAL;
