@@ -6,7 +6,7 @@
 /*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 13:35:13 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/09/02 18:23:14 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/09/03 12:26:45 by antonsplavn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,15 @@
       - >>    - Skips whitespace characters (spaces, tabs, newlines)
   */
 
+bool isValidNumber(std::string input){
 
+	for (size_t i = 0; i < input.length(); i++)
+	{
+		if(!(input[i] >= '0' && input[i] <= '9') && !(input[i] == '.') && !(input[input.length() - 1] == 'f')) return false;
+	}
+	return true;
+
+}
 
 void handleChar(std::string input){
 
@@ -107,8 +115,17 @@ void handleInt(std::string input){
 	double convertedDouble;
 	ss >> convertedDouble;
 	if(ss.fail()){
-		std::cout << "Parsing error" << std::endl;
-		return;
+		if(isValidNumber(input)){
+			std::cout << "char:   impossible" << std::endl;
+			std::cout << "int:    impossible" << std::endl;
+			std::cout << "float:  impossible" << std::endl;
+			std::cout << "double: impossible" << std::endl;
+			return;
+		}
+		else{
+			std::cout << "Parsing error" << std::endl;
+			return;
+		}
 	}
 	ss.clear();
 	ss.seekg(0);
@@ -199,8 +216,17 @@ void handleFloat(std::string input){
 	double convertedDouble;
 	ss >> convertedDouble;
 	if(ss.fail()){
-		std::cout << "Parsing error" << std::endl;
-		return;
+		if(isValidNumber(input)){
+			std::cout << "char:   impossible" << std::endl;
+			std::cout << "int:    impossible" << std::endl;
+			std::cout << "float:  impossible" << std::endl;
+			std::cout << "double: impossible" << std::endl;
+			return;
+		}
+		else{
+			std::cout << "Parsing error" << std::endl;
+			return;
+		}
 	}
 	ss.clear();
 	ss.seekg(0);
@@ -227,11 +253,16 @@ void handleFloat(std::string input){
 	else
 		std::cout << "char:   impossible" << std::endl;
 
-	std::cout << "int:    " << intValue << std::endl;
+	if(convertedInput > std::numeric_limits<int>::max() || convertedInput < std::numeric_limits<int>::min())
+		std::cout << "int:    impossible" << std::endl;
+	else
+		std::cout << "int:    " << intValue << std::endl;
+
 	std::cout << "float:  " << std::fixed << std::setprecision(precision) << convertedInput << "f" << std::endl;
 	std::cout << "double: " << std::fixed << std::setprecision(precision) << doubleValue  << std::endl;
 	return;
 }
+
 
 void handleDouble(std::string input){
 
@@ -257,23 +288,23 @@ void handleDouble(std::string input){
 			std::cout << "parsing error" << std::endl;
 			return;
 		}
-
-		//precision counter
-		precision = 0;
-		for(size_t i = dotPos; i < input.length(); i++) {
-			if(input[i] != '.')
-				precision++;
-			if(precision == 18)
-				break;
-		}
 	}
 
 	std::stringstream ss(input);
 	double convertedInput;
 	ss >> convertedInput;
 	if(ss.fail()){
-		std::cout << "Parsing error" << std::endl;
-		return;
+		if(isValidNumber(input)){
+			std::cout << "char:   impossible" << std::endl;
+			std::cout << "int:    impossible" << std::endl;
+			std::cout << "float:  impossible" << std::endl;
+			std::cout << "double: impossible" << std::endl;
+			return;
+		}
+		else{
+			std::cout << "Parsing error" << std::endl;
+			return;
+		}
 	}
 	ss.clear();
 	ss.seekg(0);
@@ -294,7 +325,6 @@ void handleDouble(std::string input){
 	else
 		std::cout << "int:    " << intValue << std::endl;
 
-
 	std::cout << "float:  " << std::fixed << std::setprecision(precision) << floatleValue << "f" << std::endl;
 	std::cout << "double: " << std::fixed << std::setprecision(precision) << convertedInput  << std::endl;
 	return;
@@ -303,7 +333,7 @@ void handleDouble(std::string input){
 
 void handleSpecial(std::string input){
 
-if(input == "-inff" || input == "+inff" || input == "nanf"){
+if(input == "-inff" || input == "inff" || input == "+inff" || input == "nanf"){
 
 		if(input == "-inff"){
 			std::cout << "char:   " << "impossible" << std::endl;
@@ -311,7 +341,7 @@ if(input == "-inff" || input == "+inff" || input == "nanf"){
 			std::cout << "float:  " << "-inff" << std::endl;
 			std::cout << "double: " << "-inf" << std::endl;
 		}
-		else if(input == "+inff"){
+		else if(input == "+inff" || input == "inff"){
 			std::cout << "char:   " << "impossible" << std::endl;
 			std::cout << "int:    " << "impossible" << std::endl;
 			std::cout << "float:  " << "+inff" << std::endl;
@@ -325,7 +355,7 @@ if(input == "-inff" || input == "+inff" || input == "nanf"){
 		}
 		return;
 	}
-	else if(input == "-inf" || input == "+inf" || input == "nan"){
+	else if(input == "-inf" || input == "+inf" || input == "inf"|| input == "nan"){
 
 		if(input == "-inf"){
 			std::cout << "char:   " << "impossible" << std::endl;
@@ -333,7 +363,7 @@ if(input == "-inff" || input == "+inff" || input == "nanf"){
 			std::cout << "float:  " << "-inff" << std::endl;
 			std::cout << "double: " << "-inf" << std::endl;
 		}
-		else if(input == "+inf"){
+		else if(input == "+inf" || input == "inf"){
 			std::cout << "char:   " << "impossible" << std::endl;
 			std::cout << "int:    " << "impossible" << std::endl;
 			std::cout << "float:  " << "+inff" << std::endl;

@@ -6,7 +6,7 @@
 /*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 14:51:07 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/09/02 14:47:47 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/09/03 12:37:53 by antonsplavn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <iostream>
 
 int main(int ac, char** av){
+
 	(void)ac;
 	if (av[1] == NULL)
 		return 1;
