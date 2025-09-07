@@ -12,7 +12,6 @@
 
 #include "ScalarConverter.hpp"
 #include <sstream>
-#include <algorithm>
 #include <iomanip>
 #include <limits>
 
@@ -191,7 +190,12 @@ void handleFloat(std::string input, LiteralType type){
 		}
 
 		//multiple decimal points
-		if (std::count(input.begin(), input.end(), '.') > 1) {
+		int dotCount = 0;
+		for (size_t i = 0; i < input.length(); i++) {
+			if (input[i] == '.')
+				dotCount++;
+		}
+		if (dotCount > 1) {
 			std::cout << "parsing error" << std::endl;
 			return;
 		}
@@ -291,7 +295,12 @@ void handleDouble(std::string input, LiteralType type){
 		}
 
 		//multiple decimal points
-		if (std::count(input.begin(), input.end(), '.') > 1) {
+		int dotCount = 0;
+		for (size_t i = 0; i < input.length(); i++) {
+			if (input[i] == '.')
+				dotCount++;
+		}
+		if (dotCount > 1) {
 			std::cout << "parsing error" << std::endl;
 			return;
 		}
@@ -404,8 +413,14 @@ bool isValidInput(std::string input){
 		return false;
 
 	//sign placement (+ or -):
-	size_t plusCount = std::count(input.begin(), input.end(), '+');
-	size_t minusCount = std::count(input.begin(), input.end(), '-');
+	size_t plusCount = 0;
+	size_t minusCount = 0;
+	for (size_t i = 0; i < input.length(); i++) {
+		if (input[i] == '+')
+			plusCount++;
+		if (input[i] == '-')
+			minusCount++;
+	}
 
 	//only one sign at the beginning
 	if (plusCount > 1 || minusCount > 1 || (plusCount > 0 && minusCount > 0)) {
