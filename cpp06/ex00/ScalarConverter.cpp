@@ -6,7 +6,7 @@
 /*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 13:35:13 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/09/07 14:33:29 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/09/07 15:06:13 by antonsplavn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,7 +222,7 @@ void handleFloat(std::string input, LiteralType type){
 	std::stringstream ss(parsedStr);
 	double convertedDouble;
 	ss >> convertedDouble;
-	if(ss.fail()){
+	if(ss.fail() || !ss.eof()){
 		if(isValidNumber(input, type)){
 			std::cout << "char:   impossible" << std::endl;
 			std::cout << "int:    impossible" << std::endl;
@@ -416,26 +416,41 @@ bool isValidInput(std::string input){
 	size_t tickPos = input.find('\'');
 	size_t plusPos = input.find('+');
 	size_t minusPos = input.find('-');
-	if ((plusPos != std::string::npos && plusPos != 0 && !(tickPos == 0 && plusPos == 1)) || (minusPos != std::string::npos && minusPos != 0 && !(tickPos == 0 && minusPos == 1))) {
+	if ((plusPos != std::string::npos && plusPos != 0
+		&& !(tickPos == 0 && plusPos == 1))
+		|| (minusPos != std::string::npos && minusPos != 0
+		&& !(tickPos == 0 && minusPos == 1))) {
 		std::cout << "parsing error" << std::endl;
 		return false;
 	}
+
 
 	return true;
 }
 
 LiteralType detectType(std::string input){
 
-	if (input.length() == 3 && input[0] == '\'' && input[2] == '\'')
+	if (input.length() == 3 && input[0] == '\'' && input[2] == '\''){
+		// std::cout << "CHAR" << std::endl;
 		return CHAR;
-	if (input.length() == 1 && (input[0]>= 0 && input[0] <= 127) && !(input[0] >= '0' && input[0] <= '9'))
+	}
+	if (input.length() == 1 && (input[0]>= 0 && input[0] <= 127) && !(input[0] >= '0' && input[0] <= '9')){
+		// std::cout << "CHAR" << std::endl;
 		return CHAR;
-	if (input == "inf" || input == "-inf" || input == "+inf" || input == "nan" || input == "inff" || input == "-inff" || input == "+inff" || input == "nanf")
+	}
+	if (input == "inf" || input == "-inf" || input == "+inf" || input == "nan" || input == "inff" || input == "-inff" || input == "+inff" || input == "nanf"){
+		// std::cout << "SPECIAL" << std::endl;
 		return SPECIAL;
-	if (input[input.length() - 1 ] == 'f' && input.find('.') != std::string::npos)
+	}
+	if (input[input.length() - 1 ] == 'f' && input.find('.') != std::string::npos){
+		// std::cout << "FLOAT" << std::endl;
 		return FLOAT;
-	if (input.find('.') != std::string::npos)
+	}
+	if (input.find('.') != std::string::npos){
+		// std::cout << "DOUBLE" << std::endl;
 		return DOUBLE;
+	}
+	// std::cout << "INT" << std::endl;
 	return INT;
 }
 
