@@ -1,38 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   easyfind.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/07 19:43:37 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/09/07 23:31:33 by antonsplavn      ###   ########.fr       */
+/*   Created: 2025/09/07 19:58:27 by antonsplavn       #+#    #+#             */
+/*   Updated: 2025/09/07 23:32:13 by antonsplavn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef EASYFIND_HPP
+#define EASYFIND_HPP
+
 #include <iostream>
-#include "easyfind.hpp"
+#include <algorithm>
+#include <vector>
+#include <stdexcept>
 
-int main(){
+template<typename T>
+void easyfind(T& container, int& valueToFind){
 
-	try
-	{
-		std::vector<int> vectorTest;
-		vectorTest.push_back(12);
-		vectorTest.push_back(22);
-		vectorTest.push_back(2);
-		vectorTest.push_back(51);
-		vectorTest.push_back(12);
-		vectorTest.push_back(62);
+	typename T::iterator found = std::find(container.begin(), container.end(), valueToFind);
+	if(found != container.end()){
+			std::cout << *found << std::endl;
 
-		int target = 12;
-		easyfind(vectorTest, target);
 	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
-
-
-	return 0;
+	else
+		throw std::out_of_range("Element not found");
 }
+
+#endif
