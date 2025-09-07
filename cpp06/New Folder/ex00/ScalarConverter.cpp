@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScalarConverter.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
+/*   By: asplavni <asplavni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 13:35:13 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/09/07 14:33:29 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/09/03 13:38:06 by asplavni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,21 +80,14 @@
       - >>    - Skips whitespace characters (spaces, tabs, newlines)
   */
 
-bool isValidNumber(std::string input, LiteralType type){
+bool isValidNumber(std::string input){
 
-	if(type == INT){
-		for (size_t i = 0; i < input.length(); i++)
-			if(input[i] < '0' || input[i] > '9') return false;
-	}
-	else if(type == FLOAT){
-			for (size_t i = 0; i < input.length(); i++)
-			if((input[i] < '0' || input[i] > '9') && !(input[i] == '.') && !(i == input.length() - 1 && input[i] == 'f')) return false;
-	}
-	else if(type == DOUBLE){
-					for (size_t i = 0; i < input.length(); i++)
-			if((input[i] < '0' || input[i] > '9') && !(input[i] == '.')) return false;
+	for (size_t i = 0; i < input.length(); i++)
+	{
+		if(!(input[i] >= '0' && input[i] <= '9') && !(input[i] == '.') && !(input[input.length() - 1] == 'f')) return false;
 	}
 	return true;
+
 }
 
 void handleChar(std::string input){
@@ -116,13 +109,13 @@ void handleChar(std::string input){
 	return;
 }
 
-void handleInt(std::string input, LiteralType type){
+void handleInt(std::string input){
 
 	std::stringstream ss(input);
 	double convertedDouble;
 	ss >> convertedDouble;
 	if(ss.fail()){
-		if(isValidNumber(input, type)){
+		if(isValidNumber(input)){
 			std::cout << "char:   impossible" << std::endl;
 			std::cout << "int:    impossible" << std::endl;
 			std::cout << "float:  impossible" << std::endl;
@@ -170,7 +163,7 @@ void handleInt(std::string input, LiteralType type){
 
 }
 
-void handleFloat(std::string input, LiteralType type){
+void handleFloat(std::string input){
 
 	std::string parsedStr = input;
 	int precision = 1;
@@ -223,7 +216,7 @@ void handleFloat(std::string input, LiteralType type){
 	double convertedDouble;
 	ss >> convertedDouble;
 	if(ss.fail()){
-		if(isValidNumber(input, type)){
+		if(isValidNumber(input)){
 			std::cout << "char:   impossible" << std::endl;
 			std::cout << "int:    impossible" << std::endl;
 			std::cout << "float:  impossible" << std::endl;
@@ -271,7 +264,7 @@ void handleFloat(std::string input, LiteralType type){
 }
 
 
-void handleDouble(std::string input, LiteralType type){
+void handleDouble(std::string input){
 
 	int precision = 1;
 
@@ -295,24 +288,13 @@ void handleDouble(std::string input, LiteralType type){
 			std::cout << "parsing error" << std::endl;
 			return;
 		}
-
-		//precision counter
-		precision = 0;
-		for(size_t i = dotPos; i < input.length(); i++) {
-			if(input[i] == 'f')
-				break;
-			if(input[i] != '.')
-				precision++;
-			if(precision == 18)
-				break;
-		}
 	}
 
 	std::stringstream ss(input);
 	double convertedInput;
 	ss >> convertedInput;
 	if(ss.fail()){
-		if(isValidNumber(input, type)){
+		if(isValidNumber(input)){
 			std::cout << "char:   impossible" << std::endl;
 			std::cout << "int:    impossible" << std::endl;
 			std::cout << "float:  impossible" << std::endl;
@@ -428,11 +410,11 @@ LiteralType detectType(std::string input){
 
 	if (input.length() == 3 && input[0] == '\'' && input[2] == '\'')
 		return CHAR;
-	if (input.length() == 1 && (input[0]>= 0 && input[0] <= 127) && !(input[0] >= '0' && input[0] <= '9'))
+	if (input.length() == 1 && (input[0]>= 0 && input[0] <= 127))
 		return CHAR;
 	if (input == "inf" || input == "-inf" || input == "+inf" || input == "nan" || input == "inff" || input == "-inff" || input == "+inff" || input == "nanf")
 		return SPECIAL;
-	if (input[input.length() - 1 ] == 'f' && input.find('.') != std::string::npos)
+	if (input[input.length() -1 ] == 'f' && input.find('.') != std::string::npos)
 		return FLOAT;
 	if (input.find('.') != std::string::npos)
 		return DOUBLE;
@@ -453,13 +435,13 @@ void ScalarConverter::convert(std::string input) {
 			handleChar(input);
 			break;
 		case INT:
-			handleInt(input, type);
+			handleInt(input);
 			break;
 		case DOUBLE:
-			handleDouble(input, type);
+			handleDouble(input);
 			break;
 		case FLOAT:
-			handleFloat(input, type);
+			handleFloat(input);
 			break;
 		case SPECIAL:
 			handleSpecial(input);
