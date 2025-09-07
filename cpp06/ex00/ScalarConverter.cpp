@@ -6,7 +6,7 @@
 /*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 13:35:13 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/09/03 12:26:45 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/09/07 14:03:50 by antonsplavn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,14 +80,21 @@
       - >>    - Skips whitespace characters (spaces, tabs, newlines)
   */
 
-bool isValidNumber(std::string input){
+bool isValidNumber(std::string input, LiteralType type){
 
-	for (size_t i = 0; i < input.length(); i++)
-	{
-		if(!(input[i] >= '0' && input[i] <= '9') && !(input[i] == '.') && !(input[input.length() - 1] == 'f')) return false;
+	if(type == INT){
+		for (size_t i = 0; i < input.length(); i++)
+			if(input[i] < '0' || input[i] > '9') return false;
+	}
+	else if(type == FLOAT){
+			for (size_t i = 0; i < input.length(); i++)
+			if((input[i] < '0' || input[i] > '9') && !(input[i] == '.') && !(i == input.length() - 1 && input[i] == 'f')) return false;
+	}
+	else if(type == DOUBLE){
+					for (size_t i = 0; i < input.length(); i++)
+			if((input[i] < '0' || input[i] > '9') && !(input[i] == '.')) return false;
 	}
 	return true;
-
 }
 
 void handleChar(std::string input){
@@ -109,13 +116,13 @@ void handleChar(std::string input){
 	return;
 }
 
-void handleInt(std::string input){
+void handleInt(std::string input, LiteralType type){
 
 	std::stringstream ss(input);
 	double convertedDouble;
 	ss >> convertedDouble;
 	if(ss.fail()){
-		if(isValidNumber(input)){
+		if(isValidNumber(input, type)){
 			std::cout << "char:   impossible" << std::endl;
 			std::cout << "int:    impossible" << std::endl;
 			std::cout << "float:  impossible" << std::endl;
@@ -163,7 +170,7 @@ void handleInt(std::string input){
 
 }
 
-void handleFloat(std::string input){
+void handleFloat(std::string input, LiteralType type){
 
 	std::string parsedStr = input;
 	int precision = 1;
@@ -216,7 +223,7 @@ void handleFloat(std::string input){
 	double convertedDouble;
 	ss >> convertedDouble;
 	if(ss.fail()){
-		if(isValidNumber(input)){
+		if(isValidNumber(input, type)){
 			std::cout << "char:   impossible" << std::endl;
 			std::cout << "int:    impossible" << std::endl;
 			std::cout << "float:  impossible" << std::endl;
@@ -264,7 +271,7 @@ void handleFloat(std::string input){
 }
 
 
-void handleDouble(std::string input){
+void handleDouble(std::string input, LiteralType type){
 
 	int precision = 1;
 
@@ -288,13 +295,24 @@ void handleDouble(std::string input){
 			std::cout << "parsing error" << std::endl;
 			return;
 		}
+
+		//precision counter
+		precision = 0;
+		for(size_t i = dotPos; i < input.length(); i++) {
+			if(input[i] == 'f')
+				break;
+			if(input[i] != '.')
+				precision++;
+			if(precision == 18)
+				break;
+		}
 	}
 
 	std::stringstream ss(input);
 	double convertedInput;
 	ss >> convertedInput;
 	if(ss.fail()){
-		if(isValidNumber(input)){
+		if(isValidNumber(input, type)){
 			std::cout << "char:   impossible" << std::endl;
 			std::cout << "int:    impossible" << std::endl;
 			std::cout << "float:  impossible" << std::endl;
@@ -410,11 +428,11 @@ LiteralType detectType(std::string input){
 
 	if (input.length() == 3 && input[0] == '\'' && input[2] == '\'')
 		return CHAR;
-	if (input.length() == 1 && (input[0]>= 0 && input[0] <= 127))
+	if (input.length() == 1 && (input[0]>= 0 && input[0] <= 127) && !(input[0] >= '0' && input[0] <= '9'))
 		return CHAR;
 	if (input == "inf" || input == "-inf" || input == "+inf" || input == "nan" || input == "inff" || input == "-inff" || input == "+inff" || input == "nanf")
 		return SPECIAL;
-	if (input[input.length() -1 ] == 'f' && input.find('.') != std::string::npos)
+	if (input[input.length() - 1 ] == 'f' && input.find('.') != std::string::npos)
 		return FLOAT;
 	if (input.find('.') != std::string::npos)
 		return DOUBLE;
@@ -435,13 +453,13 @@ void ScalarConverter::convert(std::string input) {
 			handleChar(input);
 			break;
 		case INT:
-			handleInt(input);
+			handleInt(input, type);
 			break;
 		case DOUBLE:
-			handleDouble(input);
+			handleDouble(input, type);
 			break;
 		case FLOAT:
-			handleFloat(input);
+			handleFloat(input, type);
 			break;
 		case SPECIAL:
 			handleSpecial(input);
