@@ -6,7 +6,7 @@
 /*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 11:26:49 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/08/30 12:43:53 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/09/09 15:21:14 by antonsplavn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #define SERIALIZER_HPP
 
 #include <iostream>
-#include <cstdint>
+#include <stdint.h>
 #include <string>
 
 struct Data{

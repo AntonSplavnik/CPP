@@ -6,7 +6,7 @@
 /*   By: antonsplavnik <antonsplavnik@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 19:43:37 by antonsplavn       #+#    #+#             */
-/*   Updated: 2025/09/07 23:31:33 by antonsplavn      ###   ########.fr       */
+/*   Updated: 2025/09/08 12:16:40 by antonsplavn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int main(){
 	{
 		std::cerr << e.what() << '\n';
 	}
-
 
 	return 0;
 }
