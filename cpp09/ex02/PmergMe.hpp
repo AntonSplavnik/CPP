@@ -54,13 +54,15 @@ class PmergMe {
 
 			// insertion();
 
-			std::vector<int> sequence = generate_cequesnce(20);
+			std::vector<int> sequence = generate_cequesnce(50);
 
 			std::cout << "final Jacob seq: ";
 			for (size_t i = 0; i < sequence.size(); i++) {
 				std::cout << sequence.at(i) << " ";
 			}
 			std::cout << "\n" << std::endl;
+
+			fill_sequence(sequence);
 
 			return _result;
 		}
@@ -113,7 +115,7 @@ class PmergMe {
 			return rearranged_pend;
 		}
 		std::vector<int> generate_cequesnce(int len) {
-			// 1. generate sequence based on formula // J(n) = (2^n - (-1)^n) / 3 iterative - J(i) = J(i-1) + 2*J(i-2)
+			// 1. generate sequence based on formula // J(n) = (2^n - (-1)^n) / 3  or iterative - J(i) = J(i-1) + 2*J(i-2)
 			// 2. stop generation at len. (last operation should find most sutable nuber in a group of numbers for example: if len is 9 sequenve should be [0][1][3][5][9])
 			// 2. all the missing values in cequesnce should be inserted in betveen the sequence blocks in reverce order (for example with sequence [0][1][3][5][9] it should become [0][1][3 2] [5 4] [9 8 7 6])
 			std::vector<int> seq;
@@ -132,21 +134,41 @@ class PmergMe {
 			int prev2 = 0;
 			int prev1 = 1;
 			int curr;
-			for (int i = 2; i <= len; i++) {
+			while(true) {
 				curr = prev1 + 2 * prev2;
 
 				// std::cout << "current: " << curr << " len: " << len - 1 << std::endl;
-				// if (curr > len - 1) {
-				// 	int buff_curr = curr;
-				// 	for (int j = curr; j > prev1; j--) {
-				// 		std::cout << "buff_curr: " << buff_curr << std::endl;
-				// 		if (buff_curr == len - 1)
-				// 			seq.push_back (buff_curr);
-				// 		buff_curr -= 1;
-				// 	}
-				// } else {
-				// 	seq.push_back (curr);
-				// }
+				if (curr > len - 1) {
+					seq.push_back (len - 1);
+
+					/* int buff_curr = curr;
+					while (buff_curr >= len - 1) {
+
+						std::cout << "buff_curr: " << buff_curr << std::endl;
+						if (buff_curr == len - 1)
+							seq.push_back (buff_curr);
+						buff_curr -= 1;
+					} */
+
+					/* int buff_curr = curr;
+					for (int j = curr; j > prev1; j--) {
+						std::cout << "buff_curr: " << buff_curr << std::endl;
+						if (buff_curr == len - 1)
+							seq.push_back (buff_curr);
+						buff_curr -= 1;
+					} */
+
+					std::cout << "current seq: ";
+					for (size_t k = 0; k < seq.size(); k++) {
+						std::cout << seq.at(k) << " ";
+					}
+					std::cout << std::endl;
+
+					break;
+				}
+				else {
+					seq.push_back (curr);
+				}
 
 				std::cout << "current seq: ";
 				for (size_t k = 0; k < seq.size(); k++) {
@@ -161,6 +183,31 @@ class PmergMe {
 			return seq;
 		}
 
+		std::vector<int> fill_sequence(std::vector<int> seq) {
+			std::vector<int> filled;
+			filled.push_back(0);
+			filled.push_back(1);
+
+			int block = seq.at(2);
+			for (size_t i = 2; i < seq.size(); i++) {
+
+				block = seq.at(i);
+
+				std::cout << "bloc: " << block << std::endl;
+				while (block != seq.at(i - 1)) {
+					filled.push_back(block);
+					block -= 1;
+				}
+			}
+
+			std::cout << "filled seq: ";
+			for (size_t i = 0; i < filled.size(); i++) {
+				std::cout << filled.at(i) << " ";
+			}
+			std::cout << "\n" << std::endl;
+
+			return filled;
+		}
 		/* split elements in to main (larger) and pend (smaller) recursevly - uneven goes to last positon of pend) */
 		void recursive_sort(Container input, int depth = 0) {
 
