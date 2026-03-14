@@ -30,7 +30,7 @@ class PmergMe {
 
 			if (is_sorted(_input)) return _result;
 
-			// recursive_sort(_input);
+			recursive_sort(_input);
 			std::list<RecursionLevel>::iterator it = _main_sort_list.begin();
 			for (; it != _main_sort_list.end(); ++it)
 			{
@@ -52,17 +52,21 @@ class PmergMe {
 				std::cout << std::endl;
 			}
 
-			// insertion();
+			insertion();
 
-			std::vector<int> sequence = generate_cequesnce(50);
+			// std::vector<int> sequence = generate_cequesnce(50);
+			// std::cout << "final Jacob seq: ";
+			// for (size_t i = 0; i < sequence.size(); i++) {
+			// 	std::cout << sequence.at(i) << " ";
+			// }
+			// std::cout << "\n" << std::endl;
 
-			std::cout << "final Jacob seq: ";
-			for (size_t i = 0; i < sequence.size(); i++) {
-				std::cout << sequence.at(i) << " ";
-			}
-			std::cout << "\n" << std::endl;
-
-			fill_sequence(sequence);
+			// std::vector<int> filled_sequence = fill_sequence(sequence);
+			// std::cout << "filled seq: ";
+			// for (size_t i = 0; i < filled_sequence.size(); i++) {
+			// 	std::cout << filled.at(i) << " ";
+			// }
+			// std::cout << "\n" << std::endl;
 
 			return _result;
 		}
@@ -182,7 +186,6 @@ class PmergMe {
 
 			return seq;
 		}
-
 		std::vector<int> fill_sequence(std::vector<int> seq) {
 			std::vector<int> filled;
 			filled.push_back(0);
@@ -200,14 +203,33 @@ class PmergMe {
 				}
 			}
 
-			std::cout << "filled seq: ";
-			for (size_t i = 0; i < filled.size(); i++) {
-				std::cout << filled.at(i) << " ";
-			}
-			std::cout << "\n" << std::endl;
-
 			return filled;
 		}
+		void insert_pend(const std::vector<int> &sequence, const std::vector<int> &pend) {
+			std::vector<int> temp_main(_result);
+
+			std::cout << "starting insertion..." << std::endl;
+			for (size_t i = 0; i < sequence.size(); i++) {
+
+				int num_to_find = temp_main.at(sequence.at(i));
+
+				typename Container::iterator it = find(_result.begin(), _result.end(), num_to_find);
+
+				// int pos_to_search = distance(_result.begin(), it);
+
+				typename Container::iterator pos = lower_bound(_result.begin(), it, pend.at(sequence.at(i)));
+
+				_result.insert(pos, pend.at(sequence.at(i)));
+
+				std::cout << "current result: ";
+				for (size_t i = 0; i < _result.size(); i++) {
+					std::cout << _result.at(i)  << " ";
+				}
+				std::cout << "\n" << std::endl;
+			}
+
+		}
+
 		/* split elements in to main (larger) and pend (smaller) recursevly - uneven goes to last positon of pend) */
 		void recursive_sort(Container input, int depth = 0) {
 
@@ -262,6 +284,7 @@ class PmergMe {
 
 			std::list<RecursionLevel>::reverse_iterator it = _main_sort_list.rbegin();
 
+			// TODO: remove thip part. further algo should cover this case.
 			_result.push_back(it->pend.at(0));
 			_result.push_back(it->main.at(0));
 			if (it->pend.at(1)){
@@ -312,13 +335,22 @@ class PmergMe {
 				}
 				std::cout << "\n" << std::endl;
 
+				// In medium they strore starting from 3d element of the sequence (disregarding 0 and 1. 1 will be alway )
 				std::vector<int> sequence = generate_cequesnce(rearranged_pend.size());
-
 				std::cout << "final Jacob seq: ";
 				for (size_t i = 0; i < sequence.size(); i++) {
 					std::cout << sequence.at(i) << " ";
 				}
 				std::cout << "\n" << std::endl;
+
+				std::vector<int> filled_sequence = fill_sequence(sequence);
+				std::cout << "filled seq: ";
+				for (size_t i = 0; i < filled_sequence.size(); i++) {
+					std::cout << filled_sequence.at(i) << " ";
+				}
+				std::cout << "\n" << std::endl;
+
+				insert_pend(filled_sequence, rearranged_pend);
 			}
 		}
 };
