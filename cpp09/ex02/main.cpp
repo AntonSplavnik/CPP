@@ -16,10 +16,12 @@ int main(int argc, char** argv) {
 
 	// parse input
 	std::vector<int> input;
+	std::deque<int> input_2;
 	std::stringstream ss(argv[1]);
 	int num;
 	while (ss >> num) {
 		input.push_back(num);
+		input_2.push_back(num);
 	}
 
 	std::cout << "initial input: ";
@@ -28,8 +30,13 @@ int main(int argc, char** argv) {
 	}
 	std::cout << "\n" << std::endl;
 
+	std::cout << "starting VECTOR sort\n" << std::endl;
 	PmergMe<std::vector<int> > test(input);
 	test.sort();
+
+	std::cout << "starting DEQUE sort\n" << std::endl;
+	PmergMe<std::deque<int> > test2(input_2);
+	test2.sort();
 
 	/*
 	// split all elements in pairs (uneven stored separetly)

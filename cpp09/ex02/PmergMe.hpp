@@ -7,6 +7,7 @@
 #include <deque>
 #include <algorithm>
 
+
 struct RecursionLevel {
 	std::vector<int> main;
 	std::vector<int> pend;
@@ -54,20 +55,7 @@ class PmergMe {
 
 			insertion();
 
-			// std::vector<int> sequence = generate_cequesnce(50);
-			// std::cout << "final Jacob seq: ";
-			// for (size_t i = 0; i < sequence.size(); i++) {
-			// 	std::cout << sequence.at(i) << " ";
-			// }
-			// std::cout << "\n" << std::endl;
-
-			// std::vector<int> filled_sequence = fill_sequence(sequence);
-			// std::cout << "filled seq: ";
-			// for (size_t i = 0; i < filled_sequence.size(); i++) {
-			// 	std::cout << filled.at(i) << " ";
-			// }
-			// std::cout << "\n" << std::endl;
-
+			is_sorted(_result);
 			return _result;
 		}
 
@@ -78,9 +66,13 @@ class PmergMe {
 		std::vector<int> _jacobsthal;
 
 		bool is_sorted(Container input) {
-			for(size_t i = 0; i < input.size(); i++) {
-				if (input.at(i) > input.at(i+1)) return false;
+			for(size_t i = 0; i < input.size() - 1; i++) {
+				if (input.at(i) > input.at(i+1)) {
+					std::cout << "not sorted" << std::endl;
+					return false;
+				}
 			}
+			std::cout << "sorted" << std::endl;
 			return true;
 		}
 		std::vector<int> rearrange_pend(const RecursionLevel& input) {
@@ -118,7 +110,7 @@ class PmergMe {
 			}
 			return rearranged_pend;
 		}
-		std::vector<int> generate_cequesnce(int len) {
+		std::vector<int> generate_sequesnce(int len) {
 			// 1. generate sequence based on formula // J(n) = (2^n - (-1)^n) / 3  or iterative - J(i) = J(i-1) + 2*J(i-2)
 			// 2. stop generation at len. (last operation should find most sutable nuber in a group of numbers for example: if len is 9 sequenve should be [0][1][3][5][9])
 			// 2. all the missing values in cequesnce should be inserted in betveen the sequence blocks in reverce order (for example with sequence [0][1][3][5][9] it should become [0][1][3 2] [5 4] [9 8 7 6])
@@ -190,17 +182,24 @@ class PmergMe {
 			std::vector<int> filled;
 			filled.push_back(0);
 			filled.push_back(1);
+			if(seq.size() < 3) return filled;
 
+			std::cout << "crashed here" << std::endl;
 			int block = seq.at(2);
 			for (size_t i = 2; i < seq.size(); i++) {
 
 				block = seq.at(i);
 
-				std::cout << "bloc: " << block << std::endl;
+				std::cout << "filling bloc: " << block << std::endl;
 				while (block != seq.at(i - 1)) {
 					filled.push_back(block);
 					block -= 1;
 				}
+				std::cout << "current filled seq: ";
+				for (size_t i = 0; i < filled.size(); i++) {
+					std::cout << filled.at(i) << " ";
+				}
+				std::cout << "\n" << std::endl;
 			}
 
 			return filled;
@@ -287,7 +286,7 @@ class PmergMe {
 			// TODO: remove thip part. further algo should cover this case.
 			_result.push_back(it->pend.at(0));
 			_result.push_back(it->main.at(0));
-			if (it->pend.at(1)){
+			if (it->pend.size() > 1){
 				typename Container::iterator pos = std::lower_bound(_result.begin(), _result.end(), it->pend.at(1));
 				_result.insert(pos, it->pend.at(1));
 			}
@@ -335,8 +334,9 @@ class PmergMe {
 				}
 				std::cout << "\n" << std::endl;
 
-				// In medium they strore starting from 3d element of the sequence (disregarding 0 and 1. 1 will be alway )
-				std::vector<int> sequence = generate_cequesnce(rearranged_pend.size());
+				// In medium they store starting from 3d element of the sequence
+				// (disregarding 0 and 1. 1 will be always...unfinished sentence )
+				std::vector<int> sequence = generate_sequesnce(rearranged_pend.size());
 				std::cout << "final Jacob seq: ";
 				for (size_t i = 0; i < sequence.size(); i++) {
 					std::cout << sequence.at(i) << " ";
