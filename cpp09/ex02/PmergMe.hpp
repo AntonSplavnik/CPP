@@ -29,7 +29,9 @@ class PmergMe {
 
 		Container sort() {
 
-			if (is_sorted(_input)) return _result;
+			if (is_sorted(_input)) {
+				return _input;
+			}
 
 			recursive_sort(_input);
 			typename std::list<RecursionLevel<Container> >::iterator it = _main_sort_list.begin();
@@ -66,6 +68,8 @@ class PmergMe {
 		std::vector<int> _jacobsthal;
 
 		bool is_sorted(Container input) {
+			if(input.size() <= 1) return true;
+
 			for(size_t i = 0; i < input.size() - 1; i++) {
 				if (input.at(i) > input.at(i+1)) {
 					std::cout << "not sorted" << std::endl;
@@ -102,16 +106,14 @@ class PmergMe {
 							rearranged_pend.push_back(input.pend.at(j));
 							break;
 						}
-						// should detect if result is missing from main.
-						// else if (j == input.main.size() - 1 && _result.at(i) != input.main.at(j))
-						// 	std::cout << "not found" << "\n" << std::endl;
 					}
+					// if (input.hasSgruggler) rearranged_pend.push_back(input.struggler);
 				}
 			}
 			return rearranged_pend;
 		}
 		Container generate_sequesnce(int len) {
-			// 1. generate sequence based on formula // J(n) = (2^n - (-1)^n) / 3  or iterative - J(i) = J(i-1) + 2*J(i-2)
+			// 1. generate sequence based on formula // J(n) = (2^n - (-1)^n) / 3  or iterative: J(i) = J(i-1) + 2*J(i-2)
 			// 2. stop generation at len. (last operation should find most sutable nuber in a group of numbers for example: if len is 9 sequenve should be [0][1][3][5][9])
 			// 2. all the missing values in cequesnce should be inserted in betveen the sequence blocks in reverce order (for example with sequence [0][1][3][5][9] it should become [0][1][3 2] [5 4] [9 8 7 6])
 			Container seq;
@@ -133,8 +135,8 @@ class PmergMe {
 			while(true) {
 				curr = prev1 + 2 * prev2;
 
-				// std::cout << "current: " << curr << " len: " << len - 1 << std::endl;
-				if (curr > len - 1) {
+				std::cout << "current: " << curr << " len - 1: " << len - 1 << std::endl;
+				if (curr >= len - 1) {
 					seq.push_back (len - 1);
 
 					/* int buff_curr = curr;
@@ -167,8 +169,8 @@ class PmergMe {
 				}
 
 				std::cout << "current seq: ";
-				for (size_t k = 0; k < seq.size(); k++) {
-					std::cout << seq.at(k) << " ";
+				for (size_t l = 0; l < seq.size(); l++) {
+					std::cout << seq.at(l) << " ";
 				}
 				std::cout << std::endl;
 
@@ -179,12 +181,13 @@ class PmergMe {
 			return seq;
 		}
 		Container fill_sequence(const Container &seq) {
+
 			Container filled;
 			filled.push_back(0);
 			filled.push_back(1);
+
 			if(seq.size() < 3) return filled;
 
-			std::cout << "crashed here" << std::endl;
 			int block = seq.at(2);
 			for (size_t i = 2; i < seq.size(); i++) {
 
