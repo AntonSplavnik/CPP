@@ -107,9 +107,9 @@ class PmergMe {
 							break;
 						}
 					}
-					// if (input.hasSgruggler) rearranged_pend.push_back(input.struggler);
 				}
 			}
+			if (input.hasSgruggler) rearranged_pend.push_back(input.struggler);
 			return rearranged_pend;
 		}
 		Container generate_sequesnce(int len) {
@@ -135,7 +135,7 @@ class PmergMe {
 			while(true) {
 				curr = prev1 + 2 * prev2;
 
-				std::cout << "current: " << curr << " len - 1: " << len - 1 << std::endl;
+				// std::cout << "current: " << curr << " len - 1: " << len - 1 << std::endl;
 				if (curr >= len - 1) {
 					seq.push_back (len - 1);
 
@@ -207,22 +207,31 @@ class PmergMe {
 
 			return filled;
 		}
-		void insert_pend(const Container &sequence, const Container&pend) {
+		void insert_pend(const Container &sequence, const Container &pend, bool hasSgruggler) {
 
 			Container temp_main(_result);
 
 			std::cout << "starting insertion..." << std::endl;
 			for (size_t i = 0; i < sequence.size(); i++) {
-
 				int num_to_find = temp_main.at(sequence.at(i));
+				typename Container::iterator pos_in_main = find(_result.begin(), _result.end(), num_to_find);
 
-				typename Container::iterator it = find(_result.begin(), _result.end(), num_to_find);
+				int val_in_pend = pend.at(sequence.at(i));
+				typename Container::iterator pos_in_result = lower_bound(_result.begin(), pos_in_main, val_in_pend);
 
-				// int pos_to_search = distance(_result.begin(), it);
+				_result.insert(pos_in_result, pend.at(sequence.at(i)));
 
-				typename Container::iterator pos = lower_bound(_result.begin(), it, pend.at(sequence.at(i)));
+				std::cout << "current result: ";
+				for (size_t i = 0; i < _result.size(); i++) {
+					std::cout << _result.at(i)  << " ";
+				}
+				std::cout << "\n" << std::endl;
+			}
 
-				_result.insert(pos, pend.at(sequence.at(i)));
+			if (hasSgruggler) {
+				int struggler = pend.at(pend.size() - 1);
+				typename Container::iterator pos_in_result = lower_bound(_result.begin(), _result.end(), struggler);
+				_result.insert(pos_in_result, pend.at(pend.size() - 1));
 
 				std::cout << "current result: ";
 				for (size_t i = 0; i < _result.size(); i++) {
@@ -285,44 +294,44 @@ class PmergMe {
 		}
 		void insertion() {
 
-			typename std::list<RecursionLevel<Container> >::reverse_iterator it = _main_sort_list.rbegin();
+			typename std::list<RecursionLevel<Container> >::reverse_iterator node = _main_sort_list.rbegin();
 
 			// TODO: remove thip part. further algo should cover this case.
-			_result.push_back(it->pend.at(0));
-			_result.push_back(it->main.at(0));
-			if (it->pend.size() > 1){
-				typename Container::iterator pos = std::lower_bound(_result.begin(), _result.end(), it->pend.at(1));
-				_result.insert(pos, it->pend.at(1));
+			_result.push_back(node->pend.at(0));
+			_result.push_back(node->main.at(0));
+			if (node->pend.size() > 1){
+				typename Container::iterator pos = std::lower_bound(_result.begin(), _result.end(), node->pend.at(1));
+				_result.insert(pos, node->pend.at(1));
 			}
 
-			std::cout << "insertion depth " << it->recursionDepth << std::endl;
+			std::cout << "insertion depth " << node->recursionDepth << std::endl;
 			std::cout << "result after first unwind: ";
 			for (size_t i = 0; i < _result.size(); i++) {
 				std::cout << _result.at(i)  << " ";
 			}
 			std::cout << "\n" << std::endl;
 
-			++it;
+			++node;
 
-			for (; it != _main_sort_list.rend(); ++it) {
-				std::cout << "insertion depth " << it->recursionDepth << std::endl;
+			for (; node != _main_sort_list.rend(); ++node) {
+				std::cout << "insertion depth " << node->recursionDepth << std::endl;
 				// do these steps on each level of recursion
 				// 1. rearrange pend posions based on current main positions
 				// 2. generate Jacobs sequence on each recursion depth based on pend len (its our insertion order)
 				// 3. use sequence to binary search for an insertion position
 				// 4. move to next level of depth
 
-				Container rearranged_pend = rearrange_pend(*it);
+				Container rearranged_pend = rearrange_pend(*node);
 
 				std::cout << "main: ";
-				for (size_t i = 0; i < it->main.size(); i++) {
-					std::cout << it->main.at(i) << " ";
+				for (size_t i = 0; i < node->main.size(); i++) {
+					std::cout << node->main.at(i) << " ";
 				}
 				std::cout << std::endl;
 
 				std::cout << "pend: ";
-				for (size_t i = 0; i < it->pend.size(); i++) {
-					std::cout << it->pend.at(i) << " ";
+				for (size_t i = 0; i < node->pend.size(); i++) {
+					std::cout << node->pend.at(i) << " ";
 				}
 				std::cout << "\n" << std::endl;
 
@@ -340,7 +349,8 @@ class PmergMe {
 
 				// In medium they store starting from 3d element of the sequence
 				// (disregarding 0 and 1. 1 will be always...unfinished sentence )
-				Container sequence = generate_sequesnce(rearranged_pend.size());
+				int seq_size = (node->hasSgruggler) ? rearranged_pend.size() - 1 : rearranged_pend.size();
+				Container sequence = generate_sequesnce(seq_size);
 				std::cout << "final Jacob seq: ";
 				for (size_t i = 0; i < sequence.size(); i++) {
 					std::cout << sequence.at(i) << " ";
@@ -354,7 +364,7 @@ class PmergMe {
 				}
 				std::cout << "\n" << std::endl;
 
-				insert_pend(filled_sequence, rearranged_pend);
+				insert_pend(filled_sequence, rearranged_pend, node->hasSgruggler);
 			}
 		}
 };
