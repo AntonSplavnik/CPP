@@ -7,10 +7,10 @@
 #include <deque>
 #include <algorithm>
 
-
+template <typename T>
 struct RecursionLevel {
-	std::vector<int> main;
-	std::vector<int> pend;
+	T main;
+	T pend;
 
 	bool hasSgruggler;
 	int struggler;
@@ -32,7 +32,7 @@ class PmergMe {
 			if (is_sorted(_input)) return _result;
 
 			recursive_sort(_input);
-			std::list<RecursionLevel>::iterator it = _main_sort_list.begin();
+			typename std::list<RecursionLevel<Container> >::iterator it = _main_sort_list.begin();
 			for (; it != _main_sort_list.end(); ++it)
 			{
 				std::cout << "main: ";
@@ -62,7 +62,7 @@ class PmergMe {
 	private:
 		Container _input;
 		Container _result;
-		std::list<RecursionLevel> _main_sort_list;
+		std::list<RecursionLevel<Container> > _main_sort_list;
 		std::vector<int> _jacobsthal;
 
 		bool is_sorted(Container input) {
@@ -75,13 +75,13 @@ class PmergMe {
 			std::cout << "sorted" << std::endl;
 			return true;
 		}
-		std::vector<int> rearrange_pend(const RecursionLevel& input) {
+		Container rearrange_pend(const RecursionLevel<Container>& input) {
 			// we should create new temp pend based on the positions of the main index.
 			// 1. iterate over result and compare value to main values of this level,
 			// if values are rqual -> copy pend element to temp,
 			// if values are differ (search for the element) iterate? over origial main to find index of the element and based on that index copy pend to temp pend.
 
-			std::vector<int> rearranged_pend;
+			Container rearranged_pend;
 
 			std::cout << "starting pend rearrangment..." << "\n" << std::endl;
 
@@ -110,11 +110,11 @@ class PmergMe {
 			}
 			return rearranged_pend;
 		}
-		std::vector<int> generate_sequesnce(int len) {
+		Container generate_sequesnce(int len) {
 			// 1. generate sequence based on formula // J(n) = (2^n - (-1)^n) / 3  or iterative - J(i) = J(i-1) + 2*J(i-2)
 			// 2. stop generation at len. (last operation should find most sutable nuber in a group of numbers for example: if len is 9 sequenve should be [0][1][3][5][9])
 			// 2. all the missing values in cequesnce should be inserted in betveen the sequence blocks in reverce order (for example with sequence [0][1][3][5][9] it should become [0][1][3 2] [5 4] [9 8 7 6])
-			std::vector<int> seq;
+			Container seq;
 			if (len == 1) {
 				seq.push_back(0);
 				return seq;
@@ -178,8 +178,8 @@ class PmergMe {
 
 			return seq;
 		}
-		std::vector<int> fill_sequence(std::vector<int> seq) {
-			std::vector<int> filled;
+		Container fill_sequence(const Container &seq) {
+			Container filled;
 			filled.push_back(0);
 			filled.push_back(1);
 			if(seq.size() < 3) return filled;
@@ -204,8 +204,9 @@ class PmergMe {
 
 			return filled;
 		}
-		void insert_pend(const std::vector<int> &sequence, const std::vector<int> &pend) {
-			std::vector<int> temp_main(_result);
+		void insert_pend(const Container &sequence, const Container&pend) {
+
+			Container temp_main(_result);
 
 			std::cout << "starting insertion..." << std::endl;
 			for (size_t i = 0; i < sequence.size(); i++) {
@@ -230,9 +231,9 @@ class PmergMe {
 		}
 
 		/* split elements in to main (larger) and pend (smaller) recursevly - uneven goes to last positon of pend) */
-		void recursive_sort(Container input, int depth = 0) {
+		void recursive_sort(const Container& input, int depth = 0) {
 
-			RecursionLevel level;
+			RecursionLevel<Container> level;
 			level.recursionDepth = depth;
 
 			size_t input_size = input.size();
@@ -281,7 +282,7 @@ class PmergMe {
 		}
 		void insertion() {
 
-			std::list<RecursionLevel>::reverse_iterator it = _main_sort_list.rbegin();
+			typename std::list<RecursionLevel<Container> >::reverse_iterator it = _main_sort_list.rbegin();
 
 			// TODO: remove thip part. further algo should cover this case.
 			_result.push_back(it->pend.at(0));
@@ -308,7 +309,7 @@ class PmergMe {
 				// 3. use sequence to binary search for an insertion position
 				// 4. move to next level of depth
 
-				std::vector<int> rearranged_pend = rearrange_pend(*it);
+				Container rearranged_pend = rearrange_pend(*it);
 
 				std::cout << "main: ";
 				for (size_t i = 0; i < it->main.size(); i++) {
@@ -336,14 +337,14 @@ class PmergMe {
 
 				// In medium they store starting from 3d element of the sequence
 				// (disregarding 0 and 1. 1 will be always...unfinished sentence )
-				std::vector<int> sequence = generate_sequesnce(rearranged_pend.size());
+				Container sequence = generate_sequesnce(rearranged_pend.size());
 				std::cout << "final Jacob seq: ";
 				for (size_t i = 0; i < sequence.size(); i++) {
 					std::cout << sequence.at(i) << " ";
 				}
 				std::cout << "\n" << std::endl;
 
-				std::vector<int> filled_sequence = fill_sequence(sequence);
+				Container filled_sequence = fill_sequence(sequence);
 				std::cout << "filled seq: ";
 				for (size_t i = 0; i < filled_sequence.size(); i++) {
 					std::cout << filled_sequence.at(i) << " ";
