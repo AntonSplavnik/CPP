@@ -22,6 +22,9 @@ SOURCES = main.cpp
 
 OBJECTS = $(addprefix $(OBJDIR)/, $(SOURCES:.cpp=.o))
 
+debug: CXXFLAGS += DDEBUG
+debug: re
+
 all: $(NAME)
 
 $(NAME): $(OBJECTS)

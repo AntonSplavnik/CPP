@@ -1,6 +1,12 @@
 #ifndef MERGE_ME_HPP
 #define MERGE_ME_HPP
 
+#ifdef DEBUG
+	#define LOG(x) std::cout << x << std::endl;
+#else
+	#define LOG(x)
+#endif
+
 #include <iostream>
 #include <vector>
 #include <list>
@@ -25,6 +31,8 @@ class PmergMe {
 
 	public:
 		PmergMe(Container input) : _input(input) {}
+		// PmergeMe(const Container &other) {}
+		// Container &operator=(const Container &other) {}
 		~PmergMe() {}
 
 		Container sort() {
@@ -34,29 +42,7 @@ class PmergMe {
 			}
 
 			recursive_sort(_input);
-			typename std::list<RecursionLevel<Container> >::iterator it = _main_sort_list.begin();
-			for (; it != _main_sort_list.end(); ++it)
-			{
-				std::cout << "main: ";
-				for (size_t i = 0; i < it->main.size(); i++) {
-					std::cout << it->main.at(i) << " ";
-				}
-				std::cout << std::endl;
-
-				std::cout << "pend: ";
-				for (size_t i = 0; i < it->pend.size(); i++) {
-					std::cout << it->pend.at(i) << " ";
-				}
-				std::cout << std::endl;
-
-				if (it->hasSgruggler) std::cout << "struggler: " << it->struggler << std::endl;
-
-				std::cout << "depth: " << it->recursionDepth << "\n";
-				std::cout << std::endl;
-			}
-
 			insertion();
-
 			is_sorted(_result);
 			return _result;
 		}
@@ -72,11 +58,11 @@ class PmergMe {
 
 			for(size_t i = 0; i < input.size() - 1; i++) {
 				if (input.at(i) > input.at(i+1)) {
-					std::cout << "not sorted" << std::endl;
+					LOG("not sorted");
 					return false;
 				}
 			}
-			std::cout << "sorted" << std::endl;
+			LOG("sorted");
 			return true;
 		}
 		Container rearrange_pend(const RecursionLevel<Container>& input) {
@@ -87,22 +73,24 @@ class PmergMe {
 
 			Container rearranged_pend;
 
-			std::cout << "starting pend rearrangment..." << "\n" << std::endl;
+			LOG("starting pend rearrangment..." << "\n");
 
 			for (size_t i = 0; i < _result.size(); i++) {
-
+#ifdef DEBUG
 				std::cout << "result: " << _result.at(i) << "\n"
 						  << "main: " << input.main.at(i) << "\n"
 						  << std::endl;
-
+#endif
 				if (_result.at(i) == input.main.at(i)) {
-					std::cout << "found in first block: " << input.main.at(i) << " at index: " << i << "\n" << std::endl;
+
+					LOG("found in first block: " << input.main.at(i) << " at index: " << i << "\n");
+
 					rearranged_pend.push_back(input.pend.at(i));
 				}
 				else {
 					for (size_t j = 0; j < input.main.size(); j++) {
 						if(_result.at(i) == input.main.at(j)) {
-							std::cout << "found in second block: " << input.main.at(j) << " at index: " << j << "\n" << std::endl;
+							LOG("found in second block: " << input.main.at(j) << " at index: " << j << "\n");
 							rearranged_pend.push_back(input.pend.at(j));
 							break;
 						}
@@ -138,42 +126,25 @@ class PmergMe {
 				// std::cout << "current: " << curr << " len - 1: " << len - 1 << std::endl;
 				if (curr >= len - 1) {
 					seq.push_back (len - 1);
-
-					/* int buff_curr = curr;
-					while (buff_curr >= len - 1) {
-
-						std::cout << "buff_curr: " << buff_curr << std::endl;
-						if (buff_curr == len - 1)
-							seq.push_back (buff_curr);
-						buff_curr -= 1;
-					} */
-
-					/* int buff_curr = curr;
-					for (int j = curr; j > prev1; j--) {
-						std::cout << "buff_curr: " << buff_curr << std::endl;
-						if (buff_curr == len - 1)
-							seq.push_back (buff_curr);
-						buff_curr -= 1;
-					} */
-
+#ifdef DEBUG
 					std::cout << "current seq: ";
 					for (size_t k = 0; k < seq.size(); k++) {
 						std::cout << seq.at(k) << " ";
 					}
 					std::cout << std::endl;
-
+#endif
 					break;
 				}
 				else {
 					seq.push_back (curr);
 				}
-
+#ifdef DEBUG
 				std::cout << "current seq: ";
 				for (size_t l = 0; l < seq.size(); l++) {
 					std::cout << seq.at(l) << " ";
 				}
 				std::cout << std::endl;
-
+#endif
 				prev2 = prev1;
 				prev1 = curr;
 			}
@@ -193,16 +164,18 @@ class PmergMe {
 
 				block = seq.at(i);
 
-				std::cout << "filling bloc: " << block << std::endl;
+				LOG ("filling bloc: " << block );
 				while (block != seq.at(i - 1)) {
 					filled.push_back(block);
 					block -= 1;
 				}
+#ifdef DEBUG
 				std::cout << "current filled seq: ";
 				for (size_t i = 0; i < filled.size(); i++) {
 					std::cout << filled.at(i) << " ";
 				}
 				std::cout << "\n" << std::endl;
+#endif
 			}
 
 			return filled;
@@ -211,7 +184,7 @@ class PmergMe {
 
 			Container temp_main(_result);
 
-			std::cout << "starting insertion..." << std::endl;
+			LOG("starting insertion...");
 			for (size_t i = 0; i < sequence.size(); i++) {
 				int num_to_find = temp_main.at(sequence.at(i));
 				typename Container::iterator pos_in_main = find(_result.begin(), _result.end(), num_to_find);
@@ -220,12 +193,13 @@ class PmergMe {
 				typename Container::iterator pos_in_result = lower_bound(_result.begin(), pos_in_main, val_in_pend);
 
 				_result.insert(pos_in_result, pend.at(sequence.at(i)));
-
+#ifdef DEBUG
 				std::cout << "current result: ";
 				for (size_t i = 0; i < _result.size(); i++) {
 					std::cout << _result.at(i)  << " ";
 				}
 				std::cout << "\n" << std::endl;
+#endif
 			}
 
 			if (hasSgruggler) {
@@ -233,11 +207,13 @@ class PmergMe {
 				typename Container::iterator pos_in_result = lower_bound(_result.begin(), _result.end(), struggler);
 				_result.insert(pos_in_result, pend.at(pend.size() - 1));
 
+#ifdef DEBUG
 				std::cout << "current result: ";
 				for (size_t i = 0; i < _result.size(); i++) {
 					std::cout << _result.at(i)  << " ";
 				}
 				std::cout << "\n" << std::endl;
+#endif
 			}
 
 		}
@@ -268,7 +244,7 @@ class PmergMe {
 
 			_main_sort_list.push_back(level);
 
-			/*
+#ifdef DEBUG
 			std::cout << "main: ";
 			for(size_t i = 0; i < level.main.size(); i++) {
 				std::cout << level.main[i] << " ";
@@ -283,10 +259,9 @@ class PmergMe {
 
 			if(level.hasSgruggler) {
 				std::cout << "struggler: " << level.struggler << std::endl;
-				// std::cout << std::endl;
 			}
 			std::cout << "depth: " << level.recursionDepth << "\n" << std::endl;
-			*/
+#endif
 
 			if(level.main.size() > 1) {
 				recursive_sort(level.main,level.recursionDepth + 1);
@@ -296,7 +271,6 @@ class PmergMe {
 
 			typename std::list<RecursionLevel<Container> >::reverse_iterator node = _main_sort_list.rbegin();
 
-			// TODO: remove thip part. further algo should cover this case.
 			_result.push_back(node->pend.at(0));
 			_result.push_back(node->main.at(0));
 			if (node->pend.size() > 1){
@@ -304,17 +278,18 @@ class PmergMe {
 				_result.insert(pos, node->pend.at(1));
 			}
 
+#ifdef DEBUG
 			std::cout << "insertion depth " << node->recursionDepth << std::endl;
 			std::cout << "result after first unwind: ";
 			for (size_t i = 0; i < _result.size(); i++) {
 				std::cout << _result.at(i)  << " ";
 			}
 			std::cout << "\n" << std::endl;
-
+#endif
 			++node;
 
 			for (; node != _main_sort_list.rend(); ++node) {
-				std::cout << "insertion depth " << node->recursionDepth << std::endl;
+				LOG("insertion depth " << node->recursionDepth);
 				// do these steps on each level of recursion
 				// 1. rearrange pend posions based on current main positions
 				// 2. generate Jacobs sequence on each recursion depth based on pend len (its our insertion order)
@@ -322,7 +297,7 @@ class PmergMe {
 				// 4. move to next level of depth
 
 				Container rearranged_pend = rearrange_pend(*node);
-
+#ifdef DEBUG
 				std::cout << "main: ";
 				for (size_t i = 0; i < node->main.size(); i++) {
 					std::cout << node->main.at(i) << " ";
@@ -346,24 +321,24 @@ class PmergMe {
 					std::cout << rearranged_pend.at(i) << " ";
 				}
 				std::cout << "\n" << std::endl;
-
-				// In medium they store starting from 3d element of the sequence
-				// (disregarding 0 and 1. 1 will be always...unfinished sentence )
+#endif
 				int seq_size = (node->hasSgruggler) ? rearranged_pend.size() - 1 : rearranged_pend.size();
 				Container sequence = generate_sequesnce(seq_size);
+#ifdef DEBUG
 				std::cout << "final Jacob seq: ";
 				for (size_t i = 0; i < sequence.size(); i++) {
 					std::cout << sequence.at(i) << " ";
 				}
 				std::cout << "\n" << std::endl;
-
-				Container filled_sequence = fill_sequence(sequence);
+#endif
+Container filled_sequence = fill_sequence(sequence);
+#ifdef DEBUG
 				std::cout << "filled seq: ";
 				for (size_t i = 0; i < filled_sequence.size(); i++) {
 					std::cout << filled_sequence.at(i) << " ";
 				}
 				std::cout << "\n" << std::endl;
-
+#endif
 				insert_pend(filled_sequence, rearranged_pend, node->hasSgruggler);
 			}
 		}
