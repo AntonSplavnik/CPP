@@ -31,8 +31,16 @@ class PmergMe {
 
 	public:
 		PmergMe(Container input) : _input(input) {}
-		// PmergeMe(const Container &other) {}
-		// Container &operator=(const Container &other) {}
+		PmergMe(const PmergMe& other) : _input(other._input), _result(other._result), _main_sort_list(other._main_sort_list), _jacobsthal(other._jacobsthal) {}
+		PmergMe& operator=(const PmergMe& other) {
+			if (this != &other) {
+				_input = other._input;
+				_result = other._result;
+				_main_sort_list = other._main_sort_list;
+				_jacobsthal = other._jacobsthal;
+			}
+			return *this;
+		}
 		~PmergMe() {}
 
 		Container sort() {
