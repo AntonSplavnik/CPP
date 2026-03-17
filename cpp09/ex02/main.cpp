@@ -7,13 +7,14 @@
 #include <ctime>
 #include <cstdlib>
 #include <cerrno>
+#include <climits>
 #include "PmergMe.hpp"
 
 bool is_posetive_int(const char *s) {
 	char* end;
 	errno = 0;
 	long n = std::strtol(s, &end, 10);
-	return (errno == 0 && end != s && *end == '\0' && n >= 0);
+	return (errno == 0 && end != s && *end == '\0' && n >= 0 && n <= INT_MAX);
 }
 int parse_input(int argc, char** argv, std::vector<int>& input, std::deque<int>& input_2) {
 	if (argc < 2) {
@@ -42,9 +43,9 @@ int main(int argc, char** argv) {
 	std::vector<int> input;
 	std::deque<int> input_2;
 
-	if (parse_input(argc, argv, input, input_2)) return 0;
+	if (parse_input(argc, argv, input, input_2)) return 1;
 
-	std::cout << "Input: ";
+	std::cout << "Before: ";
 	for (size_t i = 0; i < input.size(); i++) {
 		std::cout << input.at(i) << " ";
 	}
@@ -52,13 +53,33 @@ int main(int argc, char** argv) {
 
 	PmergMe<std::vector<int> > output(input);
 	std::vector<int> result = output.sort();
-	std::cout << "Result: ";
+	std::cout << "After: ";
 	for (size_t i = 0; i < result.size(); i++) {
 		std::cout << result.at(i) << " ";
 	}
 	std::cout << std::endl;
 
-/*
+
+	struct timeval start, end;
+	double elapsed;
+
+	// std::cout << "starting VECTOR sort\n" << std::endl;
+	PmergMe<std::vector<int> > test(input);
+	gettimeofday(&start, NULL);
+	test.sort();
+	gettimeofday(&end, NULL);
+	elapsed = (end.tv_sec - start.tv_sec) * 1000000.0 + (end.tv_usec - start.tv_usec);
+	std::cout << "Time to process a range of " << input.size() << " elements with std::vector<int>: " << std::fixed << std::setprecision(6) << elapsed / 1000000 << " us" << std::endl;
+
+	// std::cout << "starting DEQUE sort\n" << std::endl;
+	PmergMe<std::deque<int> > test2(input_2);
+	gettimeofday(&start, NULL);
+	test2.sort();
+	gettimeofday(&end, NULL);
+	elapsed = (end.tv_sec - start.tv_sec) * 1000000.0 + (end.tv_usec - start.tv_usec);
+	std::cout << "Time to process a range of " << input.size() << " elements with std::deque<int>: " << std::fixed << std::setprecision(6) << elapsed / 1000000 << " us" << std::endl;
+
+	/*
 	- clock() — counts only time when the CPU is actively executing instructions. Memory stall time is not counted.
 	- gettimeofday() — counts all real elapsed time, including time when the CPU is stalled waiting for RAM.
 */
@@ -78,24 +99,6 @@ int main(int argc, char** argv) {
 	std::cout << "Time to process a range of " << input.size() << " elements with std::deque<int>: " << std::fixed << std::setprecision(6) << elapsed << std::endl;
 
  */
-	struct timeval start, end;
-	double elapsed;
-
-	// std::cout << "starting VECTOR sort\n" << std::endl;
-	PmergMe<std::vector<int> > test(input);
-	gettimeofday(&start, NULL);
-	test.sort();
-	gettimeofday(&end, NULL);
-	elapsed = (end.tv_sec - start.tv_sec) * 1000000.0 + (end.tv_usec - start.tv_usec);
-	std::cout << "Time to process a range of " << input.size() << " elements with std::vector<int>: " << std::fixed << std::setprecision(6) << elapsed / 1000000 << std::endl;
-
-	// std::cout << "starting DEQUE sort\n" << std::endl;
-	PmergMe<std::deque<int> > test2(input_2);
-	gettimeofday(&start, NULL);
-	test2.sort();
-	gettimeofday(&end, NULL);
-	elapsed = ((end.tv_sec - start.tv_sec) * 1000000.0 + (end.tv_usec + start.tv_usec)) / 1000000;
-	std::cout << "Time to process a range of " << input.size() << " elements with std::deque<int>: " << std::fixed << std::setprecision(6) << elapsed << std::endl;
 
 	return 0;
 }
