@@ -67,7 +67,7 @@ class PmergMe {
 		}
 		Container rearrange_pend(const RecursionLevel<Container>& input) {
 			// we should create new temp pend based on the positions of the main index.
-			// 1. iterate over result and compare value to main values of this level,
+			// iterate over result and compare value to main values of this level,
 			// if values are rqual -> copy pend element to temp,
 			// if values are differ (search for the element) iterate? over origial main to find index of the element and based on that index copy pend to temp pend.
 
