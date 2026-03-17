@@ -5,31 +5,33 @@
 #include <sys/time.h>
 #include <iomanip>
 #include <ctime>
+#include <cstdlib>
+#include <cerrno>
 #include "PmergMe.hpp"
 
-int parse_input(int argc, char** argv, std::vector<int>& input, std::deque<int> input_2) {
+bool is_posetive_int(const char *s) {
+	char* end;
+	errno = 0;
+	long n = std::strtol(s, &end, 10);
+	return (errno == 0 && end != s && *end == '\0' && n >= 0);
+}
+int parse_input(int argc, char** argv, std::vector<int>& input, std::deque<int>& input_2) {
 	if (argc < 2) {
-		std::cout << "Wrong number of arguments" << std::endl;
+		std::cerr << "Wrong number of arguments" << std::endl;
 		return 1;
 	}
-	if (argc == 2) {
-		std::stringstream ss(argv[1]);
-		int num;
-		while (ss >> num) {
-		input.push_back(num);
-		input_2.push_back(num);
-		}
-	}
-	else {
-		for (int i = 1; i < argc; i++) {
-			int buf = atoi(argv[i]);
-			// std::cout << " Negative value: " << buf << std::endl;
-			if (buf < 0) {
-				std::cout << "Negative values are not alloud!" << std::endl;
+
+	for (int i = 1; i < argc; i++) {
+		std::stringstream ss(argv[i]);
+		std::string token;
+		while (ss >> token) {
+			if (!is_posetive_int(token.c_str())) {
+				std::cerr << "Not alloud values!" << std::endl;
 				return 1;
 			}
-			input.push_back(buf);
-			input_2.push_back(buf);
+			int n = atoi(token.c_str());
+			input.push_back(n);
+			input_2.push_back(n);
 		}
 	}
 	return 0;
@@ -42,11 +44,20 @@ int main(int argc, char** argv) {
 
 	if (parse_input(argc, argv, input, input_2)) return 0;
 
-	std::cout << "Initial input: ";
+	std::cout << "Input: ";
 	for (size_t i = 0; i < input.size(); i++) {
 		std::cout << input.at(i) << " ";
 	}
-	std::cout << "\n" << std::endl;
+	std::cout << std::endl;
+
+	PmergMe<std::vector<int> > output(input);
+	std::vector<int> result = output.sort();
+	std::cout << "Result: ";
+	for (size_t i = 0; i < result.size(); i++) {
+		std::cout << result.at(i) << " ";
+	}
+	std::cout << std::endl;
+
 /*
 	- clock() — counts only time when the CPU is actively executing instructions. Memory stall time is not counted.
 	- gettimeofday() — counts all real elapsed time, including time when the CPU is stalled waiting for RAM.
